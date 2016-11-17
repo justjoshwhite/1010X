@@ -39,3 +39,19 @@ motorSet(RollR, 0);
 delay(30);
 }
 }
+
+void autoclawencodertaskcode (void*ignore){
+  encoderReset(encoderclaw);
+int clawtarget = encoderGet(encoderclaw);
+float kclaw = 0.5;
+
+while(true){
+int clawpos = encoderGet(encoderclaw);
+int clawdifference = clawtarget - clawpos;
+motorSet(RollL, motorcap(RollL_Dir*clawdifference*kclaw));
+motorSet(RollR, motorcap(RollR_Dir*clawdifference*kclaw));
+
+  delay(25);
+}
+
+}

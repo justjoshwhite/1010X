@@ -9,3 +9,10 @@ int motorcap(int value){
     else
       return value;
   }
+
+void clawopen(int claw, int arm)
+{
+clawtarget = claw;
+armtargetL = arm;
+armtargetR = arm+300;
+}

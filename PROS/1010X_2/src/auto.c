@@ -29,22 +29,32 @@
 void autonomous() {
 lcdClear(uart1);
 lcdPrint(uart1, 1, "No Mercy.");
-//TaskHandle armtask = taskCreate (armtaskcode, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
-//TaskHandle clawtask = taskCreate (clawtaskcode, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+TaskHandle autoarmtask = taskCreate (autoarmtaskcode, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+TaskHandle autoclawtask = taskCreate (autoclawencodertaskcode, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
   switch(myauto){
     case(1):
+drivestraight(1, 12000, 5000, 4000, 4000);
+delay(600);
+turnexact(1, 500, 5000, 150, 150);
 
     break;
     case(2):
-
+armtargetL = OFF_GROUND_L;
+armtargetR = OFF_GROUND_R;
     break;
     case(3):
-
+clawtarget = 300;
     break;
     case(4):
 
     break;
+    case(5):
+    break;
+
+  default:
+  break;
+
     }
-//taskDelete(armtask);
-//taskDelete(clawtask);
+taskDelete(autoarmtask);
+taskDelete(autoclawtask);
 }

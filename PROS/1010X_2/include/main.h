@@ -95,13 +95,13 @@ extern "C" {
 #define LCD1 1 ///not sure...
 
 //arm heights
-#define GROUND_R 310 //check
+#define GROUND_R 310
 #define GROUND_L 10
-#define OFF_GROUND_R 1300//check
+#define OFF_GROUND_R 1300
 #define OFF_GROUND_L 1000
-#define FENCE_LOW_R 3300 //check
+#define FENCE_LOW_R 3300
 #define FENCE_LOW_L 3000
-#define FENCE_HIGH_R 3000//czheck
+#define FENCE_HIGH_R 3000
 #define FENCE_HIGH_L 2700
 
 #define CLAW_OPEN_FULL 10//check
@@ -122,14 +122,34 @@ Gyro gyro1;
 void clawencodertaskcode(void*ignore);
 void armtaskcode(void*ignore);
 void autoselectcode(void*ignore);
+void autoarmtaskcode(void*ignore);
+void autoclawencodertaskcode(void*ignore);
+
+
 
 void armpresets();
 void clawpresets();
 
-void drivestraight();
-void turnexact();
+void drivestraight(
+    int direction,
+    int totdist,
+    int timeout,
+    int acceldist,
+    int deacceldist,
+    int maxpower = 100,
+    int minpower = 30,
+    float kdrift = 0.5);
+void turnexact(
+  int direction,
+  int tardegrees,
+  int timeout,
+  int accelang,
+  int deaccelang,
+  int maxpower = 100,
+  int kturn = 0.5);
 
 void autoselect();
+void clawopen();
 
 int armtargetL;
 int armtargetR;//target height

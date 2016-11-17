@@ -78,3 +78,29 @@ void armpresets(){
   }
   else{}
 }
+
+void autoarmtaskcode (void*ignore){
+
+float karm = 0.15;
+
+armtargetL = analogRead(potarmL);
+armtargetR = analogRead(potarmR);
+
+while(true){
+  int armheightL = analogRead(potarmL);
+  int armheightR = analogRead(potarmR);
+  int armdifferenceL = armtargetL - armheightL;
+  int armdifferenceR = armtargetR - armheightR;
+
+  motorSet(ArmLT, motorcap(ArmLT_Dir*armdifferenceL*karm));
+  motorSet(ArmLB, motorcap(ArmLB_Dir*armdifferenceL*karm));
+  motorSet(ArmRT, motorcap(ArmRT_Dir*armdifferenceR*karm));
+  motorSet(ArmRB, motorcap(ArmRB_Dir*armdifferenceR*karm));
+
+
+
+  delay(25);
+}
+
+
+}

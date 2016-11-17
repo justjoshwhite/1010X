@@ -10,7 +10,7 @@ while(!isEnabled()){
     case (1):
       lcdClear(uart1);
       lcdSetText(uart1, 1, "Auto 1");
-      lcdSetText(uart1, 2, "1010X");
+      lcdSetText(uart1, 2, "L-Mid S");
       delay(30);
       if(lcdReadButtons(uart1) == 1){
         lcdClear(uart1);
@@ -27,7 +27,7 @@ while(!isEnabled()){
     case (2):
       lcdClear(uart1);
       lcdSetText(uart1, 1, "Auto 2");
-      lcdSetText(uart1, 2, "1010X");
+      lcdSetText(uart1, 2, "R-Mid S");
       delay(30);
       if(lcdReadButtons(uart1) == 1){
         lcdClear(uart1);
@@ -44,7 +44,7 @@ while(!isEnabled()){
     case (3):
       lcdClear(uart1);
       lcdSetText(uart1, 1, "Auto 3");
-      lcdSetText(uart1, 2, "1010X");
+      lcdSetText(uart1, 2, "L-Mid C");
       delay(30);
       if(lcdReadButtons(uart1) == 1){
         lcdClear(uart1);
@@ -61,7 +61,7 @@ while(!isEnabled()){
     case (4):
       lcdClear(uart1);
       lcdSetText(uart1, 1, "Auto 4");
-      lcdSetText(uart1, 2, "1010X");
+      lcdSetText(uart1, 2, "R-Mid S");
       delay(30);
       if(lcdReadButtons(uart1) == 1){
         lcdClear(uart1);
@@ -75,6 +75,25 @@ while(!isEnabled()){
         myauto = 1;}
       else {}
     break;
+
+    case (5):
+      lcdClear(uart1);
+      lcdSetText(uart1, 1, "Auto 5");
+      lcdSetText(uart1, 2, "blank");
+      delay(30);
+      if(lcdReadButtons(uart1) == 1){
+        lcdClear(uart1);
+        lcdSetText(uart1, 1, "wait");
+        delay(timeoutlcd);
+        myauto = 4;}
+      else if(lcdReadButtons(uart1) == 4){
+        lcdClear(uart1);
+        lcdSetText(uart1, 1, "wait");
+        delay(timeoutlcd);
+        myauto = 1;}
+      else {}
+    break;
+
     default:
      lcdClear(uart1);
      lcdSetText(uart1, 1, "DEFAULT1");

@@ -1,8 +1,8 @@
 #include "main.h"
 #include "API.h"
 
-/*
-void drivestraight(int direction, int totdist, int acceldist, int deacceldist, int maxpower, int minpower, int timeout, float kdrift)
+
+void drivestraight(int direction, int totdist, int timeout, int acceldist, int deacceldist, int maxpower = 100, int minpower = 30, float kdrift = 0.5)
 {
   encoderReset(encoderL);
   encoderReset(encoderR);
@@ -24,8 +24,8 @@ void drivestraight(int direction, int totdist, int acceldist, int deacceldist, i
     else
       {accel = netpower;}
 
-int powerL = direction*motorcap(minpower+accel)-drift;
-int powerR = direction*motorcap(minpower+accel)+drift;
+int powerL = direction*motorcap(minpower+accel)-(kdrift*drift);
+int powerR = direction*motorcap(minpower+accel)+(kdrift*drift);
 
 motorSet(DriveBL, DriveBL_Dir*powerL);
 motorSet(DriveFL, DriveFL_Dir*powerL);
@@ -40,7 +40,7 @@ motorSet(DriveBR, DriveBR_Dir*powerR);
     }
 }
 
-void turnexact(int direction, int tardegrees, int maxpower, int timeout, int accelang, int deaccelang){
+void turnexact(int direction, int tardegrees, int timeout, int accelang, int deaccelang, int maxpower = 100, int kturn = 0.5){
 
 gyroReset(gyro1);
 int curdegrees;
@@ -57,9 +57,9 @@ while (abs(curdegrees) < tardegrees){
   else
   {motorpower = maxpower;}
 
-  int powerL = -direction*motorpower;
-  int powerR = direction*motorpower;
-
+  int powerL = -direction*motorpower*kturn;
+  int powerR = direction*motorpower*kturn;
+//go fuck yourself
   motorSet(DriveBL, DriveBL_Dir*powerL);
   motorSet(DriveFL, DriveFL_Dir*powerL);
   motorSet(DriveFR, DriveFR_Dir*powerR);
@@ -71,4 +71,3 @@ while (abs(curdegrees) < tardegrees){
 delay(25);
   }
 }
-*/
