@@ -1,8 +1,8 @@
 #include "main.h"
 #include "API.h"
 
-
-void drivestraight(int direction, int totdist, int acceldist, int deacceldist, int maxpower, int minpower, int timeout, float kdrift = 0.5)
+/*
+void drivestraight(int direction, int totdist, int acceldist, int deacceldist, int maxpower, int minpower, int timeout, float kdrift)
 {
   encoderReset(encoderL);
   encoderReset(encoderR);
@@ -71,3 +71,4 @@ while (abs(curdegrees) < tardegrees){
 delay(25);
   }
 }
+*/

@@ -3,7 +3,7 @@
 
 void clawtaskcode (void*ignore){
 
-  float kclaw = 0.5;
+  //float kclaw = 0.5;
     while(true){
 
       if (joystickGetDigital(1, 5, JOY_UP)){
@@ -26,15 +26,17 @@ void clawtaskcode (void*ignore){
         clawtarget = analogRead(potclaw);
       }
       else {
-          int clawpos = analogRead(potclaw);
+          /*int clawpos = analogRead(potclaw);
           int clawdifference = clawtarget - clawpos;
 
           motorSet(RollL, motorcap(RollL_Dir*clawdifference*kclaw));
           motorSet(RollR, motorcap(RollR_Dir*clawdifference*kclaw));
-
+*/
+motorSet(RollL, 0);
+motorSet(RollR, 0);
+}
           delay(25);
       }
-    }
   }
 
 void clawpresets(){

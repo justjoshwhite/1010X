@@ -4,12 +4,13 @@
 #pragma config(Sensor, in6,    potarmR,        sensorPotentiometer)
 #pragma config(Sensor, in7,    potarmL,        sensorPotentiometer)
 #pragma config(Sensor, in8,    PEbatt,         sensorAnalog)
-#pragma config(Sensor, dgtl1,  sArmLT,         sensorTouch)//robosavages was here
+#pragma config(Sensor, dgtl1,  sArmLT,         sensorTouch)
 #pragma config(Sensor, dgtl2,  sArmLB,         sensorTouch)
 #pragma config(Sensor, dgtl3,  sArmRT,         sensorTouch)
 #pragma config(Sensor, dgtl4,  sArmRB,         sensorTouch)
 #pragma config(Sensor, dgtl5,  encoderR,       sensorQuadEncoder)
 #pragma config(Sensor, dgtl7,  encoderL,       sensorQuadEncoder)
+#pragma config(Sensor, dgtl11, Enocderclaw,    sensorQuadEncoder)
 #pragma config(Motor,  port1,           DriveBL,       tmotorVex393_HBridge, openLoop)
 #pragma config(Motor,  port2,           DriveFL,       tmotorVex393_MC29, openLoop, reversed)
 #pragma config(Motor,  port3,           RollL,         tmotorVex393_MC29, openLoop)
@@ -26,8 +27,6 @@
 #pragma competitionControl(Competition)
 #include "Vex_Competition_Includes.c"
 
-
-#include "1010X_ArmStates.c"
 
 int myauto = 1;
 

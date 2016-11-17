@@ -16,6 +16,7 @@
  */
 
 #include "main.h"
+#include "API.h"
 
  /**
   * Runs pre-initialization code.
@@ -38,13 +39,28 @@ void initializeIO() {
  * This function must exit relatively promptly, or the operatorControl() and autonomous() tasks will not start. An autonomous mode selection menu like the pre_auton() in other environments can be implemented in this task if desired.
  */
 void initialize() {
-  //TaskHandle armtask = taskCreate (armtaskcode , TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
-  //TaskHandle clawtask = taskCreate (clawtaskcode, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+
 lcdInit(uart1);
 lcdClear(uart1);
-gyro1 =  gyroInit (gyro, 196);
+lcdSetBacklight(uart1, 1);
+lcdSetText(uart1, 1, "LCD Init");
+delay(400);
+
+armtargetL = 0;
+armtargetR = 0;
+clawtarget = 0;
+myauto = 0;
+lcdClear(uart1);
+lcdSetText(uart1, 1, "Varible Init");
+delay(400);
+
 encoderR = encoderInit(encoderR_TOP, encoderR_BOT, 0);
 encoderL = encoderInit(encoderL_TOP, encoderL_BOT, 0);
-  delay(250);
-  autoselect();
+encoderclaw = encoderInit(encoderclaw_TOP, encoderclaw_BOT, 0);
+gyro1 =  gyroInit (gyro, 196);
+lcdClear(uart1);
+lcdSetText(uart1, 1, "Senseor Init");
+delay(500);
+
+autoselect();
 }

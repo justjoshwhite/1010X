@@ -31,24 +31,27 @@
 
 void operatorControl() {
 
-	lcdClear(uart1);
-	lcdPrint(uart1, 1, "Let light not see my");
-	lcdPrint(uart1, 2, "Black and Deep Desires");
+
+
+	//lcdClear(uart1);
+	//lcdSetBacklight(uart1, 1);
+	//lcdSetText(uart1, 1, "Driver10");
 
 	TaskHandle armtask = taskCreate (armtaskcode, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
-  TaskHandle clawtask = taskCreate (clawtaskcode, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+  TaskHandle clawtaskencoder = taskCreate (clawencodertaskcode, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+
 	while (true)
 	{
 armpresets();
-clawpresets();
+//clawpresets();
 
 		motorSet( DriveBL, DriveBL_Dir*joystickGetAnalog(1, 3) );
 		motorSet( DriveFL, DriveFL_Dir*joystickGetAnalog(1, 3) );
 		motorSet( DriveFR, DriveFR_Dir*joystickGetAnalog(1, 2) );
 		motorSet( DriveBR, DriveBR_Dir*joystickGetAnalog(1, 2) );
 
-		delay(25);
+		delay(30);
 	}
-	taskDelete(armtask);
-	taskDelete(clawtask);
+	//taskDelete(armtask);
+	//taskDelete(clawtask);
 }

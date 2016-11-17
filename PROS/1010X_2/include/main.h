@@ -54,27 +54,27 @@ extern "C" {
 //motor definitions
   //drive motors
   #define DriveBL 1
-    #define DriveBL_Dir 1
+    #define DriveBL_Dir -1
   #define DriveFL 2
     #define DriveFL_Dir -1
   #define DriveFR 9
     #define DriveFR_Dir 1
   #define DriveBR 10
-    #define DriveBR_Dir -1
+    #define DriveBR_Dir 1
   //Intake motors
-  #define RollL 3
-    #define RollL_Dir 1
-  #define RollR 8
-    #define RollR_Dir -1
+  #define RollL 8
+    #define RollL_Dir -1
+  #define RollR 3
+    #define RollR_Dir 1
   //Arm motors
-  #define ArmLT 4
-    #define ArmLT_Dir -1
-  #define ArmLB 5
-    #define ArmLB_Dir -1
-  #define ArmRT 7
-    #define ArmRT_Dir 1
-  #define ArmRB 6
-    #define ArmRB_Dir 1
+  #define ArmLT 7
+    #define ArmLT_Dir 1
+  #define ArmLB 6
+    #define ArmLB_Dir 1
+  #define ArmRT 4
+    #define ArmRT_Dir -1
+  #define ArmRB 5
+    #define ArmRB_Dir -1
 
 //analog sensors
   #define gyro 5
@@ -87,14 +87,22 @@ extern "C" {
   #define encoderR_BOT 5
   #define encoderL_TOP 7
   #define encoderL_BOT 8
+  #define encoderclaw_TOP 11
+  #define encoderclaw_BOT 12
+  #define clawencoder_TOP 12
+  #define clawencoder_BOT 11
 //LCD
 #define LCD1 1 ///not sure...
 
 //arm heights
-#define GROUND 1000 //check
-#define OFF_GROUND 1500//check
-#define FENCE_LOW 2000 //check
-#define FENCE_HIGH 2200//czheck
+#define GROUND_R 310 //check
+#define GROUND_L 10
+#define OFF_GROUND_R 1300//check
+#define OFF_GROUND_L 1000
+#define FENCE_LOW_R 3300 //check
+#define FENCE_LOW_L 3000
+#define FENCE_HIGH_R 3000//czheck
+#define FENCE_HIGH_L 2700
 
 #define CLAW_OPEN_FULL 10//check
 #define CLAW_OPEN_PART 15 //check
@@ -106,12 +114,14 @@ extern "C" {
 
 Encoder encoderL;
 Encoder encoderR;
+Encoder encoderclaw;
 Gyro gyro1;
 
 //TaskHandle armtask;
 //TaskHandle clawtask;
-void clawtaskcode(void*ignore);
+void clawencodertaskcode(void*ignore);
 void armtaskcode(void*ignore);
+void autoselectcode(void*ignore);
 
 void armpresets();
 void clawpresets();
@@ -121,11 +131,12 @@ void turnexact();
 
 void autoselect();
 
-int armtarget;//target height
+int armtargetL;
+int armtargetR;//target height
 
 int clawtarget;
 
-int myauto = 1;
+int myauto;
 
 int motorcap(int value);
 

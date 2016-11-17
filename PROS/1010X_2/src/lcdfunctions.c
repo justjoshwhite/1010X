@@ -2,45 +2,85 @@
 #include "API.h"
 
 
-void autoselect(){
+void autoselect(void){
+  int timeoutlcd = 350;
 lcdSetBacklight(uart1, true);
-while(true)
+while(!isEnabled()){
   switch (myauto){
-    case(1):
-      lcdPrint(uart1, 1, "Auto 1");
-      lcdPrint(uart1, 2, "1010X");
-      if(lcdReadButtons(uart1) == LCD_BTN_LEFT){
-        myauto = 1;}
-      else if(lcdReadButtons(uart1) == LCD_BTN_RIGHT){
+    case (1):
+      lcdClear(uart1);
+      lcdSetText(uart1, 1, "Auto 1");
+      lcdSetText(uart1, 2, "1010X");
+      delay(30);
+      if(lcdReadButtons(uart1) == 1){
+        lcdClear(uart1);
+        lcdSetText(uart1, 1, "wait");
+        delay(timeoutlcd);
+        myauto = 4;}
+      else if(lcdReadButtons(uart1) == 4){
+        lcdClear(uart1);
+        lcdSetText(uart1, 1, "wait");
+        delay(timeoutlcd);
         myauto = 2;}
       else {}
     break;
-    case(2):
-      lcdPrint(uart1, 1, "Auto 1");
-      lcdPrint(uart1, 2, "1010X");
-      if(lcdReadButtons(uart1) == LCD_BTN_LEFT){
+    case (2):
+      lcdClear(uart1);
+      lcdSetText(uart1, 1, "Auto 2");
+      lcdSetText(uart1, 2, "1010X");
+      delay(30);
+      if(lcdReadButtons(uart1) == 1){
+        lcdClear(uart1);
+        lcdSetText(uart1, 1, "wait");
+        delay(timeoutlcd);
         myauto = 1;}
-      else if(lcdReadButtons(uart1) == LCD_BTN_RIGHT){
+      else if(lcdReadButtons(uart1) == 4){
+        lcdClear(uart1);
+        lcdSetText(uart1, 1, "wait");
+        delay(timeoutlcd);
         myauto = 3;}
       else {}
     break;
-    case(3):
-      lcdPrint(uart1, 1, "Auto 1");
-      lcdPrint(uart1, 2, "1010X");
-      if(lcdReadButtons(uart1) == LCD_BTN_LEFT){
+    case (3):
+      lcdClear(uart1);
+      lcdSetText(uart1, 1, "Auto 3");
+      lcdSetText(uart1, 2, "1010X");
+      delay(30);
+      if(lcdReadButtons(uart1) == 1){
+        lcdClear(uart1);
+        lcdSetText(uart1, 1, "wait");
+        delay(timeoutlcd);
         myauto = 2;}
-      else if(lcdReadButtons(uart1) == LCD_BTN_RIGHT){
+      else if(lcdReadButtons(uart1) == 4){
+        lcdClear(uart1);
+        lcdSetText(uart1, 1, "wait");
+        delay(timeoutlcd);
         myauto = 4;}
       else {}
     break;
-    case(4):
-      lcdPrint(uart1, 1, "Auto 1");
-      lcdPrint(uart1, 2, "1010X");
-      if(lcdReadButtons(uart1) == LCD_BTN_LEFT){
+    case (4):
+      lcdClear(uart1);
+      lcdSetText(uart1, 1, "Auto 4");
+      lcdSetText(uart1, 2, "1010X");
+      delay(30);
+      if(lcdReadButtons(uart1) == 1){
+        lcdClear(uart1);
+        lcdSetText(uart1, 1, "wait");
+        delay(timeoutlcd);
         myauto = 3;}
-      else if(lcdReadButtons(uart1) == LCD_BTN_RIGHT){
-        myauto = 4;}
+      else if(lcdReadButtons(uart1) == 4){
+        lcdClear(uart1);
+        lcdSetText(uart1, 1, "wait");
+        delay(timeoutlcd);
+        myauto = 1;}
       else {}
     break;
+    default:
+     lcdClear(uart1);
+     lcdSetText(uart1, 1, "DEFAULT1");
+     delay(500);
+     myauto = 1;
+    break;
+    }
   }
 }
