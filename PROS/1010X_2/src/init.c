@@ -54,7 +54,7 @@ lcdClear(uart1);
 lcdSetText(uart1, 1, "Varible Init");
 delay(400);
 
-encoderR = encoderInit(encoderR_TOP, encoderR_BOT, 0);
+encoderR = encoderInit(encoderR_TOP, encoderR_BOT, 1);
 encoderL = encoderInit(encoderL_TOP, encoderL_BOT, 0);
 encoderclaw = encoderInit(encoderclaw_TOP, encoderclaw_BOT, 0);
 gyro1 =  gyroInit (gyro, 196);

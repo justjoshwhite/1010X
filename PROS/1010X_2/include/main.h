@@ -136,17 +136,18 @@ void drivestraight(
     int timeout,
     int acceldist,
     int deacceldist,
-    int maxpower = 100,
-    int minpower = 30,
-    float kdrift = 0.5);
+    int maxpower,
+    int minpower,
+    float kdrift);
 void turnexact(
   int direction,
   int tardegrees,
   int timeout,
   int accelang,
   int deaccelang,
-  int maxpower = 100,
-  int kturn = 0.5);
+  int maxpower,
+  int minpower,
+  float kturn);
 
 void autoselect();
 void clawopen();

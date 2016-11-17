@@ -10,9 +10,10 @@ int motorcap(int value){
       return value;
   }
 
-void clawopen(int claw, int arm)
+void clawopen()
 {
-clawtarget = claw;
-armtargetL = arm;
-armtargetR = arm+300;
+clawtarget = 400;
+armtargetL = 700;
+armtargetR = 1000;
+delay(1000);
 }

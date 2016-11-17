@@ -33,22 +33,46 @@ TaskHandle autoarmtask = taskCreate (autoarmtaskcode, TASK_DEFAULT_STACK_SIZE, N
 TaskHandle autoclawtask = taskCreate (autoclawencodertaskcode, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
   switch(myauto){
     case(1):
-drivestraight(1, 12000, 5000, 4000, 4000);
-delay(600);
-turnexact(1, 500, 5000, 150, 150);
+    lcdClear(uart1);
+    lcdPrint(uart1, 1, "start.");
+drivestraight(1, 1000, 10000, 300, 400, 100, 60, 0.0001);
+delay(500);
+drivestraight(-1, 1000, 10000, 300, 400, 100, 60, 0.0001);
+
+lcdClear(uart1);
+lcdPrint(uart1, 1, "over.");
+//delay(600);
 
     break;
     case(2):
-armtargetL = OFF_GROUND_L;
-armtargetR = OFF_GROUND_R;
+    //lcdClear(uart1);
+    //lcdPrint(uart1, 1, "start2.");
+armtargetL = FENCE_HIGH_L;
+armtargetR = FENCE_HIGH_R;
+//lcdClear(uart1);
+//lcdPrint(uart1, 1, "R = %d", armtargetR);
+//lcdPrint(uart1, 2, "L = %d", armtargetL);
+delay(10000);
+//lcdClear(uart1);
+//lcdPrint(uart1, 1, "over2.");
     break;
     case(3):
 clawtarget = 300;
+delay(10000);
     break;
     case(4):
+    lcdClear(uart1);
+    lcdPrint(uart1, 1, "start.");
+turnexact(1, 90, 5000, 150, 150, 100, 60, 0.5);
+delay(600);
+turnexact(-1, 90, 5000, 150, 150, 100, 60, 0.5);
+
+lcdClear(uart1);
+lcdPrint(uart1, 1, "over.");
 
     break;
     case(5):
+    clawopen();
     break;
 
   default:

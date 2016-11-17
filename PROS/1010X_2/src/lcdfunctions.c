@@ -72,7 +72,7 @@ while(!isEnabled()){
         lcdClear(uart1);
         lcdSetText(uart1, 1, "wait");
         delay(timeoutlcd);
-        myauto = 1;}
+        myauto = 5;}
       else {}
     break;
 

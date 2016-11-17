@@ -83,8 +83,8 @@ void autoarmtaskcode (void*ignore){
 
 float karm = 0.15;
 
-armtargetL = analogRead(potarmL);
-armtargetR = analogRead(potarmR);
+//armtargetL = analogRead(potarmL);
+//armtargetR = analogRead(potarmR);
 
 while(true){
   int armheightL = analogRead(potarmL);
@@ -92,12 +92,13 @@ while(true){
   int armdifferenceL = armtargetL - armheightL;
   int armdifferenceR = armtargetR - armheightR;
 
+lcdClear(uart1);
+lcdPrint(uart1, 1, "diffR = %d", armdifferenceR);
+lcdPrint(uart1, 2, "diffL = %d", armdifferenceL);
   motorSet(ArmLT, motorcap(ArmLT_Dir*armdifferenceL*karm));
   motorSet(ArmLB, motorcap(ArmLB_Dir*armdifferenceL*karm));
   motorSet(ArmRT, motorcap(ArmRT_Dir*armdifferenceR*karm));
   motorSet(ArmRB, motorcap(ArmRB_Dir*armdifferenceR*karm));
-
-
 
   delay(25);
 }
