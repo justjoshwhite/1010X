@@ -16,7 +16,7 @@ while(!isEnabled()){
         lcdClear(uart1);
         lcdSetText(uart1, 1, "wait");
         delay(timeoutlcd);
-        myauto = 4;}
+        myauto = 5;}
       else if(lcdReadButtons(uart1) == 4){
         lcdClear(uart1);
         lcdSetText(uart1, 1, "wait");
@@ -27,7 +27,7 @@ while(!isEnabled()){
     case (2):
       lcdClear(uart1);
       lcdSetText(uart1, 1, "Auto 2");
-      lcdSetText(uart1, 2, "R-Mid S");
+      lcdSetText(uart1, 2, "L-Mid C");
       delay(30);
       if(lcdReadButtons(uart1) == 1){
         lcdClear(uart1);
@@ -44,7 +44,7 @@ while(!isEnabled()){
     case (3):
       lcdClear(uart1);
       lcdSetText(uart1, 1, "Auto 3");
-      lcdSetText(uart1, 2, "L-Mid C");
+      lcdSetText(uart1, 2, "R-Mid C");
       delay(30);
       if(lcdReadButtons(uart1) == 1){
         lcdClear(uart1);
@@ -79,7 +79,7 @@ while(!isEnabled()){
     case (5):
       lcdClear(uart1);
       lcdSetText(uart1, 1, "Auto 5");
-      lcdSetText(uart1, 2, "blank");
+      lcdSetText(uart1, 2, "Programming");
       delay(30);
       if(lcdReadButtons(uart1) == 1){
         lcdClear(uart1);

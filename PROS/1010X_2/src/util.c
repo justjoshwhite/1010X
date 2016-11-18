@@ -15,5 +15,8 @@ void clawopen()
 clawtarget = 400;
 armtargetL = 700;
 armtargetR = 1000;
-delay(1000);
+delay(500);
+armtargetR = GROUND_R;
+armtargetL = GROUND_L;
+delay(500);
 }

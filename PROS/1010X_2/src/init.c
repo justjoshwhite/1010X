@@ -44,7 +44,7 @@ lcdInit(uart1);
 lcdClear(uart1);
 lcdSetBacklight(uart1, 1);
 lcdSetText(uart1, 1, "LCD Init");
-delay(400);
+delay(200);
 
 armtargetL = 0;
 armtargetR = 0;
@@ -52,7 +52,7 @@ clawtarget = 0;
 myauto = 0;
 lcdClear(uart1);
 lcdSetText(uart1, 1, "Varible Init");
-delay(400);
+delay(200);
 
 encoderR = encoderInit(encoderR_TOP, encoderR_BOT, 1);
 encoderL = encoderInit(encoderL_TOP, encoderL_BOT, 0);
@@ -60,7 +60,7 @@ encoderclaw = encoderInit(encoderclaw_TOP, encoderclaw_BOT, 0);
 gyro1 =  gyroInit (gyro, 196);
 lcdClear(uart1);
 lcdSetText(uart1, 1, "Senseor Init");
-delay(500);
+delay(200);
 
 autoselect();
 }

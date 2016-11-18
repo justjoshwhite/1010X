@@ -32,47 +32,161 @@ lcdPrint(uart1, 1, "No Mercy.");
 TaskHandle autoarmtask = taskCreate (autoarmtaskcode, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
 TaskHandle autoclawtask = taskCreate (autoclawencodertaskcode, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
   switch(myauto){
-    case(1):
-    lcdClear(uart1);
-    lcdPrint(uart1, 1, "start.");
-drivestraight(1, 1000, 10000, 300, 400, 100, 60, 0.0001);
-delay(500);
-drivestraight(-1, 1000, 10000, 300, 400, 100, 60, 0.0001);
-
-lcdClear(uart1);
-lcdPrint(uart1, 1, "over.");
-//delay(600);
-
-    break;
-    case(2):
-    //lcdClear(uart1);
-    //lcdPrint(uart1, 1, "start2.");
-armtargetL = FENCE_HIGH_L;
-armtargetR = FENCE_HIGH_R;
-//lcdClear(uart1);
-//lcdPrint(uart1, 1, "R = %d", armtargetR);
-//lcdPrint(uart1, 2, "L = %d", armtargetL);
-delay(10000);
-//lcdClear(uart1);
-//lcdPrint(uart1, 1, "over2.");
-    break;
-    case(3):
-clawtarget = 300;
-delay(10000);
-    break;
-    case(4):
-    lcdClear(uart1);
-    lcdPrint(uart1, 1, "start.");
-turnexact(1, 90, 5000, 150, 150, 100, 60, 0.5);
-delay(600);
-turnexact(-1, 90, 5000, 150, 150, 100, 60, 0.5);
-
-lcdClear(uart1);
-lcdPrint(uart1, 1, "over.");
-
-    break;
-    case(5):
+    case(1): //Star Mid-L
     clawopen();
+    clawtarget = 700;
+    drivestraight(1, 12000, 50000, 200, 200, 110, 70, 0.1);
+    clawtarget = -100;
+    delay(500);
+    armtargetL = OFF_GROUND_L;
+    armtargetR = OFF_GROUND_R;
+    delay(750);
+    turnexact(-1, 60, 5000, 30, 30, 110, 70, 0.01);
+    drivestraight(1, 2000, 5000, 50, 50, 110, 70, 0.01);
+    turnexact(1, 165, 5000, 30, 30, 110, 70, 0.01);
+    drivestraight(-1, 4400, 5000, 50, 50, 110, 70, 0.01);
+    armtargetL = FENCE_LOW_L+1000;
+    armtargetR = FENCE_LOW_R+1000;
+    while(analogRead(potarmL)<2800){}
+    clawtarget = 700;
+    delay(1200);
+    //armtargetL = GROUND_L;
+    //armtargetR = GROUND_R;
+    delay(2000);
+    break;
+    case(2)://cube mid-L
+    clawopen();
+    clawtarget = 1000;
+    drivestraight(1, 6000, 7000, 800, 800, 120, 70, 0.1);
+    clawtarget = 100;
+    delay(500);
+    armtargetL = OFF_GROUND_L;
+    armtargetR = OFF_GROUND_R;
+    delay(750);
+    turnexact(1, 110, 5000, 20, 20, 115, 70, 0.01);
+    drivestraight(-1, 4000, 5000, 800, 800, 110, 70, 0.1);
+    armtargetL = FENCE_LOW_L;
+    armtargetR = FENCE_LOW_R;
+    delay(1600);
+    clawtarget = 700;
+    delay(2000);
+    ///armtargetL = GROUND_L;
+    //armtargetR = GROUND_R;
+    delay(2000);
+
+    break;
+    case(3)://cude mid-R
+    clawopen();
+    clawtarget = 1000;
+    drivestraight(1, 6000, 7000, 800, 800, 120, 70, 0.1);
+    clawtarget = 100;
+    delay(500);
+    armtargetL = OFF_GROUND_L;
+    armtargetR = OFF_GROUND_R;
+    delay(750);
+    turnexact(-1, 120, 5000, 20, 20, 115, 70, 0.01);
+    drivestraight(-1, 4000, 5000, 800, 800, 110, 70, 0.1);
+    armtargetL = FENCE_LOW_L;
+    armtargetR = FENCE_LOW_R;
+    delay(1600);
+    clawtarget = 700;
+    delay(2000);
+  //  armtargetL = GROUND_L;
+    //armtargetR = GROUND_R;
+delay(2000);
+    break;
+    case(4): //star mid-R
+
+    clawopen();
+    clawtarget = 700;
+    drivestraight(1, 12000, 50000, 200, 200, 110, 70, 0.1);
+    clawtarget = -100;
+    delay(500);
+    armtargetL = OFF_GROUND_L;
+    armtargetR = OFF_GROUND_R;
+    delay(750);
+    turnexact(1, 60, 5000, 30, 30, 110, 70, 0.01);
+    drivestraight(1, 2000, 5000, 50, 50, 110, 70, 0.01);
+    turnexact(-1, 165, 5000, 30, 30, 110, 70, 0.01);
+    drivestraight(-1, 4400, 5000, 50, 50, 110, 70, 0.01);
+    armtargetL = FENCE_LOW_L;
+    armtargetR = FENCE_LOW_R;
+    while(analogRead(potarmL)<2800){}
+    clawtarget = 700;
+    delay(1200);
+  //  armtargetL = GROUND_L;
+  //  armtargetR = GROUND_R;
+    delay(2000);
+
+    break;
+    case(5)://programming skills
+
+    drivestraight(-1, 2500, 5000, 500, 500, 115, 70, 0.1);
+    clawopen();
+    clawtarget = 700;
+    delay(1500);
+    drivestraight(1, 1300, 5000, 250, 250, 115, 70, 0.1);
+    delay(900);
+    clawtarget = -50;
+    delay(1000);
+    armtargetL = OFF_GROUND_L;
+    armtargetR = OFF_GROUND_R;
+    delay(1000);
+//backmod
+    drivestraight(-1, 5000, 5000, 800, 800, 115, 70, 0.1);
+    armtargetL = FENCE_LOW_L + 500;
+    armtargetR = FENCE_LOW_R + 500;
+    while(analogRead(potarmL)<2800){}
+    clawtarget = 700;
+    delay(1000);
+    armtargetL = GROUND_L;
+    armtargetR = GROUND_R;
+    delay(1800);
+    drivestraight(1, 4700, 5000, 800, 800, 115, 70, 0.1);
+    delay(1000);
+    clawtarget = 0;
+    delay(1000);
+//2
+    drivestraight(-1, 5800, 5000, 800, 800, 115, 70, 0.1);
+    armtargetL = FENCE_LOW_L + 500;
+    armtargetR = FENCE_LOW_R + 500;
+    while(analogRead(potarmL)<2800){}
+    clawtarget = 700;
+    delay(1000);
+    armtargetL = GROUND_L;
+    armtargetR = GROUND_R;
+    delay(1800);
+    drivestraight(1, 5800, 5000, 800, 800, 115, 70, 0.1);
+    delay(1000);
+    clawtarget = 0;
+    delay(1000);
+//3
+drivestraight(-1, 5800, 5000, 800, 800, 115, 70, 0.1);
+armtargetL = FENCE_LOW_L + 500;
+armtargetR = FENCE_LOW_R + 500;
+while(analogRead(potarmL)<2800){}
+clawtarget = 700;
+delay(1000);
+armtargetL = GROUND_L;
+armtargetR = GROUND_R;
+delay(1800);
+drivestraight(1, 5800, 5000, 800, 800, 115, 70, 0.1);
+delay(1000);
+clawtarget = 0;
+delay(1000);
+  //4
+  drivestraight(-1, 6000, 5000, 800, 800, 115, 70, 0.1);
+  armtargetL = FENCE_LOW_L + 500;
+  armtargetR = FENCE_LOW_R + 500;
+  while(analogRead(potarmL)<2800){}
+  clawtarget = 700;
+  delay(1000);
+  armtargetL = GROUND_L;
+  armtargetR = GROUND_R;
+  delay(1800);
+  drivestraight(1, 5200, 5000, 800, 800, 115, 70, 0.1);
+  delay(1000);
+
     break;
 
   default:
