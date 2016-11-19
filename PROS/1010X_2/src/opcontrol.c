@@ -31,9 +31,8 @@
 
 void operatorControl() {
 
-
-
-	//lcdClear(uart1);
+//	taskDelete(autoarmtask);
+//	taskDelete(autoclawtask);	//lcdClear(uart1);
 	//lcdSetBacklight(uart1, 1);
 	//lcdSetText(uart1, 1, "Driver10");
 
@@ -52,6 +51,5 @@ armpresets();
 
 		delay(30);
 	}
-	//taskDelete(armtask);
-	//taskDelete(clawtask);
+
 }

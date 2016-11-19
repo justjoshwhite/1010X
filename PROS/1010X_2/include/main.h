@@ -97,12 +97,14 @@ extern "C" {
 //arm heights
 #define GROUND_R 310
 #define GROUND_L 10
-#define OFF_GROUND_R 1300
+#define OFF_GROUND_R 1550
 #define OFF_GROUND_L 1000
-#define FENCE_LOW_R 3300
+#define FENCE_LOW_R 3550
 #define FENCE_LOW_L 3000
-#define FENCE_HIGH_R 3000
+#define FENCE_HIGH_R 3250
 #define FENCE_HIGH_L 2700
+#define ARM_MAX_R 3350//tbt
+#define ARM_MAX_L 3000//tbt
 
 #define CLAW_OPEN_FULL 10//check
 #define CLAW_OPEN_PART 15 //check
@@ -117,13 +119,13 @@ Encoder encoderR;
 Encoder encoderclaw;
 Gyro gyro1;
 
-//TaskHandle armtask;
-//TaskHandle clawtask;
+TaskHandle autoarmtask;
+TaskHandle autoclawtask;
 void clawencodertaskcode(void*ignore);
-void armtaskcode(void*ignore);
-void autoselectcode(void*ignore);
-void autoarmtaskcode(void*ignore);
-void autoclawencodertaskcode(void*ignore);
+void armtaskcode(void *ignore);
+void autoselectcode(void *ignore);
+void autoarmtaskcode(void *ignore);
+void autoclawencodertaskcode(void *ignore);
 
 
 

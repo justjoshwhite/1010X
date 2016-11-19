@@ -1,7 +1,6 @@
 #include "main.h"
 #include "API.h"
 
-
 void clawencodertaskcode (void *ignore){
 
 float kclaw = 0.2;
@@ -50,6 +49,10 @@ motorSet(RollL, motorcap(RollL_Dir*clawdifference*kclaw));
 motorSet(RollR, motorcap(RollR_Dir*clawdifference*kclaw));
 
   delay(25);
+  if(isAutonomous()){}
+  else{
+    taskDelete(autoclawtask);
+  }
 }
 
 }

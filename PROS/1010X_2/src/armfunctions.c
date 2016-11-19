@@ -16,10 +16,14 @@ float karm = 0.15;
     lcdPrint(uart1, 2, "PotR = %d", armheightR);
 
     if (joystickGetDigital(1, 6, JOY_UP)){
-      motorSet(ArmLT, ArmLT_Dir*127);
-      motorSet(ArmLB, ArmLB_Dir*127);
-      motorSet(ArmRT, ArmRT_Dir*127);
-      motorSet(ArmRB, ArmRB_Dir*127);
+        if(analogRead(potarmL) < ARM_MAX_L){
+          motorSet(ArmLT, ArmLT_Dir*127);
+          motorSet(ArmLB, ArmLB_Dir*127);
+        }
+        if(analogRead(potarmR < ARM_MAX_R)){
+            motorSet(ArmRT, ArmRT_Dir*127);
+            motorSet(ArmRB, ArmRB_Dir*127);
+          }
       armtargetL = analogRead(potarmL);
       armtargetR = analogRead(potarmR);
     }else if(joystickGetDigital(1,6,JOY_DOWN)){
@@ -101,7 +105,11 @@ lcdPrint(uart1, 2, "diffL = %d", armdifferenceL);
   motorSet(ArmRB, motorcap(ArmRB_Dir*armdifferenceR*karm));
 
   delay(25);
-}
+  if( isAutonomous() )
+  { }
+  else{
+taskDelete(autoarmtask);
+  }
 
-
+  }
 }
