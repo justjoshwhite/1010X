@@ -7,8 +7,6 @@
 extern "C" {
 #endif
 
-
-
 //drive motors
 #define DriveBL 1
   #define DriveBL_Dir -1
@@ -56,16 +54,39 @@ extern "C" {
 #define encoderBL_TOP 7
 #define encoderBL_BOT 8
 
+#define ime_BL 1
+#define ime_BR 0
+
 Encoder encoderFL;
 Encoder encoderFR;
 Encoder encoderBL;
 Encoder encoderBR;
 Gyro gyro;
 
-//void clawpresets();
-//void drive_clawcontrol(void *ignore);
-//globals
+#define ARM_MAX_R 1000
+#define ARM_MAX_L 1000
+#define ARM_GROUND_R 245
+#define ARM_GROUND_L 260
+#define ARM_MID_R 2560
+#define ARM_MID_L 2780
+#define ARM_REALMAX_L 3470
+#define ARM_REALMAX_R 3370
 
+#define OFFSET_ARM 50
+//L-R
+void drive_armcontrol(void *ignore);
+void armpresets();
+
+
+#define CLAW_MAX 3030
+#define CLAW_CLOSED 275
+#define CLAW_SEMI_OPEN 1100
+#define CLAW_REALMAX 3360
+void clawpresets();
+void drive_clawcontrol(void *ignore);
+
+
+//globals
 int armtarget_L;
 int armtarget_R;
 

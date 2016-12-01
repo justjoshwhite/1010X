@@ -20,6 +20,7 @@ void initialize() {
   analogCalibrate(accel_x);
   analogCalibrate(accel_y);
   analogCalibrate(gyroport);
+  imeInitializeAll();
 
 
   lcdClear(uart1);

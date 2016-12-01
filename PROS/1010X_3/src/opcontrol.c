@@ -1,6 +1,4 @@
 #include "main.h"
-#include "armfunctions.h"
-#include "clawfunctions.h"
 
 void operatorControl() {
 
