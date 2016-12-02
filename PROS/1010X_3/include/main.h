@@ -62,6 +62,7 @@ Encoder encoderFR;
 Encoder encoderBL;
 Encoder encoderBR;
 Gyro gyro;
+Ultrasonic ultrasonic;
 
 #define ARM_MAX_R 1000
 #define ARM_MAX_L 1000
@@ -85,14 +86,73 @@ void armpresets();
 void clawpresets();
 void drive_clawcontrol(void *ignore);
 
+void drive_lcd_task(void *ignore);
+/*
+//drive_pid globals
+  //varibles
+extern int drive_armheight_L;
+extern int drive_armheight_R;
+extern int armtarget_L;
+extern int armtarget_R;
+extern int arm_skew;
 
+  //constants
+extern float arm_k_skew = 0.5;
+extern float arm_k_proportion = 0.15;
+extern float arm_k_integral = 0;
+extern int arm_integral_activezone = 100;
+extern float arm_k_derivative = 0;
+extern int arm_deaccel_delay = 100;
+extern int arm_joystickrange = 30;
+
+
+//claw_pid globals
+  //varible
+extern int claw_pos;
+extern int clawtarget;
+  //constants
+extern float claw_k_proportion = 0.18;
+extern float claw_k_integral = 0;
+extern float claw_integral_activezone = 100;
+extern float claw_k_derivative = 0;
+extern int claw_deaccel_delay = 100;
+extern int claw_joystickrange = 30;
+*/
+
+/*
 //globals
-int armtarget_L;
-int armtarget_R;
+//drive_pid globals
+  //varibles
+ int drive_armheight_L;
+ int drive_armheight_R;
+ int armtarget_L;
+ int armtarget_R;
+ int arm_skew;
 
-int clawtarget;
+  //constants
+ float arm_k_skew = 0.5;
+ float arm_k_proportion = 0.15;
+ float arm_k_integral = 0;
+ int arm_integral_activezone = 100;
+ float arm_k_derivative = 0;
+ int arm_deaccel_delay = 100;
+ int arm_joystickrange = 30;
 
 
+//claw_pid globals
+  //varible
+ int claw_pos;
+ int clawtarget;
+  //constants
+ float claw_k_proportion = 0.18;
+ float claw_k_integral = 0;
+ float claw_integral_activezone = 100;
+ float claw_k_derivative = 0;
+ int claw_deaccel_delay = 100;
+ int claw_joystickrange = 30;
+
+
+*/
 
 //#define AUTO_DEBUG
 // A function prototype looks exactly like its declaration, but with a semicolon instead of

@@ -11,7 +11,9 @@ void initialize() {
   lcdSetBacklight(uart1, 1);
   lcdSetText(uart1, 1, "LCD Init");
   delay(40);
-
+  lcdClear(uart1);
+  lcdSetText(uart1, 1, "Senseor Init");
+/*
   encoderFR = encoderInit(encoderFR_TOP, encoderFR_BOT, 1);
   encoderFL = encoderInit(encoderFL_TOP, encoderFL_BOT, 0);
   encoderBL = encoderInit(encoderBL_TOP, encoderBL_BOT, 1);
@@ -21,11 +23,11 @@ void initialize() {
   analogCalibrate(accel_y);
   analogCalibrate(gyroport);
   imeInitializeAll();
+  */
 
-
+  ultrasonic = ultrasonicInit(4, 3);
+  delay(200);
   lcdClear(uart1);
-  lcdSetText(uart1, 1, "Senseor Init");
-  delay(600);
-
+  lcdSetText(uart1, 1, "Ready");
 
 }

@@ -4,7 +4,7 @@ void operatorControl() {
 
 	TaskHandle armtaskpid = taskCreate (drive_armcontrol, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
 	TaskHandle clawtaskpid = taskCreate (drive_clawcontrol, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
-
+	TaskHandle driver_lcd = taskCreate( drive_lcd_task, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
 	while (1) {
 		armpresets();
 		clawpresets();
