@@ -87,73 +87,37 @@ void clawpresets();
 void drive_clawcontrol(void *ignore);
 
 void drive_lcd_task(void *ignore);
-/*
-//drive_pid globals
-  //varibles
-extern int drive_armheight_L;
-extern int drive_armheight_R;
-extern int armtarget_L;
-extern int armtarget_R;
-extern int arm_skew;
 
-  //constants
-extern float arm_k_skew = 0.5;
-extern float arm_k_proportion = 0.15;
-extern float arm_k_integral = 0;
-extern int arm_integral_activezone = 100;
-extern float arm_k_derivative = 0;
-extern int arm_deaccel_delay = 100;
-extern int arm_joystickrange = 30;
+//auto functions
 
+void drivestraight(
+  int direction,
+  int total_tics,
+  int target_speed,
+  int power_default);
 
-//claw_pid globals
-  //varible
-extern int claw_pos;
-extern int clawtarget;
-  //constants
-extern float claw_k_proportion = 0.18;
-extern float claw_k_integral = 0;
-extern float claw_integral_activezone = 100;
-extern float claw_k_derivative = 0;
-extern int claw_deaccel_delay = 100;
-extern int claw_joystickrange = 30;
-*/
+#define NORTH 1
+#define EAST 2
+#define SOUTH 3
+#define WEST 4
+#define NORTHEAST 5
+#define SOUTHEAST 6
+#define SOUTHWEST 7
+#define NORTHWEST 8
 
-/*
-//globals
-//drive_pid globals
-  //varibles
- int drive_armheight_L;
- int drive_armheight_R;
- int armtarget_L;
- int armtarget_R;
- int arm_skew;
+void turnexact(
+  int direction,
+  int target_degrees,
+  int target_speed,
+  int power_default
+);
 
-  //constants
- float arm_k_skew = 0.5;
- float arm_k_proportion = 0.15;
- float arm_k_integral = 0;
- int arm_integral_activezone = 100;
- float arm_k_derivative = 0;
- int arm_deaccel_delay = 100;
- int arm_joystickrange = 30;
+#define CLOCKWISE 1
+#define COUNTER_CLOCKWISE -1
 
 
-//claw_pid globals
-  //varible
- int claw_pos;
- int clawtarget;
-  //constants
- float claw_k_proportion = 0.18;
- float claw_k_integral = 0;
- float claw_integral_activezone = 100;
- float claw_k_derivative = 0;
- int claw_deaccel_delay = 100;
- int claw_joystickrange = 30;
-
-
-*/
-
+void autoselector_code(void*ignore);
+int myauto;
 //#define AUTO_DEBUG
 // A function prototype looks exactly like its declaration, but with a semicolon instead of
 // actual code. If a function does not match a prototype, compile errors will occur.
