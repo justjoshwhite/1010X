@@ -8,14 +8,14 @@ extern "C" {
 #endif
 
 //drive motors
-#define DriveBL 1
-  #define DriveBL_Dir -1
-#define DriveFL 2
-  #define DriveFL_Dir 1
-#define DriveFR 9
-  #define DriveFR_Dir -1
-#define DriveBR 10
-  #define DriveBR_Dir 1
+#define DriveBL 2
+  #define DriveBL_Dir 1
+#define DriveFL 1
+  #define DriveFL_Dir -1
+#define DriveFR 10
+  #define DriveFR_Dir 1
+#define DriveBR 9
+  #define DriveBR_Dir -1
 
 //Intake motors
 #define ClawL 8
@@ -64,28 +64,35 @@ Encoder encoderBR;
 Gyro gyro;
 Ultrasonic ultrasonic;
 
-#define ARM_MAX_R 1000
-#define ARM_MAX_L 1000
-#define ARM_GROUND_R 245
-#define ARM_GROUND_L 260
-#define ARM_MID_R 2560
-#define ARM_MID_L 2780
-#define ARM_REALMAX_L 3470
-#define ARM_REALMAX_R 3370
+#define OFFSET_ARM 105 //L-R
 
-#define OFFSET_ARM 50
-//L-R
+#define ARM_MAX_L 3000
+#define ARM_MAX_R (3000 - OFFSET_ARM)
+#define ARM_GROUND_L 260
+#define ARM_GROUND_R (260 - OFFSET_ARM)
+#define ARM_MID_L 2000
+#define ARM_MID_R (2000 - OFFSET_ARM)
+#define ARM_REALMAX_L 3400
+#define ARM_REALMAX_R (3400 - OFFSET_ARM)
+TaskHandle armtaskpid;
+TaskHandle armtaskpid_auto;
 void drive_armcontrol(void *ignore);
+void auto_armcontrol(void *ignore);
 void armpresets();
 
 
 #define CLAW_MAX 3030
 #define CLAW_CLOSED 275
 #define CLAW_SEMI_OPEN 1100
+#define CLAW_PARALLEL 2000
 #define CLAW_REALMAX 3360
+TaskHandle clawtaskpid;
+TaskHandle clawtaskpid_auto;
 void clawpresets();
 void drive_clawcontrol(void *ignore);
+void auto_clawcontrol(void *ignore);
 
+TaskHandle driver_lcd;
 void drive_lcd_task(void *ignore);
 
 //auto functions
@@ -93,8 +100,12 @@ void drive_lcd_task(void *ignore);
 void drivestraight(
   int direction,
   int total_tics,
-  int target_speed,
-  int power_default);
+  int target_speed, //use 40
+  int power_default, //use 50
+  float accel_frac, //use 0.1
+  float deaccel_frac, //use 0.05
+  float kp, //use 15
+  int timeout);
 
 #define NORTH 1
 #define EAST 2
@@ -109,15 +120,20 @@ void turnexact(
   int direction,
   int target_degrees,
   int target_speed,
-  int power_default
-);
+  int power_default,
+  float accel_frac,
+  float deaccel_frac,
+  float kp,
+  int timeout);
 
 #define CLOCKWISE 1
 #define COUNTER_CLOCKWISE -1
 
-
+TaskHandle autoselect;
 void autoselector_code(void*ignore);
 int myauto;
+
+void disable_functions(void *ingore);
 //#define AUTO_DEBUG
 // A function prototype looks exactly like its declaration, but with a semicolon instead of
 // actual code. If a function does not match a prototype, compile errors will occur.

@@ -1,5 +1,5 @@
-#ifndef LCDCONTROL_H_
-#define LCDCONTROL_H_
+#ifndef LCDFUNCTIONS_H_
+#define LCDFUNCTIONS_H_
 
 #include "API.h"
 

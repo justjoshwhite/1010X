@@ -1,5 +1,5 @@
-#ifndef ARMPIDTERMS_H_
-#define ARMPIDTERMS_H_
+#ifndef CLAWPIDTERMS_H_
+#define CLAWPIDTERMS_H_
 
 #include "API.h"
 

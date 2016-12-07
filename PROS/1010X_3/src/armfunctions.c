@@ -122,3 +122,75 @@ void armpresets(){
     }
     else{}
   }
+
+void auto_armcontrol (void *ignore)
+  {
+    float power_L;
+    float power_R;
+
+    int armdiff_L;
+    int armdiff_R;
+    int lastdiff_L;
+    int lastdiff_R;
+
+    int proportion_L;
+    int proportion_R;
+
+    int integral_L;
+    int integral_R;
+
+    int derivative_L;
+    int derivative_R;
+
+    armtarget_L = 4095 - analogRead(potarmL);
+    armtarget_R = analogRead(potarmR);
+    //lcdClear(uart1);
+
+    while(true){
+
+      //set value
+      drive_armheight_L = 4095-analogRead(potarmL);
+      drive_armheight_R = analogRead(potarmR);
+
+      //find error
+      armdiff_L = armtarget_L - drive_armheight_L;
+      armdiff_R = armtarget_R - drive_armheight_R;
+
+      //calculate P
+      proportion_L = armdiff_L;
+      proportion_R = armdiff_R;
+
+      //intergral cap+calcualte I
+      if(abs(armdiff_L) < arm_integral_activezone){
+      integral_L = integral_L + (armdiff_L);}
+      else{integral_L = 0;}
+      if(abs(armdiff_R) < arm_integral_activezone){
+        integral_R = integral_R + (armdiff_R);}
+      else{integral_R = 0;}
+
+      //calculate D
+      derivative_L =  armdiff_L - lastdiff_L;
+      lastdiff_L = armdiff_L;
+      derivative_R =  armdiff_R - lastdiff_R;
+      lastdiff_R = armdiff_R;
+
+      //calcualte power values
+      power_L = (derivative_L*arm_k_derivative) + (integral_L*arm_k_integral)+(proportion_L*arm_k_proportion);
+      power_R = (derivative_R*arm_k_derivative) + (integral_R*arm_k_integral)+(proportion_R*arm_k_proportion);
+    // (R - L) + OFF SET
+    arm_skew = ((analogRead(potarmR))-(4095-analogRead(potarmL))) + OFFSET_ARM;
+
+          motorSet(ArmLT, ArmLT_Dir*power_L);
+          motorSet(ArmLB, ArmLB_Dir*power_L);
+          motorSet(ArmRT, ArmRT_Dir*power_R);
+          motorSet(ArmRB, ArmRB_Dir*power_R);
+
+          delay(25);
+
+          if( isAutonomous() )
+            {}
+            else{
+          taskDelete(clawtaskpid_auto);}
+
+        }
+      }

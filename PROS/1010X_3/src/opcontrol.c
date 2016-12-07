@@ -9,10 +9,10 @@ lcdClear(uart1);
 		armpresets();
 		clawpresets();
 
-int FLpower = joystickGetAnalog(1, 3) - joystickGetAnalog(1, 4) + joystickGetAnalog(1, 1);
-int FRpower = joystickGetAnalog(1, 3) + joystickGetAnalog(1, 4) - joystickGetAnalog(1, 1);
-int BLpower = joystickGetAnalog(1, 3) + joystickGetAnalog(1, 4) + joystickGetAnalog(1, 1);
-int BRpower = joystickGetAnalog(1, 3) - joystickGetAnalog(1, 4) - joystickGetAnalog(1, 1);
+int FLpower = joystickGetAnalog(1, 3) + joystickGetAnalog(1, 4) + joystickGetAnalog(1, 1);
+int FRpower = joystickGetAnalog(1, 3) - joystickGetAnalog(1, 4) - joystickGetAnalog(1, 1);
+int BLpower = joystickGetAnalog(1, 3) - joystickGetAnalog(1, 4) + joystickGetAnalog(1, 1);
+int BRpower = joystickGetAnalog(1, 3) + joystickGetAnalog(1, 4) - joystickGetAnalog(1, 1);
 
 		motorSet(DriveFL, DriveFL_Dir*FLpower);
 		motorSet(DriveFR, DriveFR_Dir*FRpower);
@@ -59,4 +59,5 @@ int BRpower = joystickGetAnalog(1, 3) - joystickGetAnalog(1, 4) - joystickGetAna
 	}
 	taskDelete(clawtaskpid);
 	taskDelete(armtaskpid);
+	taskDelete(driver_lcd);
 }

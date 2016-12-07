@@ -22,6 +22,7 @@ void initialize() {
   encoderFL = encoderInit(encoderFL_TOP, encoderFL_BOT, 0);
   lcdSetText(uart1, 1, "encoder fl");
   delay(60);
+
   //encoderBL = encoderInit(encoderBL_TOP, encoderBL_BOT, 1);
   //encoderBR = encoderInit(encoderBR_TOP, encoderBR_BOT, 1);
 
@@ -52,4 +53,5 @@ void initialize() {
   delay(60);
 
 TaskHandle autoselect = taskCreate(autoselector_code, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+
 }
