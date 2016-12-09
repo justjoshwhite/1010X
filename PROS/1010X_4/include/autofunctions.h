@@ -7,17 +7,18 @@ int myauto;
 
 int motorcap_int(int value);
 
+void drivehalt(int direction, int lapse, float kp, float k_gyro);
+void nolag(int direction, int tic_limit, int power);
+
 void newdrive(
   int direction,
   int total_tics,
-  int target_speed,
-  int minpower,
-  float ka,
-  float accel_dist,
-  float kd,
-  float deaccel_dist,
-  float kskew,
-  int timeout);
+   int target_min,
+   int target_max,
+   float kskew_max,
+   float kskew_min,
+   float k_gyro,
+   int timeout);
 
 #define DEFAULT_drive_target_speed 40
 #define DEFAULT_drive_minpower 50
@@ -39,15 +40,13 @@ void newdrive(
 
 void newturn(
   int direction,
-  int target_degrees,
-  int target_speed,
-  int minpower,
-  float ka,
-  float accel_dist,
-  float kd,
-  float deaccel_dist,
-  float kskew,
-  int timeout);
+  int total_degrees,
+  int target_min,
+  int target_max,
+  float kskew_max,
+  float kskew_min,
+  int timeout
+  );
 
   #define DEFAULT_turn_target_speed 40
   #define DEFAULT_turn_minpower 50
@@ -59,9 +58,9 @@ void newturn(
   #define DEFAULT_turn_timeout 10000
 
 
-  #define CLOCKWISE -1
-  #define COUNTER_CLOCKWISE 1
+  #define CLOCKWISE 1
+  #define COUNTER_CLOCKWISE -1
 
-void checkdump(int clawrelease);
+void checkdump(int clawrelease, int avoid_direction);
 
 #endif

@@ -35,6 +35,7 @@ void disablelcd(void *ignore){
 
         case 2:
         lcdPrint(uart1, 1, "%d", screen);
+        lcdPrint(uart1, 2, "gyro =%d", gyroGet(gyro));
           if(lcdReadButtons(uart1) == 2){
               lcdClear(uart1);
               lcdSetText(uart1, 1, "wait");
