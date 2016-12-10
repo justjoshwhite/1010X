@@ -219,12 +219,13 @@ void drivehalt(int direction, int lapse, float kp, float k_gyro){
     int error_BR = 0 - tics_BR;
 
     int gyro_error = gyroGet(gyro) - gyro_zero;
-    //check left to right!!!!
+    //clockwise is +
+    //counter is -
 
-    motorSet(DriveFL, orien_FL*DriveFL_Dir*error_FL * kp);
-    motorSet(DriveFR, orien_FR*DriveFR_Dir*error_FR * kp);
-    motorSet(DriveBL, orien_BL*DriveBL_Dir*error_BL * kp);
-    motorSet(DriveBR, orien_BR*DriveBR_Dir*error_BR * kp);
+    motorSet(DriveFL, orien_FL*( (DriveFL_Dir*error_FL * kp) - (gyro_error*k_gyro) ) );
+    motorSet(DriveFR, orien_FR*( (DriveFR_Dir*error_FR * kp) + (gyro_error*k_gyro) ) );
+    motorSet(DriveBL, orien_BL*( (DriveBL_Dir*error_BL * kp) - (gyro_error*k_gyro) ) );
+    motorSet(DriveBR, orien_BR*( (DriveBR_Dir*error_BR * kp) + (gyro_error*k_gyro) ) );
 
     delay(20);
 
@@ -237,6 +238,68 @@ void drivehalt(int direction, int lapse, float kp, float k_gyro){
 }
 
 void newdrive(int direction, int total_tics, int target_min, int target_max, float kskew_max, float kskew_min, float k_gyro, int timeout){
+
+  int orien_FL;
+  int orien_FR;
+  int orien_BL;
+  int orien_BR;
+
+  switch (direction) {
+    case 1:
+      orien_BL = 1;
+      orien_BR = 1;
+      orien_FR = 1;
+      orien_FL = 1;
+    break;
+    case 2:
+      orien_BL = -1;
+      orien_BR = 1;
+      orien_FR = -1;
+      orien_FL = 1;
+    break;
+    case 3:
+      orien_BL = -1;
+      orien_BR = -1;
+      orien_FR = -1;
+      orien_FL = -1;
+    break;
+    case 4:
+      orien_BL = 1;
+      orien_BR = -1;
+      orien_FR = 1;
+      orien_FL = -1;
+    break;
+    case 5:
+      orien_BL = 0;
+      orien_BR = 1;
+      orien_FR = 0;
+      orien_FL = 1;
+    break;
+    case 6:
+      orien_BL = -1;
+      orien_BR = 0;
+      orien_FR = -1;
+      orien_FL = 0;
+    break;
+    case 7:
+      orien_BL = 0;
+      orien_BR = -1;
+      orien_FR = 0;
+      orien_FL = -1;
+    break;
+    case 8:
+      orien_BL = 1;
+      orien_BR = 0;
+      orien_FR = 1;
+      orien_FL = 0;
+    break;
+    default:
+      orien_BL = 1;
+      orien_BR = 1;
+      orien_FR = 1;
+      orien_FL = 1;
+    break;
+  }
 
   int accel_tics = 0;
   int deaccel_tics = 0;
@@ -307,66 +370,16 @@ void newdrive(int direction, int total_tics, int target_min, int target_max, flo
     int error_BL = target_speed - tics_BL;
     int error_BR = target_speed - tics_BR;
 
+    int gyro_error = gyroGet(gyro) - gyro_zero;
+
     //lcdPrint(uart1, 1, "tFL%d tFR%d", tics_FL, tics_FR);
     //lcdPrint(uart1, 2, "tBL%d tBR%d", tics_BL, tics_BR);
 
-    switch (direction) {
-      case 1: //forward - north
-        power_FL = (((error_FL*kskew)));
-        power_FR = (((error_FR*kskew)));
-        power_BL = (((error_BL*kskew)));
-        power_BR = (((error_BR*kskew)));
+    power_FL = orien_FL*((error_FL*kskew) - (gyro_error*k_gyro));
+    power_FR = orien_FR*((error_FR*kskew) + (gyro_error*k_gyro));
+    power_BL = orien_BL*((error_BL*kskew) - (gyro_error*k_gyro));
+    power_BR = orien_BR*((error_BR*kskew) + (gyro_error*k_gyro));
 
-      break;
-      case 2://right - east
-        power_FL = ((error_FL*kskew));
-        power_FR = (-1*(error_FR*kskew));
-        power_BL = (-1*(error_BL*kskew));
-        power_BR = (((error_BR*kskew)));
-      break;
-      case 3://backwards - south
-        power_FL = -1*((error_FL*kskew));
-        power_FR = -1*((error_FR*kskew));
-        power_BL = -1*((error_BL*kskew));
-        power_BR = -1*((error_BR*kskew));
-      break;
-      case 4://left - west
-        power_FL = -1*((error_FL*kskew));
-        power_FR = ((error_FR*kskew));
-        power_BL = ((error_BL*kskew));
-        power_BR = -1*((error_BR*kskew));
-      break;
-      case 5://forward right - northeast
-        power_FL = ((error_FL*kskew));
-        power_FR = 0*((error_FR*kskew));
-        power_BL = 0*((error_BL*kskew));
-        power_BR = ((error_BR*kskew));
-      break;
-      case 6://backwards right - south east
-        power_FL = 0*((error_FL*kskew));
-        power_FR = -1*((error_FR*kskew));
-        power_BL = -1*((error_BL*kskew));
-        power_BR = 0*((error_BR*kskew));
-      break;
-      case 7:// backwards left - south west
-        power_FL = -1*((error_FL*kskew));
-        power_FR = 0*((error_FR*kskew));
-        power_BL = 0*((error_BL*kskew));
-        power_BR = -1*((error_BR*kskew));
-      break;
-      case 8: // forwards left - northwest
-        power_FL = 0*((error_FL*kskew));
-        power_FR = ((error_FR*kskew));
-        power_BL = ((error_BL*kskew));
-        power_BR = 0*((error_BR*kskew));
-      break;
-      default:
-      power_FL = 0;
-      power_BL = 0;
-      power_BR = 0;
-      power_FR = 0;
-      break;
-      }
     motorSet(DriveFL, DriveFL_Dir*power_FL);
     motorSet(DriveFR, DriveFR_Dir*power_FR);
     motorSet(DriveBL, DriveBL_Dir*power_BL);
@@ -409,7 +422,7 @@ void newturn(int direction, int total_degrees, int target_min, int target_max, f
 
       delay(30);
 
-      current_degrees = current_degrees+abs(gyroGet(gyro));
+      current_degrees = abs(gyroGet(gyro));
 
       if(current_degrees < accel_degrees){
           target_speed = target_min + (current_degrees/accel_degrees)*target_net;
@@ -452,14 +465,31 @@ void newturn(int direction, int total_degrees, int target_min, int target_max, f
     motorSet(DriveBR, 0);
 }
 
-
 void checkdump(int clawrelease, int avoid_direction){
 
   int ultra_limit = 40;
 
-  if (ultrasonicGet(ultrasonic) > ultra_limit){
-    newdrive(avoid_direction, 400, 30, 40, 15, 10, 5000);}
+  arm_target_L = ARM_LOWMID_L;
+  arm_target_R = ARM_LOWMID_R;
+  delay(500);
 
+  if (ultrasonicGet(ultrasonic) < ultra_limit){
+    newdrive(avoid_direction, 400, 30, 40, 15, 10, 02, 5000);}
+
+  arm_target_L = ARM_MAX_L;
+  arm_target_R = ARM_MAX_R;
+  while(((abs(analogRead(potarmL)+potarmL_direction)+abs(analogRead(potarmR)+potarmR_direction))/2) < clawrelease){ delay(50);}
+  claw_target = CLAW_PARALLEL;
+  while (abs(analogRead(potclaw)+potclaw_direction) < CLAW_PARALLEL) {delay(50);}
+  delay(100);
+  arm_target_L = ARM_GROUND_L;
+  arm_target_R = ARM_GROUND_R;
+  claw_target = CLAW_MAX;
+  delay(100);
+}
+
+void standarddump(){
+  int clawrelease = 2800;
   arm_target_L = ARM_MAX_L;
   arm_target_R = ARM_MAX_R;
   while(((abs(analogRead(potarmL)+potarmL_direction)+abs(analogRead(potarmR)+potarmR_direction))/2) < clawrelease){ delay(50);}

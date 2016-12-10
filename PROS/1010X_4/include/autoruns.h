@@ -2,7 +2,7 @@
 #define AUTORUNS_H_
 
 #include "API.h"
-
+/*
 extern int drive_armheight_L;
 extern int drive_armheight_R;
 extern int armtarget_L;
@@ -30,18 +30,16 @@ extern float claw_integral_activezone;
 extern float claw_k_derivative;
 extern int claw_deaccel_delay;
 extern int claw_joystickrange;
+*/
 
-//functions declarations
-void lift_basic(int claw_release, int height_arm);
-
-void auto0_programming();
-void auto1_centerfence_R();
-void auto2_centerfence_L();
-void auto3_close_R();
-void auto4_close_L();
-void auto5_wall_R();
-void auto6_wall_L();
-void auto7_hang_R();
-void auto8_hang_L();
+void programmingskills();
+void centerfence_R();
+void centerfence_L();
+void cubedirect_R();
+void cubedirect_L();
+void nearauto_R();
+void nearauto_L();
+void hangauto_R();
+void hangauto_L();
 
 #endif

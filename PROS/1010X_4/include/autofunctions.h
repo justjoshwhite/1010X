@@ -62,5 +62,5 @@ void newturn(
   #define COUNTER_CLOCKWISE -1
 
 void checkdump(int clawrelease, int avoid_direction);
-
+void standarddump();
 #endif

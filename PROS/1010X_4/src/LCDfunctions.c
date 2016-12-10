@@ -53,23 +53,35 @@ void disablelcd(void *ignore){
 
       if(screen == 1){
         switch(myauto){
+          case -1:
+            lcdSetText(uart1, 2, "programming");
+          break;
           case 1:
-            lcdSetText(uart1, 2, "drive straight");
+            lcdSetText(uart1, 2, "centerfence R");
           break;
-
           case 2:
-            lcdSetText(uart1, 2, "lift");
+            lcdSetText(uart1, 2, "centerfence L");
           break;
-
           case 3:
-            lcdSetText(uart1, 2, "turn");
+            lcdSetText(uart1, 2, "cubedirect R");
           break;
-
           case 4:
-            lcdSetText(uart1, 2, "AUTO 4");
+            lcdSetText(uart1, 2, "cubedirect L");
           break;
-
+          case 5:
+            lcdSetText(uart1, 2, "near R");
+          break;
+          case 6:
+            lcdSetText(uart1, 2, "near L");
+          break;
+          case 7:
+            lcdSetText(uart1, 2, "hang R");
+          break;
+          case 8:
+            lcdSetText(uart1, 2, "hang L");
+          break;
           default:
+
           break;
         }
       }

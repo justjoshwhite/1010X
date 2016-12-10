@@ -8,7 +8,7 @@ void clawcontrol (void *ignore)
   int proportion;
   int integral;
   int derivative;
-
+  int claw_off = 200;
   //set target to current
   claw_target = abs(analogRead(potclaw)+potclaw_direction);
 
@@ -40,28 +40,52 @@ void clawcontrol (void *ignore)
         else{taskDelete(clawcontrol_drive);}
 
         if(joystickGetDigital(1,5,JOY_DOWN)){
-          motorSet(ClawL, ClawL_Dir*127);
-          motorSet(ClawR, ClawR_Dir*127);
-          delay(claw_deaccel_delay);
-          claw_target = abs(analogRead(potclaw)+potclaw_direction);}
+          if(analogRead(potclaw) < 3400){
+            motorSet(ClawL, ClawL_Dir*127);
+            motorSet(ClawR, ClawR_Dir*127);
+            delay(claw_deaccel_delay);
+            claw_target = abs(analogRead(potclaw)+potclaw_direction)+claw_off;}
+            }
 
         else if(joystickGetDigital(1,5,JOY_UP)){
-          motorSet(ClawL, ClawL_Dir*-127);
-          motorSet(ClawR, ClawR_Dir*-127);
-          delay(claw_deaccel_delay);
-          claw_target = abs(analogRead(potclaw)+potclaw_direction);}
+          if(analogRead(potclaw)>200){
+            motorSet(ClawL, ClawL_Dir*-127);
+            motorSet(ClawR, ClawR_Dir*-127);
+            delay(claw_deaccel_delay);
+            claw_target = abs(analogRead(potclaw)+potclaw_direction)-claw_off;}
+          }
+
+          else if(joystickGetDigital(2,6,JOY_UP)){
+            if(analogRead(potclaw) < 3400){
+              motorSet(ClawL, ClawL_Dir*127);
+              motorSet(ClawR, ClawR_Dir*127);
+              delay(claw_deaccel_delay);
+              claw_target = abs(analogRead(potclaw)+potclaw_direction)+claw_off;}
+              }
+
+          else if(joystickGetDigital(2,6,JOY_DOWN)){
+            if(analogRead(potclaw)>200){
+              motorSet(ClawL, ClawL_Dir*-127);
+              motorSet(ClawR, ClawR_Dir*-127);
+              delay(claw_deaccel_delay);
+              claw_target = abs(analogRead(potclaw)+potclaw_direction)-claw_off;}
+            }
 
         else if (joystickGetAnalog(2, 2) > claw_joystickrange){
-          motorSet(ClawL, ClawL_Dir*joystickGetAnalog(2, 2));
-          motorSet(ClawR, ClawR_Dir*joystickGetAnalog(2, 2));
-          delay(claw_deaccel_delay);
-          claw_target = abs(analogRead(potclaw)+potclaw_direction);}
+          if(analogRead(potclaw) < 3400){
+            motorSet(ClawL, ClawL_Dir*joystickGetAnalog(2, 2));
+            motorSet(ClawR, ClawR_Dir*joystickGetAnalog(2, 2));
+            delay(claw_deaccel_delay);
+            claw_target = abs(analogRead(potclaw)+potclaw_direction)+claw_off;}
+            }
 
         else if (joystickGetAnalog(2, 2) < -claw_joystickrange){
-          motorSet(ClawL, ClawL_Dir*joystickGetAnalog(2, 2));
-          motorSet(ClawR, ClawR_Dir*joystickGetAnalog(2, 2));
-          delay(claw_deaccel_delay);
-          claw_target = abs(analogRead(potclaw)+potclaw_direction);}
+          if(analogRead(potclaw)>200){
+            motorSet(ClawL, ClawL_Dir*joystickGetAnalog(2, 2));
+            motorSet(ClawR, ClawR_Dir*joystickGetAnalog(2, 2));
+            delay(claw_deaccel_delay);
+            claw_target = abs(analogRead(potclaw)+potclaw_direction)-claw_off;}
+            }
 
         else {
           motorSet(ClawL, ClawL_Dir*claw_power_L);
