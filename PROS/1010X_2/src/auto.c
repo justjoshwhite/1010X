@@ -56,7 +56,16 @@ TaskHandle autoclawtask = taskCreate (autoclawencodertaskcode, TASK_DEFAULT_STAC
     //armtargetR = GROUND_R;
     delay(2000);
     break;
+
+
     case(2)://cube mid-L
+
+    clawopen();
+    drivestraight(1, 12000, 7000, 800, 800, 120, 70, 0.1);
+
+
+
+    /*
     clawopen();
     clawtarget = 1000;
     drivestraight(1, 6000, 7000, 800, 800, 120, 70, 0.1);
@@ -75,9 +84,14 @@ TaskHandle autoclawtask = taskCreate (autoclawencodertaskcode, TASK_DEFAULT_STAC
     ///armtargetL = GROUND_L;
     //armtargetR = GROUND_R;
     delay(2000);
+*/
 
     break;
     case(3)://cude mid-R
+    clawopen();
+    drivestraight(1, 12000, 7000, 800, 800, 120, 70, 0.1);
+
+/*
     clawopen();
     clawtarget = 1000;
     drivestraight(1, 6000, 7000, 800, 800, 120, 70, 0.1);
@@ -97,6 +111,7 @@ TaskHandle autoclawtask = taskCreate (autoclawencodertaskcode, TASK_DEFAULT_STAC
     //armtargetR = GROUND_R;
 delay(2000);
     break;
+    */
     case(4): //star mid-R
 
     clawopen();
