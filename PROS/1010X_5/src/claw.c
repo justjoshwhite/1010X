@@ -8,11 +8,29 @@ void clawtask(void*ignore){
     PID_init(&pid_claw, 0.5, 0, 0, 0);
     claw_target_global = encoderGet(encoder_CLAW);
 
+    test_clawup = 100;
+    test_clawdown = 100;
+
+
     while(true){
       if(!isEnabled()){break;}
 
       claw_pos_global = encoderGet(encoder_CLAW);
 
+
+if(!isAutonomous() && joystickGetDigital(1, 5, JOY_UP)){
+  motorset_claw(127); //cloase
+  claw_target_global = encoderGet(encoder_CLAW) + 130;
+}
+
+else if(!isAutonomous() && joystickGetDigital(1, 5, JOY_DOWN)){
+  motorset_claw(-127); //cloase
+  claw_target_global = encoderGet(encoder_CLAW) - 100;
+
+}
+
+
+/*
       if(!isAutonomous() && (joystickGetDigital(1, 5, JOY_UP)||joystickGetDigital(1, 5, JOY_DOWN)||joystickGetDigital(2, 5, JOY_DOWN)||joystickGetDigital(2, 5, JOY_UP)))
         {
         while(joystickGetDigital(1, 5, JOY_UP)){
@@ -35,7 +53,11 @@ void clawtask(void*ignore){
         delay(CLAW_DELAY);
         claw_target_global = encoderGet(encoder_CLAW);
         }
-      motorset_claw( PID_cal(&pid_claw, claw_target_global, claw_pos_global) );
+
+        */
+      else{
+      motorset_claw( PID_cal(&pid_claw, claw_target_global, claw_pos_global) );}
+
       delay(20);
       }
     motorset_claw(0);

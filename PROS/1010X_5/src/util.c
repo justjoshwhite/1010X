@@ -30,3 +30,8 @@ void motorset_drive(int Lpower, int Rpower){
   motorSet(DriveBR, DriveBR_Dir*Rpower);
   motorSet(DriveFR, DriveFR_Dir*Rpower);
 }
+
+float gyro_read(Gyro port, int multiplier){
+
+  return gyroGet(port)*(1960/multiplier);
+  }

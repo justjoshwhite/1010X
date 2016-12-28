@@ -15,7 +15,7 @@ void armtask(void*ignore);
 #define ARM_DELAY 300
 
 #define ARM_GROUND 0
-#define ARM_LOW 150
+#define ARM_LOW 200
 #define ARM_PARALLEL 370
 #define ARM_45 670
 #define ARM_MAX 1100

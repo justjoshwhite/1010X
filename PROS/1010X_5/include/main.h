@@ -7,6 +7,8 @@
 extern "C" {
 #endif
 
+#include "lcdfunctions.h"
+//for Test Varibles
 
 //drive motors ports
   #define DriveBL 1
@@ -52,6 +54,11 @@ extern "C" {
   #define encoder_CLAW_TOP 11
   #define encoder_CLAW_BOT 12
 
+//LED Ports
+  #define LED_1 5
+  #define LED_2 6
+
+
 // Sensor Hanndles
   Encoder encoder_L;
   Encoder encoder_R;
@@ -59,6 +66,14 @@ extern "C" {
   Encoder encoder_CLAW;
   Gyro gyro;
 
+
+//globals
+
+int myauto;
+
+//test varibles
+int test_clawup;
+int test_clawdown;
 
 void autonomous();
 

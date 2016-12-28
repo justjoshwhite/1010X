@@ -18,7 +18,7 @@ void clawtask(void*ignore);
 #define CLAW_V 800 //semi closed
 #define CLAW_45 650
 #define CLAW_PARALLEL 390
-#define CLAW_MAX 0
+#define CLAW_MAX 30
 
 TaskHandle claw_task;
 
