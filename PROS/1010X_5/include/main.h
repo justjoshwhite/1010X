@@ -41,6 +41,8 @@ extern "C" {
   #define accel_y 2
   #define gyroport 3
 
+  #define clawpot_L
+  #define clawpot_R
 //digital sensors ports
   #define encoder_R_TOP 1
   #define encoder_R_BOT 2
@@ -63,7 +65,7 @@ extern "C" {
   Encoder encoder_L;
   Encoder encoder_R;
   Encoder encoder_ARM;
-  Encoder encoder_CLAW;
+  //Encoder encoder_CLAW;
   Gyro gyro;
 
 
