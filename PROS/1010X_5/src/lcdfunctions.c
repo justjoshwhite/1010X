@@ -127,8 +127,8 @@ void opcontrollcd(void *ignore){
     switch(screen){
 
       case 1:
-      lcdPrint(uart1, 1, "OP%d clawpos%d", screen, claw_pos_global);
-      lcdPrint(uart1, 2, "clawtarget%d", claw_target_global);
+      lcdPrint(uart1, 1, "OP%d clawposL%d", screen, claw_pos_global);
+      lcdPrint(uart1, 2, "clawtar %d", claw_target_global);
         if(lcdReadButtons(uart1) == 2){
             lcdClear(uart1);
             lcdSetText(uart1, 1, "wait");
@@ -153,36 +153,36 @@ void opcontrollcd(void *ignore){
 
       case 3:
       lcdPrint(uart1, 1, "OP %d", screen);
-      lcdPrint(uart1, 2, "testup %d", test_clawup);
+      lcdPrint(uart1, 2, "testup");
         if(lcdReadButtons(uart1) == 2){
             lcdClear(uart1);
             lcdSetText(uart1, 1, "wait");
             delay(btn_time);
             screen = screen + 1;}
         if(lcdReadButtons(uart1) == 1){
-          test_clawup = test_clawup+1;
+          //test_clawup = test_clawup+1;
           //delay(100);
         }
         if(lcdReadButtons(uart1) == 4){
-          test_clawup = test_clawup-1;
+          //test_clawup = test_clawup-1;
           //delay(100);
         }
       break;
 
       case 4:
         lcdPrint(uart1, 1, "OP %d", screen);
-        lcdPrint(uart1, 2, "testdown %d", test_clawdown);
+        lcdPrint(uart1, 2, "testdown");
           if(lcdReadButtons(uart1) == 2){
               lcdClear(uart1);
               lcdSetText(uart1, 1, "wait");
               delay(btn_time);
               screen = screen + 1;}
           if(lcdReadButtons(uart1) == 1){
-            test_clawdown = test_clawdown+1;
+            //test_clawdown = test_clawdown+1;
           //  delay(100);
         }
           if(lcdReadButtons(uart1) == 4){
-            test_clawdown = test_clawdown-1;
+          //  test_clawdown = test_clawdown-1;
           //  delay(100);
           }
 
