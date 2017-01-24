@@ -18,8 +18,10 @@ void operatorControl() {
 
 		motorset_drive(joystickGetAnalog(1, 3), joystickGetAnalog(1,2));
 
-		armpresets();
-		clawpresets();
+		//armpresets();
+		//clawpresets();
+
+
 /*
 		if(joystickGetDigital(1, 5, JOY_UP)){motorset_claw(127);}
 
@@ -40,5 +42,26 @@ void operatorControl() {
 		  else{
 		      motorset_claw(0);}
 */
+
+if(joystickGetDigital(1, 7, JOY_DOWN)){
+	motorSet(winch, -127*winch_Dir);
+}
+
+else if(joystickGetDigital(1, 7, JOY_LEFT))
+{
+motorSet(winch, 127*winch_Dir);
+	}
+
+else if(joystickGetDigital(2, 7, JOY_LEFT))
+{
+motorSet(winch, 127*winch_Dir);
+	}
+else if(joystickGetDigital(2, 7, JOY_DOWN))
+{
+motorSet(winch, -127*winch_Dir);
+	}
+
+else {motorSet(winch, 0);}
+
 		}
 }
