@@ -176,20 +176,18 @@ void drive_gyro(int direction, int target, int timeout, int maxpower, int minpow
 
     }
 
-
-
 void turn_gyro(int direction, int target, int timeout, int maxpower, int minpower, float kaccel, float kdeaccel){
 
   int netpower = maxpower - minpower;
-  float boost = 0;
+  float boost;
 
   int start_time = millis();
   int net_time = 0;
 
 
-  int breakpower = 15;
-  //encoderReset(encoder_L);
-  //encoderReset(encoder_R);
+  int breakpower = 20;
+  encoderReset(encoder_L);
+  encoderReset(encoder_R);
   gyroReset(gyro);
 
   int gyroaverage = abs(gyro_read(gyro, 300));
@@ -203,7 +201,7 @@ void turn_gyro(int direction, int target, int timeout, int maxpower, int minpowe
       if(gyroaverage < target*kaccel){
         boost = (gyroaverage)/(target*kaccel);}
       else if (gyroaverage > (target - target*kdeaccel)){
-        boost = (target - gyroaverage)/(target*kdeaccel);}
+        boost = (gyroaverage)/(target - target*kdeaccel);}
       else{
         boost = 1;}
 
@@ -216,5 +214,5 @@ void turn_gyro(int direction, int target, int timeout, int maxpower, int minpowe
         motorset_drive(direction*power_L, -direction*power_R);
         delay(20);
         }
-    motorset_drive(direction*breakpower, -direction*breakpower);
+    motorset_drive(-direction*breakpower, -direction*breakpower);
 }
