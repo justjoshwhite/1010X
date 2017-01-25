@@ -16,52 +16,18 @@ void operatorControl() {
 
 		delay(20);
 
-		motorset_drive(joystickGetAnalog(1, 3), joystickGetAnalog(1,2));
-
-		//armpresets();
-		//clawpresets();
+		motorset_drive(motorcap((joystickGetAnalog(1, 3)+joystickGetAnalog(1, 4))), motorcap(joystickGetAnalog(1,3)-joystickGetAnalog(1,4)));
+		
+		armpresets();
+		clawpresets();
 
 
 /*
-		if(joystickGetDigital(1, 5, JOY_UP)){motorset_claw(127);}
-
-		else if(joystickGetDigital(1, 5, JOY_DOWN)){
-		  motorset_claw(-127); //cloase
-
-
-		}
-
-		else if(joystickGetDigital(2, 6, JOY_DOWN)){
-		  motorset_claw(-127); //cloase
-
-		}
-
-		else if(joystickGetDigital(2, 6, JOY_UP)){
-		  motorset_claw(127); //cloas
-		}
-		  else{
-		      motorset_claw(0);}
-*/
-
-if(joystickGetDigital(1, 7, JOY_DOWN)){
-	motorSet(winch, -127*winch_Dir);
-}
-
-else if(joystickGetDigital(1, 7, JOY_LEFT))
-{
-motorSet(winch, 127*winch_Dir);
-	}
-
-else if(joystickGetDigital(2, 7, JOY_LEFT))
-{
-motorSet(winch, 127*winch_Dir);
-	}
-else if(joystickGetDigital(2, 7, JOY_DOWN))
-{
-motorSet(winch, -127*winch_Dir);
-	}
-
+if(joystickGetDigital(1, 7, JOY_DOWN)){motorSet(winch, -127*winch_Dir);}
+else if(joystickGetDigital(1, 7, JOY_LEFT)){motorSet(winch, 127*winch_Dir);}
+else if(joystickGetDigital(2, 7, JOY_LEFT)){motorSet(winch, 127*winch_Dir);}
+else if(joystickGetDigital(2, 7, JOY_DOWN)){motorSet(winch, -127*winch_Dir);}
 else {motorSet(winch, 0);}
-
+*/
 		}
 }

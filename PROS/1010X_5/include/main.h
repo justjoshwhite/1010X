@@ -33,11 +33,11 @@ extern "C" {
     #define ArmLB_Dir -1
   #define ArmRT 6
     #define ArmRT_Dir 1
-  #define ArmRB 6
+  #define ArmRB 7
     #define ArmRB_Dir 1
 
-#define winch 7
-  #define winch_Dir 1
+//#define winch 7
+//  #define winch_Dir 1
 
 //analog sensors ports
   #define accel_x 1

@@ -23,7 +23,7 @@ void initialize() {
   lcdSetText(uart1, 1, "CALIBRATE:");
   lcdSetText(uart1, 2, "DO NOT MOVE");
 
-  /*``
+  /*
   analogCalibrate (accel_x);
   analogCalibrate (accel_y);
   analogCalibrate (gyroport);
