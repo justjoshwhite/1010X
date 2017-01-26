@@ -41,7 +41,7 @@ void disablelcd(void *ignore){
 
         case 2:
         lcdPrint(uart1, 1, "%d: main:%dV ", screen, powerLevelMain());
-        lcdPrint(uart1, 2, " PE=%d", pe_batt(PEbatt_port));
+        lcdPrint(uart1, 2, " PE=%f", pe_batt(PEbatt_port));
           if(lcdReadButtons(uart1) == 2){
               lcdClear(uart1);
               lcdSetText(uart1, 1, "wait");

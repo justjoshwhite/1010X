@@ -15,22 +15,79 @@ void autonomous() {
 switch (myauto) {
 
 case 0:
-  
 
+
+lcdPrint(uart1, 1, "Arm STart");
+delay(500);
+
+arm_target_global = 1000;
+  lcdPrint(uart1, 1, "Arm UP");
+claw_release(100, 600);
+  lcdPrint(uart1, 1, "Arm release");
+delay(4000);
+
+//turn_time(1, 100, 5, 500, 127, 5, 10);
 
 break;
 case 1:
+//backout
+delay(200);
+claw_target_global = 140;
+drive_encoder(-1, 1000, 10000, 127, 50, 3, 0.2, 0.2);
+delay(1000);
 
-  lcdPrint(uart1, 1, "Arm STart");
-  delay(500);
+//back in grab
+drive_encoder(1, 500, 10000, 127, 50, 3, 0.2, 0.2);
+claw_target_global = 200;
+delay (1000);
 
-  arm_target_global = 1000;
-    lcdPrint(uart1, 1, "Arm UP");
-  claw_release(100, 600);
-    lcdPrint(uart1, 1, "Arm release");
-  delay(4000);
+//drive to dump
+arm_target_global = 1000;
+drive_encoder(-1, 2000, 10000, 127, 50, 3, 0.2, 0.2);
+claw_release(130, 600);
+delay(400);
 
-  //turn_time(1, 100, 5, 500, 127, 5, 10);
+//lower turn drive to corner
+arm_target_global = 0;
+delay(1500);
+turn_time(-1, 30, 5, 200, 127, 5, 12);
+drive_encoder(1, 2100, 10000, 127, 50, 3, 0.2, 0.2);
+claw_target_global = 170;
+delay(1000);
+
+//lift, turn adn dump
+arm_target_global = 200;
+delay(1000);
+turn_time(1, 30, 5, 200, 127, 5, 12);
+arm_target_global = 1000;
+drive_encoder(-1, 2000, 10000, 127, 50, 3, 0.2, 0.2);
+claw_release(130, 600);
+delay(400);
+
+//lower and back for final cube
+arm_target_global = 0;
+delay(1500);
+drive_encoder(1, 2000, 10000, 127, 50, 3, 0.2, 0.2);
+claw_target_global = 200;
+delay(1000);
+arm_target_global = 1000;
+drive_encoder(-1, 2000, 10000, 127, 50, 3, 0.2, 0.2);
+claw_release(130, 600);
+delay(400);
+arm_target_global = 0;
+claw_target_global = 140;
+delay(1000);
+drive_encoder(1, 200, 10000, 127, 50, 3, 0.2, 0.2);
+turn_time(1, 120, 5, 200, 127, 5, 12);
+drive_encoder(1, 5000, 10000, 127, 50, 3, 0.2, 0.2);
+
+
+
+
+
+delay(20000);
+
+
 
 break;
 
