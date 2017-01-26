@@ -75,7 +75,6 @@ void disablelcd(void *ignore){
       //screen cap reset
       if(screen > screen_cap){screen = 1;}
 
-
       //auto line dispalby
       if(screen == 1){
         switch(myauto){
@@ -107,7 +106,7 @@ void disablelcd(void *ignore){
             lcdSetText(uart1, 2, "#8");
           break;
           default:
-          //myauto = 1;
+          myauto = 1;
           break;
           }}
           delay(20);
@@ -200,7 +199,6 @@ void opcontrollcd(void *ignore){
   }
   taskDelete(opcontrollcd_task);
 }
-
 
 void autolcd(void *ignore){
   int screen = 1;

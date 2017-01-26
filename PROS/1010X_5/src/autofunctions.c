@@ -67,43 +67,28 @@ void nolag(int demo_tics, int demo_movepower, int demo_holdpower){
       }
     */
   }
-
+//USE
 void drive_encoder(int direction, int target, int timeout, int maxpower, int minpower, float kdrift_encoder, float kaccel, float kdeaccel){
 
   int netpower = maxpower - minpower;
-
   float boost;
-
   int breakpower = 20;
 
   encoderReset(encoder_L);
   encoderReset(encoder_R);
-  
-  int encoderaverage = 0;
 
+  int encoderaverage = 0;
   int start_time = millis();
   int net_time = 0;
 
-  //  nolag();
-  lcdPrint(uart1, 1, "START");
-  delay(750);
-
-
   while( (encoderaverage < target) && (net_time < timeout)){
 
-    //lcdPrint(uart1, 1, "enL=%d", encoderGet(encoder_L));
-    //lcdPrint(uart1, 2, "enR=%d", encoderGet(encoder_R));
-    lcdPrint(uart1, 1, "LOOP");
     net_time  = millis() - start_time;
 
     encoderaverage = abs(encoderGet(encoder_L))+abs(encoderGet(encoder_R)/2);
-
-    //int gyro_error = gyroGet(gyro); //clockwise -- subtract from L side
-
     int encoder_error = encoderGet(encoder_L) - encoderGet(encoder_R); //subtract from L side
 
     //accel/deaccel constants
-
     if(encoderaverage < target*kaccel){
       boost = (encoderaverage)/(target*kaccel);}
     else if (encoderaverage > (target - target*kdeaccel)){
@@ -113,19 +98,12 @@ void drive_encoder(int direction, int target, int timeout, int maxpower, int min
 
     int power_L = motorcap(minpower + boost*netpower) - direction*encoder_error*kdrift_encoder;
     int power_R = motorcap(minpower + boost*netpower) + direction*encoder_error*kdrift_encoder;
-
-    //int power_L = motorcap(minpower + boost*netpower) - gyro_error*kdrift_gyro;
-    //int power_R = motorcap(minpower + boost*netpower) + gyro_error*kdrift_gyro;
-
     motorset_drive(direction*power_L, direction*power_R);
+
     delay(20);
     }
-
-    lcdPrint(uart1, 1, "END");
-    delay(1000);
-    //brake
-    motorset_drive(-direction*breakpower, -direction*breakpower);
-
+  //brake
+  motorset_drive(-direction*breakpower, -direction*breakpower);
   }
 
 void drive_gyro(int direction, int target, int timeout, int maxpower, int minpower, float kdrift_gyro, float kaccel, float kdeaccel){
@@ -230,25 +208,21 @@ void claw_release(int claw_target, int arm_pos){
     delay(10);}
   claw_target_global = claw_target;
   }
-
+//USE
 void turn_time(int direction, int target, int error_range, int error_time, int power, float ktune, float ktunezone){
 
   int net_time = 0;
   int start_time = millis();
 
-  //encoderReset(encoder_L);
-  //encoderReset(encoder_R);
   gyroReset(gyro);
 
   int powerL;
   int powerR;
-
   int gyro_pos = abs(gyro_read(gyro, 300));
 
   while(net_time < error_time){
 
     gyro_pos = abs(gyro_read(gyro, 300));
-
     int gyro_error = target - gyro_pos;
 
     if ((gyro_pos < (target - (target*ktunezone))) || (gyro_pos > (target + (target*ktunezone)))){
@@ -266,8 +240,7 @@ void turn_time(int direction, int target, int error_range, int error_time, int p
       net_time = 0;
       start_time = millis();}
 
-
-  delay(20);
+    delay(20);
   }
-
+  motorset_drive(0, 0);
 }
