@@ -17,9 +17,12 @@ void operatorControl() {
 		delay(20);
 
 		motorset_drive(motorcap((joystickGetAnalog(1, 3)+joystickGetAnalog(1, 4))), motorcap(joystickGetAnalog(1,3)-joystickGetAnalog(1,4)));
-		
+
 		armpresets();
 		clawpresets();
+
+		if(joystickGetDigital(1, 7, JOY_DOWN)){digitalWrite(LED_1, LOW);}
+		else{digitalWrite(LED_1, HIGH);}
 
 
 /*

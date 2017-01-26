@@ -5,7 +5,7 @@
 
 void clawtask(void*ignore){
 
-    PID_init(&pid_claw, 0.5, 0, 0, 0);
+    PID_init(&pid_claw, 2, 0, 0, 0);
     claw_target_global = encoderGet(encoder_CLAW);
 
     test_clawup = 100;
@@ -26,11 +26,10 @@ while(true){
 
   if(joystickGetDigital(1, 5, JOY_UP)){//main up
       motorset_claw(127); //cloase
-        claw_target_global = encoderGet(encoder_CLAW) + 26;}
-
+        claw_target_global = encoderGet(encoder_CLAW) + 26;}//26
   else if(joystickGetDigital(1, 5, JOY_DOWN)){// main down
       motorset_claw(-127); //cloase
-        claw_target_global = encoderGet(encoder_CLAW) -20;}
+        claw_target_global = encoderGet(encoder_CLAW) -20;}//20
 
   else if(joystickGetDigital(2, 6, JOY_DOWN)){ //  partner down
       motorset_claw(-127); //cloase

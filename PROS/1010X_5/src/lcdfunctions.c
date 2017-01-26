@@ -11,7 +11,7 @@ void disablelcd(void *ignore){
   int screen = 1;
   int screen_cap = 3;
   int btn_time = 100;
-
+  myauto = 1;
   lcdClear(uart1);
 
   while(true){
@@ -139,7 +139,7 @@ void opcontrollcd(void *ignore){
       break;
 
       case 2:
-      lcdPrint(uart1, 1, "OP %d armpos %d", screen, arm_pos_global);
+      lcdPrint(uart1, 1, "OP%d armpos %d", screen, arm_pos_global);
       lcdPrint(uart1, 2, "armtarget %d", arm_target_global);
         if(lcdReadButtons(uart1) == 2){
             lcdClear(uart1);
@@ -152,40 +152,41 @@ void opcontrollcd(void *ignore){
 
 
       case 3:
-      lcdPrint(uart1, 1, "OP %d", screen);
-      lcdPrint(uart1, 2, "testup");
+      lcdPrint(uart1, 1, "OP%d EnL: %d", screen, encoderGet(encoder_L));
+      lcdPrint(uart1, 2, "EnR: %d", encoderGet(encoder_R));
         if(lcdReadButtons(uart1) == 2){
             lcdClear(uart1);
             lcdSetText(uart1, 1, "wait");
             delay(btn_time);
             screen = screen + 1;}
         if(lcdReadButtons(uart1) == 1){
-          //test_clawup = test_clawup+1;
-          //delay(100);
+          encoderReset(encoder_L);
+          encoderReset(encoder_R);
+          delay(50);
         }
         if(lcdReadButtons(uart1) == 4){
-          //test_clawup = test_clawup-1;
-          //delay(100);
+          encoderReset(encoder_L);
+          encoderReset(encoder_R);
+          delay(50);
         }
       break;
 
       case 4:
-        lcdPrint(uart1, 1, "OP %d", screen);
-        lcdPrint(uart1, 2, "testdown");
+        lcdPrint(uart1, 1, "OP:%d GRaw:%d", screen, gyroGet(gyro));
+        lcdPrint(uart1, 2, "GRead: %f", gyro_read(gyro, 300));
           if(lcdReadButtons(uart1) == 2){
               lcdClear(uart1);
               lcdSetText(uart1, 1, "wait");
               delay(btn_time);
               screen = screen + 1;}
           if(lcdReadButtons(uart1) == 1){
-            //test_clawdown = test_clawdown+1;
-          //  delay(100);
+            gyroReset(gyro);
+            delay(100);
         }
           if(lcdReadButtons(uart1) == 4){
-          //  test_clawdown = test_clawdown-1;
-          //  delay(100);
+            gyroReset(gyro);
+            delay(100);
           }
-
 
       break;
       default:
@@ -228,6 +229,7 @@ void autolcd(void *ignore){
 
       case 2:
       lcdPrint(uart1, 1, "AU%d ", screen);
+      lcdPrint(uart1, 2, "enL%d enR %d", encoderGet(encoder_L), encoderGet(encoder_R));
         if(lcdReadButtons(uart1) == 2){
             lcdClear(uart1);
             lcdSetText(uart1, 1, "wait");
