@@ -13,4 +13,5 @@ void motorset_drive(int Lpower, int Rpower);
 
 float gyro_read(Gyro port, int multiplier);
 
+int pe_batt(int analogport);
 #endif

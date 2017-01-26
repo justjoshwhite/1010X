@@ -14,6 +14,11 @@ void autonomous() {
 
 switch (myauto) {
 
+case 0:
+  
+
+
+break;
 case 1:
 
   lcdPrint(uart1, 1, "Arm STart");

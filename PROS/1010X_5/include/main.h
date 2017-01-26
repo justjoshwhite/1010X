@@ -44,6 +44,8 @@ extern "C" {
   #define accel_y 2
   #define gyroport 3
 
+  #define PEbatt_port 8
+
 //  #define clawpot_L 4
 //  #define clawpot_R 5
 

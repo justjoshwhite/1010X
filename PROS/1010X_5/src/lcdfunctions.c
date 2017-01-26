@@ -40,8 +40,8 @@ void disablelcd(void *ignore){
         break;
 
         case 2:
-        lcdPrint(uart1, 1, "%d: %dV ", screen, powerLevelMain());
-        lcdPrint(uart1, 2, "gyro =%d", gyroGet(gyro));
+        lcdPrint(uart1, 1, "%d: main:%dV ", screen, powerLevelMain());
+        lcdPrint(uart1, 2, " PE=%d", pe_batt(PEbatt_port));
           if(lcdReadButtons(uart1) == 2){
               lcdClear(uart1);
               lcdSetText(uart1, 1, "wait");
@@ -54,7 +54,7 @@ void disablelcd(void *ignore){
 
         case 3:
         lcdPrint(uart1, 1, "%d", screen);
-        lcdPrint(uart1, 2, "info");
+        lcdPrint(uart1, 2, "gyro =%d", gyroGet(gyro));
           if(lcdReadButtons(uart1) == 2){
               lcdClear(uart1);
               lcdSetText(uart1, 1, "wait");
