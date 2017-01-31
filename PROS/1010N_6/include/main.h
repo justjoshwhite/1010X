@@ -12,7 +12,7 @@ extern "C" {
 
 //drive motors ports
   #define DriveBL 1
-    #define DriveBL_Dir 1
+    #define DriveBL_Dir -1
   #define DriveFL 2
     #define DriveFL_Dir 1
   #define DriveFR 9

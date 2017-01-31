@@ -202,10 +202,9 @@ void turn_gyro(int direction, int target, int timeout, int maxpower, int minpowe
     motorset_drive(-direction*breakpower, -direction*breakpower);
 }
 
-void claw_release(int claw_target, int arm_pos, int timeout){
+void claw_release(int claw_target, int arm_pos){
 
-int starttime = millis();
-  while( (!(arm_pos_global >= arm_pos)) && ((millis() - starttime) < (timeout))){
+  while(!(arm_pos_global >= arm_pos)){
     delay(10);}
   claw_target_global = claw_target;
   }
@@ -244,18 +243,4 @@ void turn_time(int direction, int target, int error_range, int error_time, int p
     delay(20);
   }
   motorset_drive(0, 0);
-}
-
-void lock_encoder(int timeout, float kp){
-
-  encoderReset(encoder_L);
-  encoderReset(encoder_R);
-  int starttime = millis();
-
-  while((millis()-starttime) < timeout){
-    int errorL = encoderGet(encoder_L);
-    int errorR = encoderGet(encoder_R);
-    motorset_drive(-errorL*kp, -errorR*kp);
-    delay(20);
-  }
 }

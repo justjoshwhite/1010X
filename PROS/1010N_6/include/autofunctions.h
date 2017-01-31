@@ -15,10 +15,7 @@ void nolag(int demo_tics, int demo_movepower, int demo_holdpower);
 
 void turn_gyro(int direction, int target, int timeout, int maxpower, int minpower, float kaccel, float kdeaccel);
 
-void claw_release(int claw_target, int arm_pos, int timeout);
+void claw_release(int claw_target, int arm_pos);
 
 void turn_time(int direction, int target, int error_range, int error_time, int power, float ktune, float ktunezone);
-
-void lock_encoder(int timeout, float kp);
-
 #endif
