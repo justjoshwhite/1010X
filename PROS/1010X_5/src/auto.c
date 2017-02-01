@@ -15,7 +15,7 @@ void autonomous() {
 
 switch (myauto) {
 
-case -1:
+case -1: // old keep remain
   //backout
   delay(200);
   drive_encoder(-1, 1400, 3000, 127, 50, 3, 0.2, 0.2);
@@ -139,80 +139,199 @@ case -1:
   drive_encoder(1, 8000, 4000, 127, 100, 3, 0, 0);
 
 
-/* // direct hand code
-  //drive foward to hang
-  drive_encoder(1, 2200, 3500, 127, 50, 3, 0.2, 0.2);
-  turn_time(-1, 200, 4, 220, 127, 15, 20);
-  drive_encoder(-1, 1400, 1700, 127, 80, 3, 0, 0);
-
-  arm_target_global = 1200;
-  delay(1500);
-  drive_encoder(1, 200, 1000, 127, 100, 3, 0, 0);
-  arm_target_global = 0;
-  drive_encoder(1, 8000, 4000, 127, 100, 3, 0, 0);
-*/
-
-
   delay(20000);
 
 
 
 break;
 
-case 0:
+case 0:// preload dump changes
+
+    //backout
+    delay(200);
+    drive_encoder(-1, 1400, 3000, 127, 50, 3, 0.2, 0.2);
+    drive_encoder(1, 200, 3000, 127, 50, 3, 0.2, 0.2);
+    drive_encoder(-1, 200, 3000, 127, 50, 3, 0.2, 0.2);
+    delay(300);
+    //turn_time(1, 35, 5, 150, 127, 8, 15);
+    claw_target_global = 130;
+    delay(1500);
+
+    //back in grab
+    drive_encoder(1, 580, 3000, 127, 50, 3, 0.2, 0.2);
+    claw_target_global = 185;
+    lock_encoder(1200, 1);
+
+
+    //drive to dump
+    arm_target_global = 1000;
+    drive_encoder(-1, 1900, 4000, 127, 50, 3, 0.2, 0);//0.2 deaccel take out
+    claw_release(130, 800, 8000);
+    delay(750);
+
+    //lower arm for second grab
+    arm_target_global = 0;
+    delay(1500);
+    //turn_time(-1, 30, 5, 150, 127, 8, 15);
+    drive_encoder(-1, 500, 1000, 127, 50, 3, 0.2, 0);//square
+    //drive_encoder(1, 300, 750, 127, 50, 3, 0.2, 0);
+    //drive_encoder(-1, 300, 750, 127, 50, 3, 0.2, 0);
+    //drive_encoder(1, 300, 750, 127, 50, 3, 0.2, 0);
+
+    claw_target_global = 135; //was 120
+    drive_encoder( 1, 2000, 3000, 127, 50, 3, 0.2, 0.2);
+    claw_target_global = 185;
+    lock_encoder(1200, 1);
+
+    //to fence for dump
+    arm_target_global = 1000;
+    drive_encoder(-1, 2000, 3000, 127, 50, 3, 0.2, 0);//0.2 deaccel take out
+    claw_release(130, DUMP_HIEGHT, 2000);
+    delay(400);
+
+    //lower and back for final cube
+    arm_target_global = 0;
+    delay(1000);
+    drive_encoder(-1, 400, 1000, 127, 50, 3, 0.2, 0.2);
+    drive_encoder(1, 400, 1000, 127, 50, 3, 0.2, 0);
+    drive_encoder(-1, 400, 1000, 127, 50, 3, 0.2, 0);
+    drive_encoder(1, 1900, 3500, 127, 50, 3, 0.2, 0.2);
+    claw_target_global = 200;
+    lock_encoder(1200, 1);
+    arm_target_global = 1000;
+    drive_encoder(-1, 1900, 3500, 127, 50, 3, 0.2, 0);//0.2 deaccel take out
+    claw_release(130, DUMP_HIEGHT, 2000);
+    delay(400);
+
+    //down, turn and drive
+    claw_target_global = 140;
+    arm_target_global = 0;
+    delay(1000);
+    drive_encoder(-1, 200, 400, 127, 50, 3, 0.2, 0.2);
+    //drive_encoder(-1, 200, 10000, 127, 50, 3, 0.2, 0.2);
+    drive_encoder(1, 250, 3500, 127, 50, 3, 0.2, 0.2);
+    delay(500);
+    turn_time(1, 151, 3, 250, 127, 10, 15);
+    drive_encoder(1, 5700, 4000, 127, 60, 5, 0.03, 0);
+    claw_target_global = 200;
+    drive_encoder(-1, 200, 3500, 127, 60, 5, 0.2, 0.2);
+    delay(700);
+    arm_target_global = 185;
+    delay(750);
+    //drive_encoder(-1, 200, 700, 127, 60, 5, 0.05, 0.05);
+
+    //turn, move to dump
+    turn_time(-1, 148, 5, 150, 127, 5, 12);
+    arm_target_global = 1000;
+    //drive_encoder(-1, 100, 1000, 127, 50, 3, 0.2, 0.2);
+    claw_release(130, 700, 2000);
+    delay(1000);
+    arm_target_global = 0;
+    delay(1500);
+    drive_encoder(-1, 300, 1000, 127, 50, 3, 0.2, 0.2);
+    drive_encoder(1, 250, 1000, 127, 50, 3, 0, 0);
+    drive_encoder(-1, 300, 1000, 127, 50, 3, 0.2, 0.2);
+
+
+    //drive to grab cube and back star
+    claw_target_global = 105;
+    drive_encoder(1, 2100, 3500, 127, 50, 3, 0.2, 0.2);
+    claw_target_global = 190;
+    lock_encoder(1000, 1);
+    //delay(1000);
+    arm_target_global = 190;
+    delay(600);
+    arm_target_global = 1000;
+    drive_encoder(-1, 2000, 4000, 127, 50, 3, 0.2, 0.2);
+    claw_release(130, 600, 2000);
+    delay(1000);
+    arm_target_global = 700;
+    delay(1500);
+    drive_encoder(-1, 300, 400, 127, 50, 3, 0.2, 0.2);//square
+    drive_encoder(1, 1800, 3500, 127, 50, 3, 0.2, 0.2);
+
+    turn_time(-1, 140, 4, 220, 127, 15, 20);
+    drive_encoder(-1, 900, 1000, 127, 80, 3, 0, 0);
+    delay(300);
+    drive_encoder(1, 800, 1000, 127, 80, 3, 0, 0);
+
+    turn_time(-1, 140, 4, 220, 127, 15, 20);
+    drive_encoder(-1, 900, 1000, 127, 80, 3, 0, 0);
+    delay(300);
+    drive_encoder(1, 800, 1000, 127, 80, 3, 0, 0);
+
+    turn_time(1, 75, 4, 220, 127, 15, 20);
+    drive_encoder(-1, 1200, 1500, 127, 80, 3, 0, 0);
+
+    arm_target_global = 1200;
+    delay(1500);
+    drive_encoder(1, 200, 1000, 127, 100, 3, 0, 0);
+    arm_target_global = -100;
+    drive_encoder(1, 8000, 4000, 127, 100, 3, 0, 0);
+
+
+    delay(20000);
+
+
+
+
+break;
+case 1: // velocity timed dumps mod
+
   //backout
   delay(200);
-  drive_encoder(-1, 1000, 10000, 127, 50, 3, 0.2, 0.2);
+  drive_encoder(-1, 1400, 3000, 127, 50, 3, 0.2, 0.2);
+  drive_encoder(1, 200, 3000, 127, 50, 3, 0.2, 0.2);
+  drive_encoder(-1, 200, 3000, 127, 50, 3, 0.2, 0.2);
   delay(300);
-  turn_time(1, 35, 5, 150, 127, 8, 15);
-  claw_target_global = 120;
+  //turn_time(1, 35, 5, 150, 127, 8, 15);
+  claw_target_global = 130;
   delay(1500);
 
   //back in grab
-  drive_encoder(1, 300, 10000, 127, 50, 3, 0.2, 0.2);
-  claw_target_global = 200;
-  lock_encoder(1000, 1);
-  arm_target_global = 200;
-  drive_encoder(-1, 300, 10000, 127, 50, 3, 0.2, 0.2);
+  drive_encoder(1, 580, 3000, 127, 50, 3, 0.2, 0.2);
+  claw_target_global = 185;
+  lock_encoder(1200, 1);
 
 
   //drive to dump
   arm_target_global = 1000;
-  drive_encoder(-1, 2000, 4000, 127, 50, 3, 0.2, 0.2);
-  claw_release(130, 600, 8000);
+  drive_encoder(-1, 2100, 4000, 127, 50, 3, 0.2, 0);//0.2 deaccel take out
+  claw_release(130, 800, 8000);
   delay(750);
 
   //lower arm for second grab
   arm_target_global = 0;
   delay(1500);
-  turn_time(-1, 30, 5, 150, 127, 8, 15);
+  //turn_time(-1, 30, 5, 150, 127, 8, 15);
   drive_encoder(-1, 300, 750, 127, 50, 3, 0.2, 0);//square
-  drive_encoder(1, 300, 750, 127, 50, 3, 0.2, 0);
-  drive_encoder(-1, 300, 750, 127, 50, 3, 0.2, 0);
+  //drive_encoder(1, 300, 750, 127, 50, 3, 0.2, 0);
+  //drive_encoder(-1, 300, 750, 127, 50, 3, 0.2, 0);
   //drive_encoder(1, 300, 750, 127, 50, 3, 0.2, 0);
 
-  claw_target_global = 100;
-  drive_encoder( 1, 1800, 10000, 127, 50, 3, 0.2, 0.2);
-  claw_target_global = 200;
-  delay(750);
+  claw_target_global = 135; //was 120
+  drive_encoder( 1, 2000, 3000, 127, 50, 3, 0.2, 0.2);
+  claw_target_global = 185;
+  lock_encoder(1200, 1);
 
   //to fence for dump
   arm_target_global = 1000;
-  drive_encoder(-1, 2000, 10000, 127, 50, 3, 0.2, 0.2);
-  claw_release(130, 750, 2000);
+  drive_encoder(-1, 2000, 3000, 127, 50, 3, 0.2, 0);//0.2 deaccel take out
+  claw_release(130, DUMP_HIEGHT, 2000);
   delay(400);
 
   //lower and back for final cube
   arm_target_global = 0;
-  drive_encoder(-1, 300, 500, 127, 50, 3, 0.2, 0.2);
-  drive_encoder(1, 300, 500, 127, 50, 3, 0.2, 0);
-  drive_encoder(-1, 300, 500, 127, 50, 3, 0.2, 0);
-  drive_encoder(1, 1900, 10000, 127, 50, 3, 0.2, 0.2);
+  delay(1000);
+  drive_encoder(-1, 400, 1000, 127, 50, 3, 0.2, 0.2);
+  drive_encoder(1, 400, 1000, 127, 50, 3, 0.2, 0);
+  drive_encoder(-1, 400, 1000, 127, 50, 3, 0.2, 0);
+  drive_encoder(1, 1900, 3500, 127, 50, 3, 0.2, 0.2);
   claw_target_global = 200;
-  delay(700);
+  lock_encoder(1200, 1);
   arm_target_global = 1000;
-  drive_encoder(-1, 1900, 10000, 127, 50, 3, 0.2, 0.2);
-  claw_release(130, 750, 2000);
+  drive_encoder(-1, 1900, 3500, 127, 50, 3, 0.2, 0);//0.2 deaccel take out
+  claw_release(130, DUMP_HIEGHT, 2000);
   delay(400);
 
   //down, turn and drive
@@ -221,158 +340,70 @@ case 0:
   delay(1000);
   drive_encoder(-1, 200, 400, 127, 50, 3, 0.2, 0.2);
   //drive_encoder(-1, 200, 10000, 127, 50, 3, 0.2, 0.2);
-  drive_encoder(1, 250, 10000, 127, 50, 3, 0.2, 0.2);
+  drive_encoder(1, 250, 3500, 127, 50, 3, 0.2, 0.2);
   delay(500);
-  turn_time(1, 153, 3, 250, 127, 10, 15);
-  drive_encoder(1, 5500, 10000, 127, 60, 5, 0.05, 0.05);
+  turn_time(1, 151, 3, 250, 127, 10, 15);
+  drive_encoder(1, 5700, 4000, 127, 60, 5, 0.03, 0);
   claw_target_global = 200;
+  drive_encoder(-1, 200, 3500, 127, 60, 5, 0.2, 0.2);
   delay(700);
-  arm_target_global = 200;
-  delay(500);
-  drive_encoder(-1, 200, 700, 127, 60, 5, 0.05, 0.05);
+  arm_target_global = 185;
+  delay(750);
+  //drive_encoder(-1, 200, 700, 127, 60, 5, 0.05, 0.05);
 
   //turn, move to dump
-  turn_time(-1, 153, 5, 150, 127, 5, 12);
+  turn_time(-1, 148, 5, 150, 127, 5, 12);
   arm_target_global = 1000;
   //drive_encoder(-1, 100, 1000, 127, 50, 3, 0.2, 0.2);
   claw_release(130, 700, 2000);
   delay(1000);
   arm_target_global = 0;
   delay(1500);
+  drive_encoder(-1, 300, 1000, 127, 50, 3, 0.2, 0.2);
   drive_encoder(1, 250, 1000, 127, 50, 3, 0, 0);
-  drive_encoder(-1, 300, 500, 127, 50, 3, 0.2, 0.2);
+  drive_encoder(-1, 300, 1000, 127, 50, 3, 0.2, 0.2);
 
 
   //drive to grab cube and back star
   claw_target_global = 105;
-  drive_encoder(1, 2000, 10000, 127, 50, 3, 0.2, 0.2);
+  drive_encoder(1, 2100, 3500, 127, 50, 3, 0.2, 0.2);
   claw_target_global = 190;
-  lock_encoder(1000, 5);
-  arm_target_global = 200;
+  lock_encoder(1000, 1);
+  //delay(1000);
+  arm_target_global = 190;
   delay(600);
   arm_target_global = 1000;
-  drive_encoder(-1, 2000, 10000, 127, 50, 3, 0.2, 0.2);
+  drive_encoder(-1, 2000, 4000, 127, 50, 3, 0.2, 0.2);
   claw_release(130, 600, 2000);
   delay(1000);
-  arm_target_global = 0;
+  arm_target_global = 700;
   delay(1500);
   drive_encoder(-1, 300, 400, 127, 50, 3, 0.2, 0.2);//square
+  drive_encoder(1, 1800, 3500, 127, 50, 3, 0.2, 0.2);
 
-  //drive foward to hang
-  drive_encoder(1, 2200, 10000, 127, 50, 3, 0.2, 0.2);
-  turn_time(-1, 200, 4, 220, 127, 15, 20);
-  drive_encoder(-1, 1000, 700, 127, 80, 3, 0, 0);
+  turn_time(-1, 140, 4, 220, 127, 15, 20);
+  drive_encoder(-1, 900, 1000, 127, 80, 3, 0, 0);
+  delay(300);
+  drive_encoder(1, 800, 1000, 127, 80, 3, 0, 0);
+
+  turn_time(-1, 140, 4, 220, 127, 15, 20);
+  drive_encoder(-1, 900, 1000, 127, 80, 3, 0, 0);
+  delay(300);
+  drive_encoder(1, 800, 1000, 127, 80, 3, 0, 0);
+
+  turn_time(1, 75, 4, 220, 127, 15, 20);
+  drive_encoder(-1, 1200, 1500, 127, 80, 3, 0, 0);
 
   arm_target_global = 1200;
   delay(1500);
   drive_encoder(1, 200, 1000, 127, 100, 3, 0, 0);
-  arm_target_global = 0;
+  arm_target_global = -100;
   drive_encoder(1, 8000, 4000, 127, 100, 3, 0, 0);
 
-  delay(20000);
-
-break;
-case 1: // initial skills = corner cube
-  //backout
-  delay(200);
-  claw_target_global = 140;
-  drive_encoder(-1, 1000, 10000, 127, 50, 3, 0.2, 0.2);
-  delay(1000);
-
-  //back in grab
-  drive_encoder(1, 400, 10000, 127, 50, 3, 0.2, 0.2);
-  claw_target_global = 200;
-  delay (1000);
-
-  //drive to dump
-  arm_target_global = 1000;
-  drive_encoder(-1, 2000, 10000, 127, 50, 3, 0.2, 0.2);
-  claw_release(130, 600, 2000);
-  delay(750);
-
-  //lower arm for second grab
-  arm_target_global = 0;
-  drive_encoder(-1, 300, 1000, 127, 50, 3, 0.2, 0.2);
-  delay(1500);
-  drive_encoder( 1, 1800, 10000, 127, 50, 3, 0.2, 0.2);
-  claw_target_global = 200;
-  delay(1000);
-
-  //to fence for dump
-  arm_target_global = 1000;
-  drive_encoder(-1, 2000, 10000, 127, 50, 3, 0.2, 0.2);
-  claw_release(130, 750, 2000);
-  delay(400);
-
-  //lower and back for final cube
-  arm_target_global = 0;
-  drive_encoder(-1, 300, 1000, 127, 50, 3, 0.2, 0.2);
-  delay(1500);
-  drive_encoder(1, 1900, 10000, 127, 50, 3, 0.2, 0.2);
-  claw_target_global = 200;
-  delay(1000);
-  arm_target_global = 1000;
-  drive_encoder(-1, 1900, 10000, 127, 50, 3, 0.2, 0.2);
-  claw_release(130, 750,2000);
-  delay(400);
-
-  //down, turn and drive
-  claw_target_global = 150;
-  arm_target_global = 0;
-  drive_encoder(-1, 300, 1000, 127, 50, 3, 0.2, 0.2);
-  delay(1000);
-  //drive_encoder(-1, 200, 10000, 127, 50, 3, 0.2, 0.2);
-  drive_encoder(1, 250, 10000, 127, 50, 3, 0.2, 0.2);
-  turn_time(1, 153, 4, 250, 127, 7, 12);
-  drive_encoder(1, 5200, 10000, 127, 60, 5, 0.05, 0.05);
-  claw_target_global = 200;
-  delay(1200);
-  arm_target_global = 200;
-  delay(500);
-
-  //turn, move to dump
-  turn_time(-1, 150, 5, 200, 127, 5, 12);
-  arm_target_global = 1000;
-  //drive_encoder(-1, 100, 1000, 127, 50, 3, 0.2, 0.2);
-  claw_release(130, 600, 2000);
-  delay(2000);
-  drive_encoder(1, 250, 1000, 127, 50, 3, 0.2, 0.2);
-  delay(500);
-  arm_target_global = 0;
-  delay(1500);
-  drive_encoder(-1, 300, 1300, 127, 50, 3, 0.2, 0.2);
-
-
-  //drive to (w/ turn) grab cube and back star
-  claw_target_global = 105;
-  drive_encoder(1, 2000, 10000, 127, 50, 3, 0.2, 0.2);
-  claw_target_global = 190;
-  delay(1200);
-  arm_target_global = 200;
-  delay(1000);
-  arm_target_global = 1000;
-  drive_encoder(-1, 2000, 10000, 127, 50, 3, 0.2, 0.2);
-  claw_release(130, 600, 2000);
-  delay(1200);
-  arm_target_global = 0;
-  delay(1500);
-  drive_encoder(-1, 300, 500, 127, 50, 3, 0.2, 0.2);
-  drive_encoder(1, 300, 500, 127, 50, 3, 0.2, 0.2);
-
-
-  drive_encoder(1, 1900, 10000, 127, 50, 3, 0.2, 0.2);
-  turn_time(-1, 200, 5, 220, 127, 10, 12);
-  drive_encoder(-1, 1000, 1200, 127, 80, 3, 0.2, 0.2);
-  //  drive_encoder(1, 500, 1200, 127, 80, 3, 0.1, 0.1);
-  //  drive_encoder(-1, 600, 1200, 127, 80, 3, 0.1, 0.1);
-
-  arm_target_global = 1200;
-  delay(1500);
-  drive_encoder(1, 200, 1300, 127, 100, 3, 0.2, 0.2);
-  arm_target_global = 0;
-  drive_encoder(1, 8000, 4000, 127, 100, 3, 0.2, 0.2);
 
   delay(20000);
+
+
 
 
 break;

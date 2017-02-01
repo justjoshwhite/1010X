@@ -79,12 +79,13 @@ void disablelcd(void *ignore){
       if(screen == 1){
         switch(myauto){
           case -1:
-            lcdSetText(uart1, 2, "#-1");
+            lcdSetText(uart1, 2, "#-1 OG");
           break;
           case 0:
+            lcdSetText(uart1, 2, "#1 preload change");
           break;
           case 1:
-            lcdSetText(uart1, 2, "Skills 1");
+            lcdSetText(uart1, 2, "#1 vel dump");
           break;
           case 2:
             lcdSetText(uart1, 2, "SKills 2");
