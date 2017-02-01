@@ -5,7 +5,7 @@
 
 void clawtask(void*ignore){
 
-    PID_init(&pid_claw, 2, 0, 0, 0);
+    PID_init(&pid_claw, 1.0, 0, 0, 0);
     claw_target_global = encoderGet(encoder_CLAW);
 
     test_clawup = 100;

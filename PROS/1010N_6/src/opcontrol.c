@@ -16,7 +16,8 @@ void operatorControl() {
 
 		delay(20);
 
-		motorset_drive(motorcap((joystickGetAnalog(1, 3)+joystickGetAnalog(1, 4))), motorcap(joystickGetAnalog(1,3)-joystickGetAnalog(1,4)));
+		//motorset_drive(motorcap((joystickGetAnalog(1, 3)+joystickGetAnalog(1, 4))), motorcap(joystickGetAnalog(1,3)-joystickGetAnalog(1,4)));//arcade
+		motorset_drive(joystickGetAnalog(1, 3), joystickGetAnalog(1, 2));
 
 		armpresets();
 		clawpresets();
