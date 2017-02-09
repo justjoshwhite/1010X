@@ -72,7 +72,7 @@ void drive_encoder(int direction, int target, int timeout, int maxpower, int min
 
   int netpower = maxpower - minpower;
   float boost;
-  int breakpower = 20;
+  int breakpower = 13;
 
   encoderReset(encoder_L);
   encoderReset(encoder_R);
