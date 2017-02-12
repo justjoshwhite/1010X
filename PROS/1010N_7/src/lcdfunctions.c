@@ -101,13 +101,13 @@ void disablelcd(void *ignore){
             lcdSetText(uart1, 2, "#4 Hang R");
           break;
           case 5:
-            lcdSetText(uart1, 2, "#5 Right Hang");
+            lcdSetText(uart1, 2, "#5 Non L");
           break;
           case 6:
-            lcdSetText(uart1, 2, "#6");
+            lcdSetText(uart1, 2, "#6 Non R");
           break;
           case 7:
-            lcdSetText(uart1, 2, "#7");
+            lcdSetText(uart1, 2, "#7 None");
           break;
           case 8:
             lcdSetText(uart1, 2, "#8");

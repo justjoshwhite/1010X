@@ -112,7 +112,7 @@ void drive_stop(int direction, int delta_trip, int maxpower, float kdrift_encode
   encoderReset(encoder_R);
 
   motorset_drive(direction*maxpower, direction*maxpower);
-  delay(120);
+  delay(250);
 
   while( (abs(encoderGet(encoder_L)+encoderGet(encoder_R))/2) > delta_trip){
 
