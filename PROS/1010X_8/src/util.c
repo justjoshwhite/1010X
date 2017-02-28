@@ -1,6 +1,16 @@
 #include "main.h"
 #include "util.h"
 
+int cap(int value, int max){
+    if(value > max){
+      return max;}
+    else if (value < max){
+      return -max;
+      }
+    else{
+      return value;
+    }
+  }
 
 int motorcap(int value){
   if (value > 127){

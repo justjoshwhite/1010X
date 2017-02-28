@@ -23,4 +23,7 @@ void turn_time(int direction, int target, int error_range, int error_time, int p
 
 void lock_encoder(int timeout, float kp);
 
+void turn_pid(int direction, int target, int maxpower, float kp, float ki, float kd, int ki_range, long timeout);
+
+void claw_release2(int armheight, int clawtarget, int timeout);
 #endif

@@ -5,7 +5,7 @@
 
 void armtask (void*ignore){
 
-  PID_init(&pid_arm, 2.1, 0, 0, 0); // was 0.4
+  PID_init(&pid_arm, 1.5, 0, 0, 0); // was 0.4
   arm_target_global = encoderGet(encoder_ARM);
 
 //  test_armdown = 100;
@@ -19,12 +19,12 @@ void armtask (void*ignore){
     if(!isAutonomous() && joystickGetDigital(1, 6, JOY_UP)){
 
       motorset_arm(127);
-      arm_target_global = encoderGet(encoder_ARM)+12;} //was 150
+      arm_target_global = encoderGet(encoder_ARM)+16;} //was 150
 
     else if(!isAutonomous() && joystickGetDigital(1, 6, JOY_DOWN)){
 
       motorset_arm(-127);
-      arm_target_global = encoderGet(encoder_ARM)-3;} //was 50
+      arm_target_global = encoderGet(encoder_ARM)-7;} //was 50
 
 
     /*

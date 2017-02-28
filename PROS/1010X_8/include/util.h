@@ -3,6 +3,8 @@
 
 #include "main.h"
 
+int cap (int value, int max);
+
 int motorcap(int value);
 
 void motorset_arm(int power);

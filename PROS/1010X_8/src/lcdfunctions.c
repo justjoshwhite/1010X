@@ -4,7 +4,7 @@
 #include "claw.h"
 #include "ledfunctions.h"
 #include "util.h"
-
+#include "autofunctions.h"
 
 void disablelcd(void *ignore){
 
@@ -19,6 +19,7 @@ void disablelcd(void *ignore){
     joystick_connected(LED_1);
     if(!isEnabled()){
       switch(screen){
+
 
         case 1:
         lcdPrint(uart1, 1, "%d, Auto  %d ", screen, myauto);
@@ -209,16 +210,21 @@ void opcontrollcd(void *ignore){
 
 void autolcd(void *ignore){
   int screen = 1;
-  int screen_cap = 2;
-  int btn_time = 100;
+  int screen_cap = 3;
+  int btn_time = 50;
   lcdClear(uart1);
+
+  float kp_test= 9.5;
+  float kd_test= 20;
 
   while(isAutonomous()){
     delay(25);
     switch(screen){
 
+
+
       case 1:
-      lcdPrint(uart1, 1, "AU%d A=%d", screen, myauto);
+      //lcdPrint(uart1, 1, "AU%d A=%d", screen, myauto);
       //lcdPrint(uart1, 2, "enL%d enR%d", encoderGet(encoder_L), encoderGet(encoder_R));
       lcdPrint(uart1, 2, "gyro %f", gyro_read(gyro, 300));
         if(lcdReadButtons(uart1) == 2){
@@ -227,21 +233,35 @@ void autolcd(void *ignore){
             delay(btn_time);
             screen = screen + 1;}
         if(lcdReadButtons(uart1) == 1){
-            encoderReset(encoder_L);
-            encoderReset(encoder_R);  }
+
+            turn_pid(1, 100, 127, kp_test, 0, kd_test, 0, 5000);
+
+            }
         if(lcdReadButtons(uart1) == 4){/*action*/}
       break;
 
       case 2:
       lcdPrint(uart1, 1, "AU%d ", screen);
-      lcdPrint(uart1, 2, "enL%d enR %d", encoderGet(encoder_L), encoderGet(encoder_R));
+      lcdPrint(uart1, 2, "kptest%f", kp_test);
         if(lcdReadButtons(uart1) == 2){
             lcdClear(uart1);
             lcdSetText(uart1, 1, "wait");
             delay(btn_time);
             screen = screen + 1;}
-        if(lcdReadButtons(uart1) == 1){/*action*/}
-        if(lcdReadButtons(uart1) == 4){/*action*/}
+        if(lcdReadButtons(uart1) == 1){kp_test = kp_test + 0.01;}
+        if(lcdReadButtons(uart1) == 4){kp_test = kp_test - 0.01;}
+      break;
+
+      case 3:
+      lcdPrint(uart1, 1, "AU%d ", screen);
+      lcdPrint(uart1, 2, "kdtest%f", kd_test);
+        if(lcdReadButtons(uart1) == 2){
+            lcdClear(uart1);
+            lcdSetText(uart1, 1, "wait");
+            delay(btn_time);
+            screen = screen + 1;}
+        if(lcdReadButtons(uart1) == 1){kd_test = kd_test + 0.01;}
+        if(lcdReadButtons(uart1) == 4){kd_test = kd_test - 0.01;}
       break;
 
       default:
@@ -252,6 +272,7 @@ void autolcd(void *ignore){
       break;
       }
     if(screen > screen_cap){screen = 1;}
+
   }
 
   taskDelete(autolcd_task);

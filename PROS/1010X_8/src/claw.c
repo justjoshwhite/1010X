@@ -2,6 +2,7 @@
 #include "claw.h"
 #include "util.h"
 #include "pid.h"
+#include "arm.h"
 
 void clawtask(void*ignore){
 
@@ -21,8 +22,6 @@ while(true){
   if(!isEnabled()){break;}
 
   claw_pos_global = encoderGet(encoder_CLAW);
-
-
 
   if(joystickGetDigital(1, 5, JOY_UP)){//main up
       motorset_claw(127); //cloase
@@ -63,6 +62,20 @@ while(true){
         claw_zero_L = analogRead(clawpot_L);
       }
 */
+
+  else if(c_release){
+
+    c_release_start_time = millis();
+    c_release_net_time = 0;
+
+    while((c_release_net_time < c_release_timeout)&&(arm_pos_global < c_release_arm)){
+      c_release_net_time = millis() - c_release_start_time;
+      delay(20);
+      }
+    claw_target_global = c_release_target;
+    c_release = false;
+  }
+
   else{
       motorset_claw(PID_cal(&pid_claw, claw_target_global, claw_pos_global));
 

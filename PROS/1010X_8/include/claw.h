@@ -9,7 +9,13 @@ PID_terms pid_claw;
 int claw_target_global;
 int claw_pos_global;
 
+bool c_release;
+int c_release_timeout;
+int c_release_arm;
+int c_release_target;
 
+int c_release_start_time;
+int c_release_net_time;
 /*
 PID_terms pid_claw_L;
 PID_terms pid_claw_R;
