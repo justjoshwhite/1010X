@@ -84,10 +84,10 @@ void disablelcd(void *ignore){
           break;
 
           case -1:
-            lcdSetText(uart1, 2, "#-1 OldProgramming");
+            lcdSetText(uart1, 2, "#-1 Test");
           break;
           case 0:
-            lcdSetText(uart1, 2, "#0 NewProgramming");
+            lcdSetText(uart1, 2, "#0 Programming");
           break;
           case 1:
             lcdSetText(uart1, 2, "#1 Cube L");
@@ -102,16 +102,16 @@ void disablelcd(void *ignore){
             lcdSetText(uart1, 2, "#4 Hang R");
           break;
           case 5:
-            lcdSetText(uart1, 2, "#5 Non L");
+            lcdSetText(uart1, 2, "#5 Near L");
           break;
           case 6:
-            lcdSetText(uart1, 2, "#6 Non R");
+            lcdSetText(uart1, 2, "#6 Near R");
           break;
           case 7:
-            lcdSetText(uart1, 2, "#7 None");
+            lcdSetText(uart1, 2, "#7 Stars L");
           break;
           case 8:
-            lcdSetText(uart1, 2, "#8");
+            lcdSetText(uart1, 2, "#8 Stars R");
           break;
           default:
           myauto = 1;

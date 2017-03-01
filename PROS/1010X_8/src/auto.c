@@ -19,87 +19,190 @@ case -2:
 break;
 
 
-case -1: //Old Programming skills
+case -1: //Test check
 
 break;
 
-case 0:// new programming skills
+case 0://  programming skills
+
+  delay(5);
+  arm_target_global = 50;
+  claw_target_global = 600;
+  drive_encoder(-1, 600, 5000, 127, 50, 4, 0.1, 0.2);
+  arm_target_global = 0;
+  delay(1000);
+  turn_pid(-1, 130, 127, 9.5, 0, 19, 0, 750);
+  delay(500);
+  drive_encoder(1, 1000, 5000, 127, 50, 4, 0.1, 0.2);
+  claw_target_global = 800;
+  delay(1000);
+  arm_target_global = 100;
+  delay(1000);
+  drive_encoder(-1, 1100, 5000, 127, 50, 4, 0.1, 0.2);
+  turn_pid(1, 130, 127, 9.5, 0, 19, 0, 750);
+  arm_target_global = 400;
+  claw_release2(280, 500, 3000);
+  drive_encoder(-1, 750, 4000, 127, 50, 4, 0.1, 0.2);
 
 
 break;
-case 1: // AUTO 1 - CUBE LEFT
-
-
+case 1: //CUBE L
 break;
 
 case 2: // CUBE R
 
-delay(5);
+  delay(5);
+  arm_target_global = 200;
+  claw_target_global = 800;
+  drive_encoder(-1, 4100, 6000, 127, 50, 4, 0.1, 0.2);
+  claw_target_global = 600;
+  arm_target_global = 0;
+  turn_pid(1, 50, 127, 9.5, 0, 19, 0, 750);
+  //delay(900);
+  drive_encoder(1, 750, 4000, 127, 50, 4, 0.1, 0.2);
+  claw_target_global = 870; // was 900
+  delay(750); // was 1500
+  arm_target_global = 400;
+  claw_release2(320, 500, 3000);
+  drive_encoder(-1, 750, 2500, 127, 50, 4, 0.1, 0.2); // timeout was 4000
+  delay(900);// was 1200
+  arm_target_global = 0;
+  delay(1000);
+  drive_encoder(1, 2400, 5000, 127, 50, 4, 0.1, 0.2); // was 2300
+  claw_target_global = 900;
 
-arm_target_global = 200;
-claw_target_global = 800;
-drive_encoder(-1, 4000, 6000, 127, 50, 4, 0.1, 0.2);
-claw_target_global = 600;
-arm_target_global = 0;
-turn_pid(1, 50, 127, 9.5, 0, 19, 0, 750);
-delay(900);
-drive_encoder(1, 750, 4000, 127, 50, 4, 0.1, 0.2);
-claw_target_global = 890;
-delay(1500);
-arm_target_global = 400;
-claw_release2(280, 500, 3000);
-drive_encoder(-1, 750, 4000, 127, 50, 4, 0.1, 0.2);
-delay(1200);
-arm_target_global = 0;
-delay(1000);
-drive_encoder(1, 2300, 5000, 127, 50, 4, 0.1, 0.2);
-claw_target_global = 800;
+  //drive_encoder(-1, 200, 800, 127, 50, 4, 0.1, 0.2);
+  //drive_encoder(1, 200, 800, 127, 50, 4, 0.1, 0.2);
 
-drive_encoder(-1, 200, 5000, 127, 50, 4, 0.1, 0.2);
-drive_encoder(1, 200, 5000, 127, 50, 4, 0.1, 0.2);
+  delay(1000);
+  arm_target_global = 370;
+  claw_release2(280, 500, 3000);
+  drive_encoder(-1, 2400, 5000, 127, 50, 4, 0.1, 0.2);
+  delay(1000);
 
-delay(1000);
-arm_target_global = 370;
-claw_release2(280, 500, 3000);
-drive_encoder(-1, 2200, 5000, 127, 50, 4, 0.1, 0.2);
-delay(1000);
+  //2nd dump
+  arm_target_global = 0;
+  delay(1000);
+  drive_encoder(1, 2300, 5000, 127, 50, 4, 0.1, 0.2);
+  claw_target_global = 900;
 
-//2nd dump
-arm_target_global = 0;
-delay(1000);
-drive_encoder(1, 2300, 5000, 127, 50, 4, 0.1, 0.2);
-claw_target_global = 800;
+  drive_encoder(-1, 200, 5000, 127, 50, 4, 0.1, 0.2);
+  drive_encoder(1, 200, 5000, 127, 50, 4, 0.1, 0.2);
 
-drive_encoder(-1, 200, 5000, 127, 50, 4, 0.1, 0.2);
-drive_encoder(1, 200, 5000, 127, 50, 4, 0.1, 0.2);
-
-delay(1000);
-arm_target_global = 370;
-claw_release2(280, 500, 3000);
-drive_encoder(-1, 2200, 5000, 127, 50, 4, 0.1, 0.2);
-
-break;
-
-case 3:// HANG -L
-
+  delay(1000);
+  arm_target_global = 370;
+  claw_release2(280, 500, 3000);
+  drive_encoder(-1, 2200, 5000, 127, 50, 4, 0.1, 0.2);
 
 break;
 
-case 4: // Hang - R
+case 3:// HANG L
+
+  delay(5);
+
+  arm_target_global = 200;
+  claw_target_global = 580;
+  delay(1200);
+  arm_target_global = 0;
+  delay(1200);
+  drive_encoder(1, 500, 5000, 127, 50, 4, 0.2, 0.2);
+  claw_target_global = 820;
+  delay(1200);
+  arm_target_global = 200;
+  drive_encoder(-1, 200, 5000, 127, 50, 4, 0.2, 0.2);
+  delay(1000);
+  turn_pid(-1, 130, 127, 9.5, 0, 19, 0, 750);
+  claw_release2(280, 500, 3000);
+  arm_target_global = 340;
+  drive_encoder(-1, 2000, 5000, 127, 50, 4, 0.2, 0.2);
+
+
+  delay(1000);
+  arm_target_global = 200;
+  drive_encoder(1, 1700, 5000, 127, 50, 4, 0.2, 0.2);
+  turn_pid(-1, 150, 127, 9.5, 0, 19, 0, 750);
+  drive_encoder(-1, 1000, 3000, 127, 50, 4, 0.2, 0.2);
+
+  //the lift
+  arm_target_global = 380;
+  delay(2000);
+  drive_encoder(1, 300, 5000, 127, 50, 4, 0.2, 0.2);
+  arm_target_global = -20;
+  drive_encoder(1, 1000, 5000, 127, 50, 4, 0.2, 0.2);
+  delay(2000);
+  claw_target_global = 0;
+
+
+
+
+
+
 
 break;
 
-case 5: //non hang L
+case 4: // HANG R
 
 break;
 
-case 6: // nonhang R
+case 5: //NEAR L
+
+  delay(5);
+  claw_target_global = 550;
+  arm_target_global = 320;
+  drive_encoder(-1, 2000, 5000, 127, 50, 4, 0.2, 0.2);
+  delay(2000);
+  arm_target_global = 0;
+  claw_target_global = 600;
+  delay(1500);
+  turn_pid(1, 40, 127, 9.5, 0, 19, 0, 750);
+  drive_encoder(1, 1800, 5000, 127, 50, 4, 0.2, 0.2);
+  delay(500);
+  claw_target_global = 820;
+  delay(2000);
+  claw_release2(280, 500, 3000);
+  arm_target_global = 340;
+  drive_encoder(-1, 2000, 5000, 127, 50, 4, 0.2, 0.2);
+
 
 break;
 
-case 7: // none
+case 6: // NEAR R
+
+
 
 break;
+
+case 7: //Back Stars L
+
+  delay(5);
+  arm_target_global = 200;
+  claw_target_global = 620;
+  delay(1200);
+  arm_target_global = 0;
+  delay(1200);
+  drive_encoder(1, 3200, 5000, 127, 50, 4, 0.2, 0.2);
+  claw_target_global = 800;
+  delay(1000);
+  arm_target_global = 100;
+  delay(1000);
+  drive_encoder(-1, 3000, 5000, 127, 50, 4, 0.2, 0.2);
+  turn_pid(1, 130, 127, 9.5, 0, 19, 0, 750);
+  claw_release2(280, 500, 3000);
+  arm_target_global = 380;
+  drive_encoder(-1, 2000, 5000, 127, 50, 4, 0.2, 0.2);
+  delay(1000);
+  arm_target_global = 0;
+  claw_target_global = 600;
+  delay(1500);
+  turn_pid(-1, 50, 127, 9.5, 0, 19, 0, 750);
+  drive_encoder(1, 1000, 5000, 127, 50, 4, 0.2, 0.2);
+  claw_target_global = 800;
+  delay(1000);
+  arm_target_global = (370);
+  claw_release2(280, 500, 3000);
+  drive_encoder(-1, 1000, 5000, 127, 50, 4, 0.2, 0.2);
+break;
+case 8: // Back Stars R
 
 default:
 break;
