@@ -9,6 +9,18 @@ PID_terms pid_claw;
 int claw_target_global;
 int claw_pos_global;
 
+bool c_release;
+int c_release_timeout;
+int c_release_arm;
+int c_release_target;
+
+int c_release_start_time;
+int c_release_net_time;
+
+bool c_hang;
+int c_hang_arm ;
+int c_hang_target;
+
 
 /*
 PID_terms pid_claw_L;
@@ -29,11 +41,11 @@ void clawtask(void*ignore);
 
 #define CLAW_DELAY 200
 
-#define CLAW_CLOSED 880
-#define CLAW_V 800 //semi closed
-#define CLAW_45 650
-#define CLAW_PARALLEL 390
-#define CLAW_MAX 30
+//#define CLAW_CLOSED 300
+//#define CLAW_V 300 //semi closed
+//#define CLAW_45 300
+#define CLAW_PARALLEL 350
+#define CLAW_MAX 0
 
 TaskHandle claw_task;
 

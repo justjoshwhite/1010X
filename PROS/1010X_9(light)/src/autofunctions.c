@@ -283,20 +283,73 @@ void lock_encoder(int timeout, float kp){
   while((millis()-starttime) < timeout){
     int errorL = encoderGet(encoder_L);
     int errorR = encoderGet(encoder_R);
-    motorset_drive(-errorL*kp, -errorR*kp);
+    motorset_drive(errorL*kp, -errorR*kp);
     delay(20);
   }
 }
 
-/*
-void pid_turn(int direction, int target, float kp, float ki, float kd, int time){
+//20 dp
+void turn_pid(int direction, int target, int maxpower, float kp, float ki, float kd, int ki_range, long timeout){
 
   gyroReset(gyro);
+  long start_time = millis();
+  long net_time = 0;
 
+  float kpv;
+  float kiv;
+  float kdv;
 
-  int starttime = millis();
-  int nettime = 0;
-  while ()
+  int error_last = 0;
+  int error_diff = 0;
+  int error_sum = 0;
+
+  int brake_power = 10;
+
+  while( net_time < timeout){
+
+    net_time = millis() - start_time;
+
+    lcdPrint(uart1, 1, "gyro:%f", gyro_read(gyro, 300));
+    int pos = abs(gyro_read(gyro, 300));
+    int error = target - pos;
+
+    error_diff = error - error_last;
+    error_last = error;
+
+    if(abs(error)<ki_range){
+      error_sum =+ error; }
+    else{ error_sum = 0; }
+
+    kpv = kp*error;
+    kiv = ki*error_sum;
+    kdv = kd*error_diff;
+
+    int motor_power = (kpv+kiv+kdv);
+
+    motorset_drive(motor_power*direction, -motor_power*direction);// L, R
+
+    delay(20);
+
+    }
+
+  motorset_drive(brake_power*-direction, brake_power*direction);// L, R
+
+  }
+
+void claw_release2(int armheight, int clawtarget, int timeout){
+
+  c_release = true;
+  c_release_arm = armheight;
+  c_release_target = clawtarget;
+  c_release_timeout = timeout;
 
 }
-*/
+
+void claw_hang (int armheight, int clawtarget){
+
+  c_hang = true;
+  c_hang_arm = armheight;
+  c_hang_target = clawtarget;
+
+
+}

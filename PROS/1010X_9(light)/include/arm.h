@@ -19,7 +19,7 @@ void armtask(void*ignore);
 #define ARM_PARALLEL 370
 #define ARM_45 670
 #define ARM_MAX 1100
-
+#define ARM_SKILLS_1 100 // Pushing off high fence
 TaskHandle arm_task;
 
 #endif

@@ -221,8 +221,6 @@ void autolcd(void *ignore){
     delay(25);
     switch(screen){
 
-
-
       case 1:
       //lcdPrint(uart1, 1, "AU%d A=%d", screen, myauto);
       //lcdPrint(uart1, 2, "enL%d enR%d", encoderGet(encoder_L), encoderGet(encoder_R));

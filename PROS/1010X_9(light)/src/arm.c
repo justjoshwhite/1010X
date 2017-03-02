@@ -58,9 +58,9 @@ else{
   }
 
 void armpresets(){
-  if(joystickGetDigital(1,8,JOY_UP)){arm_target_global = ARM_MAX;}
+  if(joystickGetDigital(1,8,JOY_UP)){arm_target_global = ARM_SKILLS_1;}
     else if(joystickGetDigital(1,8,JOY_DOWN)){arm_target_global = ARM_GROUND;}
-    else if (joystickGetDigital(1,8,JOY_LEFT)){arm_target_global = ARM_LOW;}
-    else if(joystickGetDigital(1,8,JOY_RIGHT)){arm_target_global = ARM_PARALLEL;}
+    //else if (joystickGetDigital(1,8,JOY_LEFT)){arm_target_global = ARM_LOW;}
+    //else if(joystickGetDigital(1,8,JOY_RIGHT)){arm_target_global = ARM_PARALLEL;}
     else{}
   }
