@@ -12,7 +12,7 @@ void disablelcd(void *ignore){
   int screen = 1;
   int screen_cap = 3;
   int btn_time = 100;
-  myauto = 1;
+  myauto = 0;
   lcdClear(uart1);
 
   while(true){
@@ -84,10 +84,10 @@ void disablelcd(void *ignore){
           break;
 
           case -1:
-            lcdSetText(uart1, 2, "#-1 Test");
+            lcdSetText(uart1, 2, "#-1 New Program");
           break;
           case 0:
-            lcdSetText(uart1, 2, "#0 Programming");
+            lcdSetText(uart1, 2, "#0 WED Program");
           break;
           case 1:
             lcdSetText(uart1, 2, "#1 Cube L");
@@ -96,10 +96,10 @@ void disablelcd(void *ignore){
             lcdSetText(uart1, 2, "#2 Cube R");
           break;
           case 3:
-            lcdSetText(uart1, 2, "#3");
+            lcdSetText(uart1, 2, "#3 Back L");
           break;
           case 4:
-            lcdSetText(uart1, 2, "#4 ");
+            lcdSetText(uart1, 2, "#4 Back R");
           break;
           case 5:
             lcdSetText(uart1, 2, "#5 ");

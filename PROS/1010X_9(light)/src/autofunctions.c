@@ -106,20 +106,26 @@ void drive_encoder(int direction, int target, int timeout, int maxpower, int min
   motorset_drive(-direction*breakpower, -direction*breakpower);
   }
 
-void drive_stop(int direction, int delta_trip, int maxpower, float kdrift_encoder){
+void drive_stop(int direction, int delta_trip, int maxpower, float kdrift_encoder, int timeout){
+
+  int start_time = millis();
+  int net_time = 0;
 
   encoderReset(encoder_L);
   encoderReset(encoder_R);
 
   motorset_drive(direction*maxpower, direction*maxpower);
-  delay(250);
+  delay(150);
 
-  while( (abs(encoderGet(encoder_L)+encoderGet(encoder_R))/2) > delta_trip){
+  while(((abs(encoderGet(encoder_L)+encoderGet(encoder_R))/2) > delta_trip)&& (net_time < timeout)){
 
+    net_time = millis()-start_time;
     encoderReset(encoder_L);
     encoderReset(encoder_R);
 
     delay(20);
+
+    lcdPrint(uart1, 1, "L: %d, R:%d",  encoderGet(encoder_L), encoderGet(encoder_R));
 
     int encoder_error = encoderGet(encoder_L) - encoderGet(encoder_R); //subtract from L side
     //int power_L = motorcap(ower) - direction*encoder_error*kdrift_encoder;

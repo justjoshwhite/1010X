@@ -9,7 +9,7 @@
 
 void drive_encoder(int direction, int target, int timeout, int maxpower, int minpower, float kdrift_encoder, float kaccel, float kdeaccel);
 
-void drive_stop(int direction, int delta_trip, int maxpower, float kdrift_encoder);
+void drive_stop(int direction, int delta_trip, int maxpower, float kdrift_encoder, int timeout);
 
 void drive_gyro(int direction, int target, int timeout, int maxpower, int minpower, float kdrift_gyro, float kaccel, float kdeaccel);
 
