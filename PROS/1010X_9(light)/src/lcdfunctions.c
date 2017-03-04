@@ -102,13 +102,13 @@ void disablelcd(void *ignore){
             lcdSetText(uart1, 2, "#4 Back R");
           break;
           case 5:
-            lcdSetText(uart1, 2, "#5 ");
+            lcdSetText(uart1, 2, "#5 Near L");
           break;
           case 6:
-            lcdSetText(uart1, 2, "#6 ");
+            lcdSetText(uart1, 2, "#6 Near R");
           break;
           case 7:
-            lcdSetText(uart1, 2, "#7 ");
+            lcdSetText(uart1, 2, "#7 Nothing");
           break;
           case 8:
             lcdSetText(uart1, 2, "#8");
@@ -244,8 +244,8 @@ void autolcd(void *ignore){
             screen = screen + 1;}
         if(lcdReadButtons(uart1) == 1){
 
-            drive_encoder(1, 2000, 5000, 127, 60, kp_test, cont, 1-cont);
-            //turn_pid(1, 100, 127, kp_test, 0, kd_test, 0, 5000);
+            //drive_encoder(1, 2000, 5000, 127, 60, kp_test, cont, 1-cont);
+            turn_pid(1, 130, 127, kp_test, 0, kd_test, 0, 5000);
 
             }
         if(lcdReadButtons(uart1) == 4){/*action*/}
@@ -259,20 +259,20 @@ void autolcd(void *ignore){
             lcdSetText(uart1, 1, "wait");
             delay(btn_time);
             screen = screen + 1;}
-        if(lcdReadButtons(uart1) == 1){kp_test = kp_test + 0.01;}
-        if(lcdReadButtons(uart1) == 4){kp_test = kp_test - 0.01;}
+        if(lcdReadButtons(uart1) == 1){kp_test = kp_test + 0.1;}
+        if(lcdReadButtons(uart1) == 4){kp_test = kp_test - 0.1;}
       break;
 
       case 3:
       lcdPrint(uart1, 1, "AU%d ", screen);
-      lcdPrint(uart1, 2, "cont%f", cont);
+      lcdPrint(uart1, 2, "kd_test%f", kd_test);
         if(lcdReadButtons(uart1) == 2){
             lcdClear(uart1);
             lcdSetText(uart1, 1, "wait");
             delay(btn_time);
             screen = screen + 1;}
-        if(lcdReadButtons(uart1) == 1){cont = cont + 0.005;}
-        if(lcdReadButtons(uart1) == 4){cont = cont - 0.005;}
+        if(lcdReadButtons(uart1) == 1){kd_test = kd_test + 0.1;}
+        if(lcdReadButtons(uart1) == 4){kd_test = kd_test - 0.1;}
       break;
 
 /* //OLD LECD CODE  - LIKELY NOT NEEDED //03/01
