@@ -108,10 +108,13 @@ void disablelcd(void *ignore){
             lcdSetText(uart1, 2, "#6 Near R");
           break;
           case 7:
-            lcdSetText(uart1, 2, "#7 Nothing");
+            lcdSetText(uart1, 2, "#7 C Block L");
           break;
           case 8:
-            lcdSetText(uart1, 2, "#8");
+            lcdSetText(uart1, 2, "#8 C Block R");
+          break;
+          case 9:
+            lcdSetText(uart1, 2, "#9 Nothing");
           break;
           default:
           myauto = 1;
