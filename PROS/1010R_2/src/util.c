@@ -12,25 +12,24 @@ int motorcap(int value){
   }
 
 void motorset_claw(int power){
-  //motorSet(ClawL, ClawL_Dir*power);
+  motorSet(ClawL, ClawL_Dir*power);
   motorSet(ClawR, ClawR_Dir*power);
   }
 
 void motorset_arm(int power){
-  motorSet(ArmL, ArmL_Dir*power);
-  motorSet(ArmR, ArmR_Dir*power);
-  motorSet(ArmOFF, ArmOFF_Dir*power);
-
+  motorSet(ArmLT, ArmLT_Dir*power);
+  motorSet(ArmRT, ArmRT_Dir*power);
+  motorSet(ArmLB, ArmLB_Dir*power);
+  motorSet(ArmRB, ArmRB_Dir*power);
   }
 
 void motorset_drive(int Lpower, int Rpower){
 
   motorSet(DriveBL, DriveBL_Dir*Lpower);
   motorSet(DriveFL, DriveFL_Dir*Lpower);
-  motorSet(DriveML, DriveML_Dir*Lpower);
   motorSet(DriveBR, DriveBR_Dir*Rpower);
   motorSet(DriveFR, DriveFR_Dir*Rpower);
-  motorSet(DriveMR, DriveMR_Dir*Rpower);
+
 }
 
 float gyro_read(Gyro port, int multiplier){

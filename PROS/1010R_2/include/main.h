@@ -11,37 +11,33 @@ extern "C" {
 //for Test Varibles
 
 //drive motors ports
-  #define DriveBL 3
+  #define DriveBL 1
     #define DriveBL_Dir 1
 
-  #define DriveFL 10
+  #define DriveFL 9
     #define DriveFL_Dir 1
 
-  #define DriveML 2
-    #define DriveML_Dir 1
-
-  #define DriveFR 1
+  #define DriveFR 2
     #define DriveFR_Dir 1
 
-    #define DriveMR 9
-      #define DriveMR_Dir -1
-
-  #define DriveBR 8
+  #define DriveBR 10
     #define DriveBR_Dir 1
 
 //Intake motors ports
-  //#define ClawL 6
-    //#define ClawL_Dir -1
+  #define ClawL 6
+    #define ClawL_Dir -1
   #define ClawR 5
     #define ClawR_Dir 1
 
 //Arm motors ports
-  #define ArmL 7
-    #define ArmL_Dir -1
-  #define ArmR 4
-    #define ArmR_Dir 1
-  #define ArmOFF 6
-    #define ArmOFF_Dir 1
+  #define ArmLB 7
+    #define ArmLB_Dir -1
+  #define ArmRB 4
+    #define ArmRB_Dir 1
+  #define ArmLT 8
+    #define ArmLT_Dir -1
+  #define ArmRT 3
+    #define ArmRT_Dir 1
 
 //#define winch 7
 //  #define winch_Dir 1
