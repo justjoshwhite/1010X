@@ -85,7 +85,7 @@ void drive_encoder(int direction, int target, int timeout, int maxpower, int min
 
     net_time  = millis() - start_time;
 
-    encoderaverage = abs(encoderGet(encoder_L))+abs(encoderGet(encoder_R)/2);
+    encoderaverage = 1.23*abs(encoderGet(encoder_L))+abs(encoderGet(encoder_R)/2);
     int encoder_error = encoderGet(encoder_L) - encoderGet(encoder_R); //subtract from L side
 
     //accel/deaccel constants
@@ -96,8 +96,8 @@ void drive_encoder(int direction, int target, int timeout, int maxpower, int min
     else{
       boost = 1;}
 
-    int power_L = motorcap(minpower + boost*netpower) - direction*encoder_error*kdrift_encoder;
-    int power_R = motorcap(minpower + boost*netpower) + direction*encoder_error*kdrift_encoder;
+    int power_L = motorcap(minpower + boost*netpower) - (direction*encoder_error*kdrift_encoder)/2.5;
+    int power_R = motorcap(minpower + boost*netpower) + (direction*encoder_error*kdrift_encoder)/2.5;
     motorset_drive(direction*power_L, direction*power_R);
 
     delay(20);

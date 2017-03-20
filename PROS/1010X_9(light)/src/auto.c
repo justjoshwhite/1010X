@@ -532,12 +532,12 @@ break;
 case 1: // AUTO 1 - CUBE LEFT
   delay(5);
   arm_target_global = 20;
-  drive_encoder(1, 1050, 2500, 127, 60, 8, 0, 0.2);
+  drive_encoder(1, 1350, 2500, 127, 60, 8, 0, 0.2);
   arm_target_global = -10;
   claw_target_global = 800;
   delay(900); // was 1500 // was 1000
   arm_target_global = 38;
-  delay(200); // was 200
+  delay(500); // was 200
   turn_pid(1, 190, 127, 7, 0, 22, 0, 750);
 
   arm_target_global = 130;
@@ -555,10 +555,10 @@ case 1: // AUTO 1 - CUBE LEFT
   //drive_stop(-1, 2, 127, 10, 1000);
   //drive_encoder(-1, 100, 800, 127, 60, 10, 0, 0.3);
   //delay(500);
-  drive_encoder(1, 1250, 4000, 127, 60, 8, 0, 0.3); // was 10 // was 1000 // was 1250
+  drive_encoder(1, 1500, 4000, 127, 60, 8, 0, 0.3); // was 10 // was 1000 // was 1250
   delay(500);
   claw_target_global = 790;
-  delay(800); // was 1000
+  delay(1200); // was 1000
   //fence dump
   arm_target_global = 130;
   claw_release2(90, 600, 5000);
@@ -574,7 +574,7 @@ case 1: // AUTO 1 - CUBE LEFT
   drive_stop(-1, 5, 127, 10, 1000);
   //drive_encoder(-1, 100, 800, 127, 60, 10, 0, 0.3);
   //delay(500);
-  drive_encoder(1, 1100, 4000, 127, 60, 8, 0, 0.3);// was 10
+  drive_encoder(1, 1500, 4000, 127, 60, 8, 0, 0.3);// was 10
   delay(0);// was 500
   claw_target_global = 790;
   delay(800); // was 1200
@@ -657,12 +657,12 @@ case 2: // CUBE R
 
 delay(5);
 arm_target_global = 20;
-drive_encoder(1, 1050, 2500, 127, 60, 8, 0, 0.2);
+drive_encoder(1, 1350, 2500, 127, 60, 8, 0, 0.2);
 arm_target_global = -10;
 claw_target_global = 800;
-delay(900); // was 1500 // was 1000
+delay(1200); // was 1500 // was 1000
 arm_target_global = 38;
-delay(200); // was 200
+delay(500); // was 200
 turn_pid(-1, 190, 127, 7, 0, 22, 0, 750);
 
 arm_target_global = 130;
@@ -680,7 +680,7 @@ delay(1000); // was 2300
 //drive_stop(-1, 2, 127, 10, 1000);
 //drive_encoder(-1, 100, 800, 127, 60, 10, 0, 0.3);
 //delay(500);
-drive_encoder(1, 1250, 4000, 127, 60, 8, 0, 0.3); // was 10 // was 1000 // was 1250
+drive_encoder(1, 1500, 4000, 127, 60, 8, 0, 0.3); // was 10 // was 1000 // was 1250
 delay(500);
 claw_target_global = 790;
 delay(800); // was 1000
@@ -699,7 +699,7 @@ delay(800);// 2300 // was 1000
 drive_stop(-1, 5, 127, 10, 1000);
 //drive_encoder(-1, 100, 800, 127, 60, 10, 0, 0.3);
 //delay(500);
-drive_encoder(1, 1100, 4000, 127, 60, 8, 0, 0.3);// was 10
+drive_encoder(1, 1500, 4000, 127, 60, 8, 0, 0.3);// was 10
 delay(0);// was 500
 claw_target_global = 790;
 delay(800); // was 1200
@@ -843,16 +843,16 @@ case 7: // CUBE BLOCK L
 
 delay(5);
 arm_target_global = 20;
-drive_encoder(1, 1050, 2500, 127, 60, 8, 0, 0.2);
+drive_encoder(1, 1350, 2500, 127, 60, 8, 0, 0.2);
 arm_target_global = -10;
 claw_target_global = 800;
 delay(900); // was 1500 // was 1000
 arm_target_global = 38;
-delay(200); // was 200
+delay(500); // was 200
 turn_pid(1, 190, 127, 7, 0, 22, 0, 750);
 
-arm_target_global = 145; // was 130
-claw_release2(100, 450, 5000); // was 600
+arm_target_global = 130;
+claw_release2(100, 600, 5000);
 delay(500);//adjust for fence timing // was 100
 drive_stop(-1, 0, 127, 16, 3500); // was 10 // 12.5 // 14
 //drive_encoder(-1, 1500, 3000, 127, 60, 10, 0, 0.3);// was 1200
@@ -865,16 +865,16 @@ case 8: // CUBE BLOCK R
 
 delay(5);
 arm_target_global = 20;
-drive_encoder(1, 1050, 2500, 127, 60, 8, 0, 0.2);
+drive_encoder(1, 1350, 2500, 127, 60, 8, 0, 0.2);
 arm_target_global = -10;
 claw_target_global = 800;
 delay(900); // was 1500 // was 1000
 arm_target_global = 38;
-delay(200); // was 200
+delay(500); // was 200
 turn_pid(-1, 190, 127, 7, 0, 22, 0, 750);
 
-arm_target_global = 145; // was 130
-claw_release2(100, 450, 5000); // was 600
+arm_target_global = 130;
+claw_release2(100, 600, 5000);
 delay(500);//adjust for fence timing // was 100
 drive_stop(-1, 0, 127, 16, 3500); // was 10 // 12.5 // 14
 //drive_encoder(-1, 1500, 3000, 127, 60, 10, 0, 0.3);// was 1200
