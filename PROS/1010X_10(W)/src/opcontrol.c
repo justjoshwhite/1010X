@@ -4,6 +4,7 @@
 #include "claw.h"
 #include "util.h"
 #include "lcdfunctions.h"
+#include "motor.h"
 
 void operatorControl() {
 
@@ -11,6 +12,9 @@ void operatorControl() {
 	TaskHandle opcontrollcd_task = taskCreate(opcontrollcd, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
 	TaskHandle claw_task = taskCreate (clawtask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
 	TaskHandle arm_task = taskCreate (armtask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+	TaskHandle motor_task = taskCreate(motortask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+
+	slewset(true, false, false, false);
 
 	while (true) {
 

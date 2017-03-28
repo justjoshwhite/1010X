@@ -14,4 +14,6 @@ void motorset_drive(int Lpower, int Rpower);
 float gyro_read(Gyro port, int multiplier);
 
 float pe_batt(int analogport);
+
+void slewset(bool t_slewcontrol, bool t_slewcontrol_drive, bool t_slewcontrol_arm, bool t_slewcontrol_claw);
 #endif

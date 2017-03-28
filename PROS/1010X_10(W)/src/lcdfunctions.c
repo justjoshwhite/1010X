@@ -5,7 +5,7 @@
 #include "ledfunctions.h"
 #include "util.h"
 #include "autofunctions.h"
-
+#include "motor.h"
 
 void disablelcd(void *ignore){
 
@@ -163,21 +163,23 @@ void opcontrollcd(void *ignore){
 
       case 3:
       lcdPrint(uart1, 1, "OP%d EnL: %d", screen, encoderGet(encoder_L));
-      lcdPrint(uart1, 2, "EnR: %d", encoderGet(encoder_R));
+      lcdPrint(uart1, 2, "EnR%d Sl%d", encoderGet(encoder_R), test_slew);
         if(lcdReadButtons(uart1) == 2){
             lcdClear(uart1);
             lcdSetText(uart1, 1, "wait");
             delay(btn_time);
             screen = screen + 1;}
         if(lcdReadButtons(uart1) == 1){
-          encoderReset(encoder_L);
-          encoderReset(encoder_R);
-          delay(50);
+          /*encoderReset(encoder_L);
+          encoderReset(encoder_R);*/
+          test_slew = 1+test_slew;
+          delay(100);
         }
         if(lcdReadButtons(uart1) == 4){
-          encoderReset(encoder_L);
-          encoderReset(encoder_R);
-          delay(50);
+          /*encoderReset(encoder_L);
+          encoderReset(encoder_R);*/
+          test_slew = test_slew-1;
+          delay(100);
         }
       break;
 
@@ -199,8 +201,8 @@ void opcontrollcd(void *ignore){
           }
 
       case 5:
-            lcdPrint(uart1, 1, "OP:%d Batt:%d", screen, powerLevelMain());
-            lcdPrint(uart1, 2, "");
+            lcdPrint(uart1, 1, "tar%d, port%d", motortarget[1], motorport[1]);
+            lcdPrint(uart1, 2, "pow%d err%d", motorpower[1], motorerror[1]);
               if(lcdReadButtons(uart1) == 2){
                   lcdClear(uart1);
                   lcdSetText(uart1, 1, "wait");

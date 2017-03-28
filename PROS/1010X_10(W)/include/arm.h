@@ -4,7 +4,8 @@
 #include "main.h"
 #include "pid.h"
 
-PID_terms pid_arm;
+PID_terms pidarm_auto;
+PID_terms pidarm_op;
 
 int arm_target_global;
 int arm_pos_global;

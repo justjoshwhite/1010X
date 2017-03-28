@@ -5,7 +5,8 @@
 
 void armtask (void*ignore){
 
-  PID_init(&pid_arm, 1.5, 0, 0, 0); // was 0.4
+  PID_init(&pidarm_auto, 1.5, 0, 0, 0); // was 0.4
+  PID_init(&pidarm_op, 1.5, 0, 0, 0);
   arm_target_global = encoderGet(encoder_ARM);
 
 //  test_armdown = 100;
@@ -47,7 +48,10 @@ void armtask (void*ignore){
   //if(!joystickGetDigital(1, 6, JOY_UP)||!joystickGetDigital(1, 6, JOY_DOWN)){
 
 else{
-   motorset_arm( PID_cal(&pid_arm, arm_target_global, arm_pos_global) );}
+     if(isAutonomous()){motorset_arm( PID_cal(&pidarm_auto, arm_target_global, arm_pos_global) );}
+     else{motorset_arm( PID_cal(&pidarm_op, arm_target_global, arm_pos_global) );}
+
+   }
 
     delay(20);
 

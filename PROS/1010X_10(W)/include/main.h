@@ -86,9 +86,11 @@ extern "C" {
 //globals
 
 int myauto;
+int gyro_offset;
 
 //test varibles
 int test_clawup;
+int test_slew;
 int test_clawdown;
 
 void autonomous();

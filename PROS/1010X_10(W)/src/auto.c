@@ -5,6 +5,7 @@
 #include "util.h"
 #include "claw.h"
 #include "arm.h"
+#include "motor.h"
 
 #define DUMP_HIEGHT 600
 void autonomous() {
@@ -12,6 +13,12 @@ void autonomous() {
   TaskHandle autolcd_task = taskCreate(autolcd, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
   TaskHandle claw_task = taskCreate(clawtask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
   TaskHandle arm_task = taskCreate(armtask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+  TaskHandle motor_task = taskCreate(motortask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+
+slewset(false, false, false, false);
+
+gyroReset(gyro);
+gyro_offset = 0; // must change in auto for differeent starting positions
 
 int motor_count= 1; // For motor test (auto -2)
 
