@@ -40,7 +40,7 @@ void nolag(int demo_tics, int demo_movepower, int demo_holdpower){
       powerR = hold_power;
       R_done = true;}
 
-      motorset_drive(powerL, powerR);
+      motorset_drive_auto(powerL, powerR);
       delay(20);
     }
   }
@@ -54,7 +54,7 @@ void lock_encoder(int timeout, float kp){
   while((millis()-starttime) < timeout){
     int errorL = encoderGet(encoder_L);
     int errorR = encoderGet(encoder_R);
-    motorset_drive(errorL*kp, -errorR*kp);
+    motorset_drive_auto(errorL*kp, -errorR*kp);
     delay(20);
   }
 }
@@ -76,7 +76,7 @@ void drive_encoder(int direction, int target, int timeout, int maxpower, int min
 
     net_time  = millis() - start_time;
 
-    encoderaverage = 1.23*abs(encoderGet(encoder_L))+abs(encoderGet(encoder_R)/2);
+    encoderaverage = abs(encoderGet(encoder_L))+abs(encoderGet(encoder_R)/2);
     int encoder_error = encoderGet(encoder_L) - encoderGet(encoder_R); //subtract from L side
 
     //accel/deaccel constants
@@ -87,14 +87,14 @@ void drive_encoder(int direction, int target, int timeout, int maxpower, int min
     else{
       boost = 1;}
 
-    int power_L = motorcap(minpower + boost*netpower) - (direction*encoder_error*kdrift_encoder)/2.5;
-    int power_R = motorcap(minpower + boost*netpower) + (direction*encoder_error*kdrift_encoder)/2.5;
-    motorset_drive(direction*power_L, direction*power_R);
+    int power_L = motorcap(minpower + boost*netpower) - (direction*encoder_error*kdrift_encoder);
+    int power_R = motorcap(minpower + boost*netpower) + (direction*encoder_error*kdrift_encoder);
+    motorset_drive_auto(direction*power_L, direction*power_R);
 
     delay(20);
     }
   //brake
-  motorset_drive(-direction*breakpower, -direction*breakpower);
+  motorset_drive_auto(-direction*breakpower, -direction*breakpower);
   }
 
 void drive_gyro(int direction, int target, int timeout, int maxpower, int minpower, float kdrift_gyro, float kaccel, float kdeaccel){
@@ -129,12 +129,12 @@ void drive_gyro(int direction, int target, int timeout, int maxpower, int minpow
 
     int power_L = motorcap(minpower + boost*netpower) + (direction*gyro_error*kdrift_gyro);
     int power_R = motorcap(minpower + boost*netpower) - (direction*gyro_error*kdrift_gyro);
-    motorset_drive(direction*power_L, direction*power_R);
+    motorset_drive_auto(direction*power_L, direction*power_R);
 
     delay(20);
     }
   //brake
-  motorset_drive(-direction*breakpower, -direction*breakpower);
+  motorset_drive_auto(-direction*breakpower, -direction*breakpower);
   }
 
 void drive_stop(int direction, int delta_trip, int maxpower, float kdrift_encoder, int timeout){
@@ -145,7 +145,7 @@ void drive_stop(int direction, int delta_trip, int maxpower, float kdrift_encode
   encoderReset(encoder_L);
   encoderReset(encoder_R);
 
-  motorset_drive(direction*maxpower, direction*maxpower);
+  motorset_drive_auto(direction*maxpower, direction*maxpower);
   delay(150);
 
   while(((abs(encoderGet(encoder_L)+encoderGet(encoder_R))/2) > delta_trip)&& (net_time < timeout)){
@@ -163,12 +163,12 @@ void drive_stop(int direction, int delta_trip, int maxpower, float kdrift_encode
     //int power_L = motorcap(ower) - direction*encoder_error*kdrift_encoder;
     //int power_R = motorcap(minpower + boost*netpower) + direction*encoder_error*kdrift_encoder;
 
-    motorset_drive(motorcap(direction*maxpower)-(encoder_error*kdrift_encoder), motorcap(direction*maxpower)+(encoder_error*kdrift_encoder));
+    motorset_drive_auto(motorcap(direction*maxpower)-(encoder_error*kdrift_encoder), motorcap(direction*maxpower)+(encoder_error*kdrift_encoder));
     }
 
-    motorset_drive(direction*maxpower, direction*maxpower);
+    motorset_drive_auto(direction*maxpower, direction*maxpower);
     delay(40);
-    motorset_drive(0, 0);
+    motorset_drive_auto(0, 0);
 
 
   }
@@ -210,10 +210,10 @@ void turn_gyro(int direction, int target, int timeout, int maxpower, int minpowe
         //int power_L = motorcap(minpower + boost*netpower) - gyro_error*kdrift_gyro;
         //int power_R = motorcap(minpower + boost*netpower) + gyro_error*kdrift_gyro;
 
-        motorset_drive(direction*power_L, -direction*power_R);
+        motorset_drive_auto(direction*power_L, -direction*power_R);
         delay(20);
         }
-    motorset_drive(-direction*breakpower, -direction*breakpower);
+    motorset_drive_auto(-direction*breakpower, -direction*breakpower);
 }
 
 //USE
@@ -240,7 +240,7 @@ void turn_time(int direction, int target, int error_range, int error_time, int p
       powerL = gyro_error*ktune*direction;
       powerR = -gyro_error*ktune*direction;}
 
-    motorset_drive(powerL, powerR);
+    motorset_drive_auto(powerL, powerR);
 
     if ((gyro_pos < target+error_range) && (gyro_pos > target-error_range)){
       net_time = millis() - start_time;}
@@ -250,7 +250,7 @@ void turn_time(int direction, int target, int error_range, int error_time, int p
 
     delay(20);
   }
-  motorset_drive(0, 0);
+  motorset_drive_auto(0, 0);
 }
 
 //20 dp
@@ -291,13 +291,13 @@ void turn_pid(int direction, int target, int maxpower, float kp, float ki, float
 
     int motor_power = (kpv+kiv+kdv);
 
-    motorset_drive(motor_power*direction, -motor_power*direction);// L, R
+    motorset_drive_auto(motor_power*direction, -motor_power*direction);// L, R
 
     delay(20);
 
     }
 
-  motorset_drive(brake_power*-direction, brake_power*direction);// L, R
+  motorset_drive_auto(brake_power*-direction, brake_power*direction);// L, R
 
   }
 
@@ -322,7 +322,7 @@ void turn_pid2(int direction, int target, int maxpower, float kp, float ki, floa
     net_time = millis() - start_time;
 
     lcdPrint(uart1, 1, "gyro:%f", gyro_read(gyro, 300));
-    int pos = abs(gyro_read(gyro, 300));
+    int pos = gyro_read(gyro, 300);
     int error = target - pos;
 
     error_diff = error - error_last;
@@ -338,13 +338,13 @@ void turn_pid2(int direction, int target, int maxpower, float kp, float ki, floa
 
     int motor_power = (kpv+kiv+kdv);
 
-    motorset_drive(motor_power*direction, -motor_power*direction);// L, R
+    motorset_drive_auto(motor_power*direction, -motor_power*direction);// L, R
 
     delay(20);
 
     }
 
-  motorset_drive(brake_power*-direction, brake_power*direction);// L, R
+  motorset_drive_auto(brake_power*-direction, brake_power*direction);// L, R
 
   }
 

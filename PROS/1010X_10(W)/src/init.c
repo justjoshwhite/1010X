@@ -3,7 +3,9 @@
 #include "ledfunctions.h"
 
 void initializeIO() {
-  ledinit();}
+  ledinit();
+  pinMode(gyro_reset, INPUT);
+}
 
 void initialize() {
 
@@ -14,15 +16,17 @@ void initialize() {
   lcdSetBacklight(uart1, 1);
 
   encoder_R = encoderInit(encoder_R_TOP, encoder_R_BOT, 1);
-  encoder_L = encoderInit(encoder_L_TOP, encoder_L_BOT, 1);
+  encoder_L = encoderInit(encoder_L_TOP, encoder_L_BOT, 0);
   encoder_ARM = encoderInit(encoder_ARM_TOP, encoder_ARM_BOT, 1);
   encoder_CLAW = encoderInit(encoder_CLAW_TOP, encoder_CLAW_BOT, 1);
 
   gyro =  gyroInit (gyroport, 300);
 
+
   lcdClear(uart1);
   lcdSetText(uart1, 1, "CALIBRATE:");
   lcdSetText(uart1, 2, "DO NOT MOVE");
+
 
   /*
   analogCalibrate (accel_x);

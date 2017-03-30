@@ -7,6 +7,20 @@
 #define CLOCKWISE 1
 #define COUNTERCLOCKWISE -1
 
+#define ARM_GROUND 0
+#define ARM_LOW 200
+#define ARM_PARALLEL 370
+#define ARM_45 670
+#define ARM_MAX 1100
+#define ARM_SKILLS_1 100 // Pushing off high fence
+
+#define CLAW_CLOSED 300
+#define CLAW_V 300 //semi closed
+#define CLAW_45 300
+#define CLAW_PARALLEL 350
+#define CLAW_MAX 0
+
+
 void nolag(int demo_tics, int demo_movepower, int demo_holdpower);
 
 void lock_encoder(int timeout, float kp);

@@ -47,7 +47,29 @@ void motorset_arm(int power){
 
   }
 
-void motorset_drive(int Lpower, int Rpower){
+void motorset_drive_auto(int Lpower, int Rpower){
+
+/*  motorSet(DriveBL, DriveBL_Dir*Lpower);
+  motorSet(DriveFL, DriveFL_Dir*Lpower);
+  motorSet(DriveBR, DriveBR_Dir*Rpower);
+  motorSet(DriveFR, DriveFR_Dir*Rpower);*/
+  int Ldirection;
+  int Rdirection;
+
+  if(Lpower < 0){Ldirection = -1;}
+    else{Ldirection = 1;}
+  if(Rpower < 0){Rdirection = -1;}
+    else{Rdirection = 1;}
+
+  motortarget[DriveBL-1] = Ldirection*DriveBL_Dir*abs(Lpower);
+  motortarget[DriveFL-1] = Ldirection*DriveFL_Dir*abs(Lpower);
+  motortarget[DriveBR-1] = Rdirection*DriveBR_Dir*abs(Rpower);
+  motortarget[DriveFR-1] = Rdirection*DriveFR_Dir*abs(Rpower);
+
+}
+
+
+void motorset_drive_op(int Lpower, int Rpower){
 
 /*  motorSet(DriveBL, DriveBL_Dir*Lpower);
   motorSet(DriveFL, DriveFL_Dir*Lpower);
@@ -67,6 +89,7 @@ void motorset_drive(int Lpower, int Rpower){
   motortarget[DriveFR-1] = Rdirection*DriveFR_Dir*originalTrueSpeed[abs(Rpower)];
 
 }
+
 
 float gyro_read(Gyro port, int multiplier){
   return gyroGet(port)+ gyro_offset;/**(1960/multiplier)*/;

@@ -9,7 +9,9 @@ void motorset_arm(int power);
 
 void motorset_claw(int power);
 
-void motorset_drive(int Lpower, int Rpower);
+void motorset_drive_auto(int Lpower, int Rpower);
+
+void motorset_drive_op(int Lpower, int Rpower);
 
 float gyro_read(Gyro port, int multiplier);
 

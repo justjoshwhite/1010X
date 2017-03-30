@@ -2,11 +2,15 @@
 #include "arm.h"
 #include "util.h"
 #include "pid.h"
+#include "autofunctions.h"
+
+#define ARM_UP 100
+#define ARM_DOWN 60
 
 void armtask (void*ignore){
 
-  PID_init(&pidarm_auto, 1.5, 0, 0, 0); // was 0.4
-  PID_init(&pidarm_op, 1.5, 0, 0, 0);
+  PID_init(&pidarm_auto, 0.8, 0, 0, 0); // was 0.4
+  PID_init(&pidarm_op, 0.8, 0, 0, 0);
   arm_target_global = encoderGet(encoder_ARM);
 
 //  test_armdown = 100;
@@ -17,15 +21,18 @@ void armtask (void*ignore){
 
     arm_pos_global = encoderGet(encoder_ARM);
 
+/*
     if(!isAutonomous() && joystickGetDigital(1, 6, JOY_UP)){
 
+      delay(40);
       motorset_arm(127);
-      arm_target_global = encoderGet(encoder_ARM)+16;} //was 150
+      arm_target_global = encoderGet(encoder_ARM)+ARM_UP;} //was 150
 
     else if(!isAutonomous() && joystickGetDigital(1, 6, JOY_DOWN)){
 
+      delay(40);
       motorset_arm(-127);
-      arm_target_global = encoderGet(encoder_ARM)-7;} //was 50
+      arm_target_global = encoderGet(encoder_ARM)-ARM_DOWN;} //was 50
 
 
     /*
@@ -43,7 +50,7 @@ void armtask (void*ignore){
       delay(ARM_DELAY);
       arm_target_global = encoderGet(encoder_ARM);
       }
-      */
+
 
   //if(!joystickGetDigital(1, 6, JOY_UP)||!joystickGetDigital(1, 6, JOY_DOWN)){
 
@@ -52,8 +59,25 @@ else{
      else{motorset_arm( PID_cal(&pidarm_op, arm_target_global, arm_pos_global) );}
 
    }
+*/
+
+if(joystickGetDigital(1, 6, JOY_UP)) {  arm_target_global = arm_target_global + 13;}
+if(joystickGetDigital(1, 6, JOY_DOWN)) { arm_target_global = arm_target_global- 13;}
+//if(joystickGetDigital(2, 6, JOY_UP)) {  arm_target_global = arm_target_global + 13;}
+//if(joystickGetDigital(2, 6, JOY_DOWN)) { arm_target_global = arm_target_global- 13;}
+
+if(arm_target_global < -15 ) {  arm_target_global  = -15; }
+if(arm_target_global > 657)  {  arm_target_global  = 657; }
+
+
+if(isAutonomous()){motorset_arm( PID_cal(&pidarm_auto, arm_target_global, arm_pos_global) );}
+else{motorset_arm( PID_cal(&pidarm_op, arm_target_global, arm_pos_global) );}
+
+
 
     delay(20);
+
+
 
     }
 

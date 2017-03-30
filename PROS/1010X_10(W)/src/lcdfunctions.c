@@ -18,6 +18,14 @@ void disablelcd(void *ignore){
   while(true){
     delay(25);
     joystick_connected(LED_1);
+
+    if(digitalRead(gyro_reset) == LOW){
+      gyroReset(gyro);
+      lcdClear(uart1);
+      lcdPrint(uart1, 1, "GYRO RESET");
+      delay(500);
+        }
+
     if(!isEnabled()){
       switch(screen){
 
@@ -134,6 +142,14 @@ void opcontrollcd(void *ignore){
 
   while(isEnabled()){
     delay(25);
+
+    if(digitalRead(gyro_reset) == LOW){
+      gyroReset(gyro);
+      lcdClear(uart1);
+      lcdPrint(uart1, 1, "GYRO RESET");
+      delay(500);
+        }
+
     switch(screen){
 
       case 1:
@@ -250,7 +266,7 @@ void autolcd(void *ignore){
         if(lcdReadButtons(uart1) == 1){
 
             //drive_encoder(1, 2000, 5000, 127, 60, kp_test, cont, 1-cont);
-            turn_pid(1, 130, 127, kp_test, 0, kd_test, 0, 5000);
+            turn_pid2(-1, 130, 127, kp_test, 0, kd_test, 0, 5000);
 
             }
         if(lcdReadButtons(uart1) == 4){/*action*/}

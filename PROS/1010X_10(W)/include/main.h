@@ -69,6 +69,7 @@ extern "C" {
   #define encoder_CLAW_TOP 11
   #define encoder_CLAW_BOT 12
 
+  #define gyro_reset 6
 //LED Ports
   #define LED_1 5
   #define LED_2 6
