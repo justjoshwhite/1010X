@@ -98,28 +98,28 @@ void disablelcd(void *ignore){
             lcdSetText(uart1, 2, "#0 WED Program");
           break;
           case 1:
-            lcdSetText(uart1, 2, "#1 Cube L");
+            lcdSetText(uart1, 2, "#1 Cube L 2M");
           break;
           case 2:
-            lcdSetText(uart1, 2, "#2 Cube R");
+            lcdSetText(uart1, 2, "#2 Cube L 2L");
           break;
           case 3:
-            lcdSetText(uart1, 2, "#3 Back L");
+            lcdSetText(uart1, 2, "#3 Cube L 2R");
           break;
           case 4:
-            lcdSetText(uart1, 2, "#4 Back R");
+            lcdSetText(uart1, 2, "#4 Cube R 2M");
           break;
           case 5:
-            lcdSetText(uart1, 2, "#5 Near L");
+            lcdSetText(uart1, 2, "#5 Cube R 2L");
           break;
           case 6:
-            lcdSetText(uart1, 2, "#6 Near R");
+            lcdSetText(uart1, 2, "#6 Cube R 2R");
           break;
           case 7:
-            lcdSetText(uart1, 2, "#7 C Block L");
+            lcdSetText(uart1, 2, "#7 Back L");
           break;
           case 8:
-            lcdSetText(uart1, 2, "#8 C Block R");
+            lcdSetText(uart1, 2, "#8 Back R");
           break;
           case 9:
             lcdSetText(uart1, 2, "#9 Nothing");

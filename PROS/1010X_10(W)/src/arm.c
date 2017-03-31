@@ -7,77 +7,38 @@
 #define ARM_UP 100
 #define ARM_DOWN 60
 
+#define MAX_POWER_ARM 30
 void armtask (void*ignore){
 
   PID_init(&pidarm_auto, 0.8, 0, 0, 0); // was 0.4
   PID_init(&pidarm_op, 0.8, 0, 0, 0);
   arm_target_global = encoderGet(encoder_ARM);
 
-//  test_armdown = 100;
-//  test_armup = 100;
-
   while(true){
     if(!isEnabled()){break;}
 
+    int arm_pos_last = arm_pos_global;
     arm_pos_global = encoderGet(encoder_ARM);
+    int arm_vel = abs(arm_pos_global - arm_pos_last);
 
-/*
-    if(!isAutonomous() && joystickGetDigital(1, 6, JOY_UP)){
-
-      delay(40);
-      motorset_arm(127);
-      arm_target_global = encoderGet(encoder_ARM)+ARM_UP;} //was 150
-
-    else if(!isAutonomous() && joystickGetDigital(1, 6, JOY_DOWN)){
-
-      delay(40);
-      motorset_arm(-127);
-      arm_target_global = encoderGet(encoder_ARM)-ARM_DOWN;} //was 50
-
-
-    /*
-    if(!isAutonomous() && (joystickGetDigital(1, 6, JOY_UP)||joystickGetDigital(1, 6, JOY_DOWN)))
-      {
-      while(joystickGetDigital(1, 6, JOY_UP)){
-          motorset_arm(127);
-          delay(20);}
-
-      while(joystickGetDigital(1, 6, JOY_DOWN)){
-          motorset_arm(-127);
-          delay(20);}
-
-      motorset_arm(0);
-      delay(ARM_DELAY);
-      arm_target_global = encoderGet(encoder_ARM);
-      }
-
-
-  //if(!joystickGetDigital(1, 6, JOY_UP)||!joystickGetDigital(1, 6, JOY_DOWN)){
-
-else{
-     if(isAutonomous()){motorset_arm( PID_cal(&pidarm_auto, arm_target_global, arm_pos_global) );}
-     else{motorset_arm( PID_cal(&pidarm_op, arm_target_global, arm_pos_global) );}
-
-   }
-*/
-
-if(joystickGetDigital(1, 6, JOY_UP)) {  arm_target_global = arm_target_global + 13;}
-if(joystickGetDigital(1, 6, JOY_DOWN)) { arm_target_global = arm_target_global- 13;}
+if(joystickGetDigital(1, 6, JOY_UP)){  arm_target_global = arm_target_global + 12;}
+else if(joystickGetDigital(1, 6, JOY_DOWN)) { arm_target_global = arm_target_global- 12;}
 //if(joystickGetDigital(2, 6, JOY_UP)) {  arm_target_global = arm_target_global + 13;}
 //if(joystickGetDigital(2, 6, JOY_DOWN)) { arm_target_global = arm_target_global- 13;}
+else if((((arm_target_global-arm_pos_global)) > (MAX_POWER_ARM/0.8))&&!isAutonomous()){
+  arm_target_global = arm_pos_global + (MAX_POWER_ARM/0.8);}
+else if((((arm_target_global-arm_pos_global)) < -(MAX_POWER_ARM/0.8))&&!isAutonomous()){
+  arm_target_global = arm_pos_global - (MAX_POWER_ARM/0.8);}
 
-if(arm_target_global < -15 ) {  arm_target_global  = -15; }
+if(arm_target_global < -22 ) {  arm_target_global  = -22; }
 if(arm_target_global > 657)  {  arm_target_global  = 657; }
+
 
 
 if(isAutonomous()){motorset_arm( PID_cal(&pidarm_auto, arm_target_global, arm_pos_global) );}
 else{motorset_arm( PID_cal(&pidarm_op, arm_target_global, arm_pos_global) );}
 
-
-
     delay(20);
-
-
 
     }
 

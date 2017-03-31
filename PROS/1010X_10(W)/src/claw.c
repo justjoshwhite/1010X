@@ -8,6 +8,7 @@
 #define CLAW_OPEN 50
 #define CLAW_CLOSED 50
 
+#define MAX_POWER_CLAW 25 // was 20
 void clawtask(void*ignore){
 
     PID_init(&pid_claw, 0.5, 0, 0, 0); // was 2
@@ -27,7 +28,7 @@ while(true){
 
   claw_pos_global = encoderGet(encoder_CLAW);
 
-
+/*
   if(joystickGetDigital(1, 5, JOY_UP)){//main up
 
       //delay(40);
@@ -88,13 +89,21 @@ else if(c_release){
       //motorSet(ClawR, ClawL_Dir*( PID_cal(&pid_claw_R, claw_target_global_R, claw_pos_global_R)));
       }
 
+*/
 
 
+       // code for new p controoller = need velcontorl
+if(joystickGetDigital(1, 5, JOY_UP)) {  claw_target_global = claw_target_global + 18;}
+else if(joystickGetDigital(1, 5, JOY_DOWN)) { claw_target_global = claw_target_global- 18;} // was 13
+else if(joystickGetDigital(2, 6, JOY_UP)) {  claw_target_global = claw_target_global + 18;}
+else if(joystickGetDigital(2, 6, JOY_DOWN)) { claw_target_global = claw_target_global- 18;}
 
-      /* // code for new p controoller = need velcontorl
-if(joystickGetDigital(1, 5, JOY_UP)) {  claw_target_global = claw_target_global + 15;}
-if(joystickGetDigital(1, 5, JOY_DOWN)) { claw_target_global = claw_target_global- 15;}
 //to be tested below
+else if(((claw_target_global-claw_pos_global)> (MAX_POWER_CLAW/0.5))&&!isAutonomous()){
+  claw_target_global = claw_pos_global + (MAX_POWER_CLAW/0.5);}
+else if((((claw_target_global-claw_pos_global)) < -(MAX_POWER_CLAW/0.5))&&!isAutonomous()){
+  claw_target_global = claw_pos_global - (MAX_POWER_CLAW/0.5);}
+
 else if(c_release){
 
   c_release_start_time = millis();
@@ -117,12 +126,7 @@ else if(c_release){
     c_release = false;
     }
 
-    if(arm_target_global < -15 ) {  arm_target_global  = -15; }
-    if(arm_target_global > 0)  {  arm_target_global  = 0; }
-
-motorset_claw(PID_cal(&pid_claw, claw_target_global, claw_pos_global));
-
-*/
+    motorset_claw(PID_cal(&pid_claw, claw_target_global, claw_pos_global));
 
       delay(20);
       }
