@@ -126,6 +126,8 @@ else if(c_release){
     c_release = false;
     }
 
+    if((claw_target_global > -60 )&&(!isAutonomous())) {  claw_target_global  = -60; }
+
     motorset_claw(PID_cal(&pid_claw, claw_target_global, claw_pos_global));
 
       delay(20);

@@ -57,9 +57,9 @@ drive_encoder(-1, 1000, 4000, 127, 60, 4, 0, 0.2);
 claw_target_global = -300;
 delay(1000);
 drive_encoder(1, 400, 4000, 127, 60, 4, 0, 0.2);
-claw_target_global = -90;
+claw_target_global = -120;
 delay(1000);
-
+//dump1
 arm_target_global = 660;
   claw_release2(420, -400, 5000);// 350
   drive_stop(-1, 0, 127, 2, 1500);
@@ -67,9 +67,10 @@ delay(1000);
 arm_target_global = 0;
 delay(1000);
 drive_encoder(1, 1000, 4000, 127, 60, 4, 0, 0);
-claw_target_global = -90;
+claw_target_global = -120;
 delay(1000);
 
+//dump2
 arm_target_global = 660;
   claw_release2(420, -400, 5000);// 350
   drive_stop(-1, 0, 127, 2, 1500);
@@ -79,8 +80,10 @@ delay(1000);
 arm_target_global = 0;
 delay(1000);
 drive_encoder(1, 1000, 4000, 127, 60, 2, 0, 0);
-claw_target_global = -90;
+claw_target_global = -120;
 delay(1000);
+
+//dump3
 arm_target_global = 660;
   claw_release2(420, -400, 5000);// 350
   drive_stop(-1, 0, 127, 2, 1500);
@@ -89,8 +92,10 @@ arm_target_global = 660;
   arm_target_global = 0;
   delay(1000);
   drive_encoder(1, 1000, 4000, 127, 60, 2, 0, 0);
-  claw_target_global = -90;
+  claw_target_global = -120;
   delay(1000);
+
+  //dump4
   arm_target_global = 660;
     claw_release2(420, -400, 5000);// 350
     drive_stop(-1, 0, 127, 2, 1500);
@@ -98,9 +103,15 @@ arm_target_global = 660;
     delay(1000);
     arm_target_global = 0;
     delay(1000);
+
+    /////
+
+    turn_pid2(-1, -140, 127, 1.5, 0, 20.2, 0, 1300); // was 800/-25
     drive_encoder(1, 1000, 4000, 127, 60, 2, 0, 0);
-    claw_target_global = -90;
+    claw_target_global = -120;
     delay(1000);
+    arm_target_global = 250;
+  turn_pid2(-1, 0, 127, 1.5, 0, 20.2, 0, 1300); // was 800/-25
     arm_target_global = 660;
       claw_release2(420, -400, 5000);// 350
       drive_stop(-1, 0, 127, 2, 1500);
@@ -109,32 +120,44 @@ arm_target_global = 660;
       arm_target_global = 0;
       delay(1000);
       drive_encoder(1, 1000, 4000, 127, 60, 2, 0, 0);
-      claw_target_global = -90;
+      claw_target_global = -120;
       delay(1000);
       arm_target_global = 660;
         claw_release2(420, -400, 5000);// 350
         drive_stop(-1, 0, 127, 2, 1500);
 
+        delay(1000);
+        arm_target_global = 0;
+        delay(1000);
+        drive_encoder(1, 1000, 4000, 127, 60, 2, 0, 0);
+        claw_target_global = -120;
+        delay(1000);
+        arm_target_global = 660;
+          claw_release2(420, -400, 5000);// 350
+          drive_stop(-1, 0, 127, 2, 1500);
+
 
 break;
 case 1: // AUTO 1 - CUBE LEFT 2 M
   delay(5);
-  claw_target_global = -250;
-  delay(300); // was 200
-  drive_encoder(1, 640, 1000, 127, 60, 2, 0, 0); // was 900 // was 800 //w as 720 // 660
-  claw_target_global = -90;
-  delay(250); // was 400
+  claw_target_global = -340;
+  delay(185); // was 200 // was 300 // was 280
+  drive_encoder(1, 700, 1000, 127, 60, 2, 0, 0); // was 900 // was 800 //w as 720 // 660
+  delay(100);
+  claw_target_global = -120;
+  delay(350); // was 400
   arm_target_global = 400;
   turn_pid2(-1, -5, 127, 1.5, 0, 20.2, 0, 700); // was 800/-25
-arm_target_global = 660;
+  arm_target_global = 660;
   claw_release2(420, -400, 5000);// 350
   drive_stop(-1, 0, 127, 2, 1500); // was 10 // 12.5 // 14
   //drive_encoder(-1, 1500, 3000, 127, 60, 10, 0, 0.3);// was 1200
-  delay(4500);// was 1400 // was 1000 // was 800
+  delay(4000);// was 1400 // was 1000 // was 800
 arm_target_global = 0;
+claw_target_global = -500;
 delay(1000);
-turn_pid2(-1, -10, 127, 1.5, 0, 20.2, 0, 1000);
-drive_encoder(1, 1100, 1000, 127, 60, 2, 0, 0);
+turn_pid2(-1, -10, 127, 1.5, 0, 20.2, 0, 800);
+drive_encoder(1, 1200, 1000, 127, 60, 2, 0, 0);
 claw_target_global = -100;
 delay(1000);
 arm_target_global = 660;
@@ -144,37 +167,70 @@ arm_target_global = 660;
 
 break;
 
-case 2: // CUBE L 2L
+case 2: // Near L
+  delay(5);
+  claw_target_global = -300;
+  drive_encoder(-1, 450, 1000, 127, 60, 2, 0, 0);
+  delay(3500);// was 500
+  drive_encoder(1, 900, 1000, 127, 60, 2, 0, 0);
+  claw_target_global = -80;
+  delay(1000);
+  arm_target_global = 380;
+  drive_encoder(-1, 75, 1000, 127, 60, 2, 0, 0);
+  turn_pid2(-1, 20, 127, 1.5, 0, 20.2, 0, 1300);
+      claw_release2(420, -400, 5000); // was 350
+        drive_stop(-1, 0, 127, 2, 1700);
+        arm_target_global = 660;
+        delay(2000);
+
 
 break;
 
-case 3:// Cube L 2R
+case 3:// NEar R
+delay(5);
+claw_target_global = -300;
+drive_encoder(-1, 450, 1000, 127, 60, 2, 0, 0);
+delay(3500); // was 500
+drive_encoder(1, 900, 1000, 127, 60, 2, 0, 0);
+claw_target_global = -80;
+delay(1000);
+arm_target_global = 380;
+drive_encoder(-1, 75, 1000, 127, 60, 2, 0, 0);
+turn_pid2(-1, -20, 127, 1.5, 0, 20.2, 0, 1300);
+    claw_release2(420, -400, 5000); // was 350
+      drive_stop(-1, 0, 127, 2, 1700);
+      arm_target_global = 660;
+      delay(2000);
+
 break;
 
 case 4: // Cube R 2M
 
 delay(5);
-claw_target_global = -250;
-delay(150); // was 200
-drive_encoder(1, 660, 1000, 127, 60, 2, 0, 0); // was 900 // was 800 //w as 720
-claw_target_global = -90;
-delay(250); // was 400
+claw_target_global = -340;
+delay(185); // was 200 // was 300
+drive_encoder(1, 700, 1000, 127, 60, 2, 0, 0); // was 900 // was 800 //w as 720 // 660
+delay(100);
+claw_target_global = -120;
+delay(350); // was 400
 arm_target_global = 400;
-turn_pid2(1, -5, 127, 1.5, 0, 20.2, 0, 700); // was 800/-25
+turn_pid2(-1, 5, 127, 1.5, 0, 20.2, 0, 700); // was 800/-25
 arm_target_global = 660;
 claw_release2(420, -400, 5000);// 350
 drive_stop(-1, 0, 127, 2, 1500); // was 10 // 12.5 // 14
 //drive_encoder(-1, 1500, 3000, 127, 60, 10, 0, 0.3);// was 1200
-delay(7000);// was 1400 // was 1000 // was 800
+delay(4000);// was 1400 // was 1000 // was 800
 arm_target_global = 0;
+claw_target_global = -500;
 delay(1000);
-turn_pid2(1, 0, 127, 1.5, 0, 20.2, 0, 1000);
-drive_encoder(1, 900, 1000, 127, 60, 2, 0, 0);
+turn_pid2(-1, 10, 127, 1.5, 0, 20.2, 0, 800);
+drive_encoder(1, 1200, 1000, 127, 60, 2, 0, 0);
 claw_target_global = -100;
 delay(1000);
 arm_target_global = 660;
 claw_release2(420, -400, 5000); // was 350
 drive_stop(-1, 0, 127, 2, 2000);
+
 
 break;
 
@@ -188,27 +244,28 @@ break;
 case 7: // Back L
 //Back L
 delay(5);
-claw_target_global = -300;
+claw_target_global = -250;
+drive_encoder(-1, 140, 1000, 127, 60, 2, 0, 0.3);
 delay(1000);
 
-drive_encoder(1, 2000, 4000, 127, 60, 2, 0, 0.3);// was 1800 // was 2300
-claw_target_global = -90;
+drive_encoder(1, 1800, 4000, 127, 60, 3, 0, 0.3);// was 1800 // was 2300
+claw_target_global = -120;
 delay(700);
 arm_target_global = 260; // was 70
 delay(700);
-drive_encoder(-1, 1650, 4000, 127, 60, 2, 0, 0.3); // was 1350 // was 1650
+drive_encoder(-1, 1500, 4000, 127, 60, 2, 0, 0.3); // was 1350 // was 1650
 delay(150);
 //turn to dump
-turn_pid2(-1, 0, 127, 6.2, 0, 46, 0, 1300); // was 7 // was 135
+turn_pid2(-1, -10, 127, 1.5, 0, 20.2, 0, 1300); // was 7 // was 135
 delay(100);// was 1000
 
   // dump 1
-  arm_target_global = 660;
   claw_release2(500, -400, 5000);
-  delay(130);//adjust for fence timing // was 100
-  drive_stop(-1, 0, 127, 2, 3000); // was 10 // 12.5 // 14 // timeout was 3500
+  //delay(130);//adjust for fence timing // was 100
+  drive_stop(-1, 0, 127, 2, 2000); // was 10 // 12.5 // 14 // timeout was 3500
   //drive_encoder(-1, 1500, 3000, 127, 60, 10, 0, 0.3);// was 1200
-  delay(800);// was 1400
+  arm_target_global = 660;
+  delay(2000);// was 1400
 
 
 
@@ -216,6 +273,34 @@ delay(100);// was 1000
 
 break;
 case 8: // Back R
+
+delay(5);
+claw_target_global = -250;
+drive_encoder(-1, 140, 1000, 127, 60, 2, 0, 0.3);
+delay(1000);
+
+drive_encoder(1, 1800, 4000, 127, 60, 3, 0, 0.3);// was 1800 // was 2300
+claw_target_global = -120;
+delay(700);
+arm_target_global = 260; // was 70
+delay(700);
+drive_encoder(-1, 1500, 4000, 127, 60, 2, 0, 0.3); // was 1350 // was 1650
+delay(150);
+//turn to dump
+turn_pid2(-1, 10, 127, 1.5, 0, 20.2, 0, 1300); // was 7 // was 135
+delay(100);// was 1000
+
+  // dump 1
+  claw_release2(500, -400, 5000);
+  //delay(130);//adjust for fence timing // was 100
+  drive_stop(-1, 0, 127, 2, 2000); // was 10 // 12.5 // 14 // timeout was 3500
+  //drive_encoder(-1, 1500, 3000, 127, 60, 10, 0, 0.3);// was 1200
+  arm_target_global = 660;
+  delay(2000);// was 1400
+
+
+
+
 
 break;
 case 9: // do nothing
