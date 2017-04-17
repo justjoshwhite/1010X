@@ -18,11 +18,11 @@ void initialize() {
   lcdSetBacklight(uart1, 1);
 
   encoder_R = encoderInit(encoder_R_TOP, encoder_R_BOT, 1);
-  encoder_L = encoderInit(encoder_L_TOP, encoder_L_BOT, 1);
+  encoder_L = encoderInit(encoder_L_TOP, encoder_L_BOT, 0);
   encoder_ARM = encoderInit(encoder_ARM_TOP, encoder_ARM_BOT, 0);
   encoder_CLAW = encoderInit(encoder_CLAW_TOP, encoder_CLAW_BOT, 1);
 
-  gyro =  gyroInit (gyroport, 300);
+  gyro =  gyroInit (gyroport, 196);
 
 
   lcdClear(uart1);

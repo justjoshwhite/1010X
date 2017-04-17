@@ -3,9 +3,9 @@
 #include "util.h"
 
 
-#define SLEW_STEP_DRIVE 18
-#define SLEW_STEP_CLAW 18
-#define SLEW_STEP_ARM 18
+#define SLEW_STEP_DRIVE 4.25 // 17
+#define SLEW_STEP_CLAW 4 // 16
+#define SLEW_STEP_ARM 4.5 // 18
 
 int motortarget[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 int motorerror[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -15,10 +15,10 @@ int motorport[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 void motortask(void*ignore){
 int islew;
 int in;
-int slew_step = 16;
+int slew_step = 4;
 
 while (true){
-  delay(20);
+  delay(5); // was 20
   if(!isEnabled()){break;}
 
 

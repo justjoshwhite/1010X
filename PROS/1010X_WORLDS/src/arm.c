@@ -34,7 +34,8 @@ else if((((arm_target_global-arm_pos_global)) > (MAX_POWER_ARM/0.8))&&!isAutonom
 else if((((arm_target_global-arm_pos_global)) < -(MAX_POWER_ARM/0.8))&&!isAutonomous()){
   arm_target_global = arm_pos_global - (MAX_POWER_ARM/0.8);}
 
-if(arm_target_global < -22 ) {  arm_target_global  = -22; }
+if((arm_target_global < -30 )&&(!joystickGetDigital(1, 7, JOY_DOWN))) {  arm_target_global  = -30; }
+else if((arm_target_global< -150)){  arm_target_global = -150;}
 if(arm_target_global > 657)  {  arm_target_global  = 657; }
 
 
@@ -51,9 +52,8 @@ else{motorset_arm( PID_cal(&pidarm_op, arm_target_global, arm_pos_global) );}
   }
 
 void armpresets(){
-  if(joystickGetDigital(1,8,JOY_UP)){arm_target_global = ARM_SKILLS_1;}
-    else if(joystickGetDigital(1,8,JOY_DOWN)){arm_target_global = ARM_GROUND;}
-    //else if (joystickGetDigital(1,8,JOY_LEFT)){arm_target_global = ARM_LOW;}
+  if(joystickGetDigital(1,8,JOY_UP)){arm_target_global = 520;}
+    else if(joystickGetDigital(1,8,JOY_DOWN)){arm_target_global = -30;}
+    else if (joystickGetDigital(1,8,JOY_LEFT)){arm_target_global = 175;}
     //else if(joystickGetDigital(1,8,JOY_RIGHT)){arm_target_global = ARM_PARALLEL;}
-    else{}
   }

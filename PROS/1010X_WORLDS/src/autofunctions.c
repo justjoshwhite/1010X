@@ -63,7 +63,7 @@ void drive_encoder(int direction, int target, int timeout, int maxpower, int min
 
   int netpower = maxpower - minpower;
   float boost;
-  int breakpower = 13;
+  int breakpower = 0; // was 13
 
   encoderReset(encoder_L);
   encoderReset(encoder_R);
@@ -348,7 +348,7 @@ void turn_pid2(int direction, int target, int maxpower, float kp, float ki, floa
 
   }
 
-
+// use 3.5 =kp and 30 = kd
 
 ////////////////////////////////////////////////
 

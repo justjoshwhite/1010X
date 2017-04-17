@@ -8,7 +8,7 @@
 #define CLAW_OPEN 50
 #define CLAW_CLOSED 50
 
-#define MAX_POWER_CLAW 25 // was 20
+#define MAX_POWER_CLAW 30 // was 20 // was 25
 void clawtask(void*ignore){
 
     PID_init(&pid_claw, 0.5, 0, 0, 0); // was 2
@@ -91,7 +91,7 @@ else if(c_release){
 
 */
 
-
+////////////////////////////////////////////////////////////////////////
        // code for new p controoller = need velcontorl
 if(joystickGetDigital(1, 5, JOY_UP)) {  claw_target_global = claw_target_global + 18;}
 else if(joystickGetDigital(1, 5, JOY_DOWN)) { claw_target_global = claw_target_global- 18;} // was 13
@@ -126,8 +126,9 @@ else if(c_release){
     c_release = false;
     }
 
-    //if((claw_target_global > -60 )&&(!isAutonomous())) {  claw_target_global  = -60; } // out for new bot:
+    if((claw_target_global > 20 )&&(!isAutonomous())) {  claw_target_global  = 20; } // out for new bot:
     // global max
+    
     motorset_claw(PID_cal(&pid_claw, claw_target_global, claw_pos_global));
 
       delay(20);
@@ -139,13 +140,13 @@ else if(c_release){
 
 void clawpresets(){
 
-    if(joystickGetDigital(1,7,JOY_UP)){claw_target_global = CLAW_PARALLEL;}
-    else if(joystickGetDigital(1,7,JOY_DOWN)){claw_target_global = CLAW_MAX;}
+  //  if(joystickGetDigital(1,7,JOY_UP)){claw_target_global = CLAW_PARALLEL;}
+  //  else if(joystickGetDigital(1,7,JOY_DOWN)){claw_target_global = CLAW_MAX;}
   //  else if(joystickGetDigital(1,7,JOY_LEFT)){claw_target_global = CLAW_45;}
   //  else if(joystickGetDigital(1,7,JOY_RIGHT)){claw_target_global = CLAW_PARALLEL;}
 
-    else if (joystickGetDigital(2,7,JOY_UP)){claw_target_global = CLAW_PARALLEL;}
-    else if(joystickGetDigital(2,7,JOY_DOWN)){claw_target_global = CLAW_MAX;}
+    if(joystickGetDigital(2,8,JOY_DOWN)){claw_target_global = -200;}
+    //else if(joystickGetDigital(2,7,JOY_DOWN)){claw_target_global = CLAW_MAX;}
   //  else if(joystickGetDigital(2,7,JOY_LEFT)){claw_target_global = CLAW_PARALLEL;}
   //  else if(joystickGetDigital(2,7,JOY_RIGHT)){claw_target_global = CLAW_45;}
 

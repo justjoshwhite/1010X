@@ -24,12 +24,15 @@ void operatorControl() {
 
 		motorset_drive_op(motorcap((joystickGetAnalog(1, 3)+joystickGetAnalog(1, 4))), motorcap(joystickGetAnalog(1,3)-joystickGetAnalog(1,4)));
 
-		//armpresets();
-		//clawpresets();
-
+		armpresets();
+		clawpresets();
+		/*
 		if(joystickGetDigital(1, 7, JOY_DOWN)){motorSet(10, -127);}
 		else if(joystickGetDigital(1, 7, JOY_UP)){motorSet(10, 127);}
 		else{motorSet(10, 0);}
+		*/
+
+
 
 		//motorSet(10, joystickGetAnalog(1, 2));
 		//motorSet(10, -joystickGetAnalog(1, 4));
