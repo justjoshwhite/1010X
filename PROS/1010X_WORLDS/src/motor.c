@@ -3,7 +3,7 @@
 #include "util.h"
 
 
-#define SLEW_STEP_DRIVE 4.25 // 17
+#define SLEW_STEP_DRIVE 5 // 17 // 4.25
 #define SLEW_STEP_CLAW 4 // 16
 #define SLEW_STEP_ARM 4.5 // 18
 

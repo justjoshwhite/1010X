@@ -144,7 +144,7 @@ drive_encoder(-1, 300, 4000, 127, 60, 0.1, 0, 0);
       claw_target_global = -80;
       delay(700);
       arm_target_global = 260;
-      drive_encoder(-1, 400, 4000, 127, 60, 0.1, 0, 0);
+      drive_encoder(-1, 300, 4000, 127, 60, 0.1, 0, 0); // was 400
     turn_pid2(-1, 0, 127, 3.5, 0, 30.2, 0, 1300); // was 800/-25
       arm_target_global = 500;
       delay(500);
@@ -169,7 +169,7 @@ drive_encoder(-1, 300, 4000, 127, 60, 0.1, 0, 0);
 
     drive_encoder(1, 200, 2000, 127, 60, 0.1, 0, 0);
     turn_pid2(-1,-92, 127, 3.5, 0, 30, 0, 1300); // was 800/-25
-    drive_encoder(1, 2200, 2000, 127, 60, 0.1, 0, 0);
+    drive_encoder(1, 2300, 2000, 127, 60, 0.1, 0, 0); // was 2200
     turn_pid2(-1, -3, 127, 3.5, 0, 30, 0, 1300); // was 800/-25
     claw_target_global = -475;
     delay(700);
@@ -205,13 +205,13 @@ drive_encoder(-1, 300, 4000, 127, 60, 0.1, 0, 0);
 break;
 case 1: // AUTO 1 - CUBE LEFT 2 M
   delay(1);
-  claw_target_global = -300;
-  delay(300); // was 200 // was 300 // was 400 WORKDING2
+  claw_target_global = -390;
+  delay(425); // was 200 // was 300 // was 400 WORKDING2
   drive_encoder(1, 660, 1000, 127, 60, 0.1, 0, 0); // was 900 // was 800 //w as 720 // 660 // was 550
   claw_target_global = -20;
   delay(300); //was 500 !!!
   arm_target_global = 180;
-  turn_pid2(-1, 0, 127, 3.5, 0, 30, 0, 700); // was 800/-25 // was 900 WORKING1 // 800 (WORKING !!!)
+  turn_pid2(-1, 0, 127, 3.5, 0, 30, 0, 750); // was 800/-25 // was 900 WORKING1 // 800 (WORKING !!!)
   arm_target_global = 500;
   claw_release2(350, -350, 5000);// 350
 
@@ -222,9 +222,9 @@ case 1: // AUTO 1 - CUBE LEFT 2 M
   arm_target_global = -10;
   claw_target_global = -460;
   delay(600); // was 1000 // was 700
-  turn_pid2(-1, -15, 127, 3.5, 0, 30, 0, 600);
+  turn_pid2(-1, -25, 127, 3.5, 0, 30, 0, 600);
   claw_target_global = -460;
-  drive_encoder(1, 1050, 1000, 127, 60, 0.1, 0, 0);
+  drive_encoder(1, 880, 1000, 127, 60, 0.1, 0, 0);
   claw_target_global = -60;
   delay(800); // was 1000
   /* // two grabs
@@ -242,11 +242,11 @@ case 1: // AUTO 1 - CUBE LEFT 2 M
 
   delay(550);// was 1400 // was 1000
   arm_target_global = -10;
-  claw_target_global = -420;
+  claw_target_global = -390;
   delay(800); // was 1000
   turn_pid2(-1, -64, 127, 3.5, 0, 30, 0, 800);
-  claw_target_global = -460;
-  drive_encoder(1, 2300, 1000, 127, 60, 0.1, 0, 0);
+  claw_target_global = -390;
+  drive_encoder(1, 2200, 2000, 127, 60, 0, 0, 0);
   claw_target_global = -60;
   delay(1000);
   drive_encoder(-1, 350, 1000, 127, 60, 0.1, 0, 0);
@@ -331,26 +331,26 @@ break;
 
 case 4: // Cube R 2M
   delay(1);
-  claw_target_global = -300;
-  delay(300); // was 200 // was 300 // was 400 WORKDING2
+  claw_target_global = -390;
+  delay(425); // was 200 // was 300 // was 400 WORKDING2
   drive_encoder(1, 660, 1000, 127, 60, 0.1, 0, 0); // was 900 // was 800 //w as 720 // 660 // was 550
   claw_target_global = -20;
   delay(300); //was 500 !!!
   arm_target_global = 180;
-  turn_pid2(-1, 0, 127, 3.5, 0, 30, 0, 700); // was 800/-25 // was 900 WORKING1 // 800 (WORKING !!!)
+  turn_pid2(-1, 0, 127, 3.5, 0, 30, 0, 800); // was 800/-25 // was 900 WORKING1 // 800 (WORKING !!!)
   arm_target_global = 500;
   claw_release2(350, -350, 5000);// 350
 
-  drive_stop(-1, 0, 127, 0.1, 1300); //was 10 // 12.5 // 14
+  drive_stop(-1, 0, 127, 0.1, 1000); //was 10 // 12.5 // 14
   //drive_encoder(-1, 1200, 1000, 127, 60, 1, 0, 0);// was 1200
 
   delay(700);// was 1400 // was 1000
   arm_target_global = -10;
   claw_target_global = -460;
   delay(600); // was 1000 // was 700
-  turn_pid2(-1, 15, 127, 3.5, 0, 30, 0, 600);
+  turn_pid2(-1, 22, 127, 3.5, 0, 30, 0, 1100);
   claw_target_global = -460;
-  drive_encoder(1, 1050, 1000, 127, 60, 0.1, 0, 0);
+  drive_encoder(1, 800, 1000, 127, 60, 0.1, 0, 0);
   claw_target_global = -60;
   delay(800); // was 1000
   /* // two grabs
@@ -371,8 +371,8 @@ case 4: // Cube R 2M
   claw_target_global = -420;
   delay(800); // was 1000
   turn_pid2(-1, 64, 127, 3.5, 0, 30, 0, 800);
-  claw_target_global = -460;
-  drive_encoder(1, 2300, 1000, 127, 60, 0.1, 0, 0);
+  claw_target_global = -390;
+  drive_encoder(1, 2200, 2100, 127, 60, 0.0, 0, 0);
   claw_target_global = -60;
   delay(1000);
   drive_encoder(-1, 350, 1000, 127, 60, 0.1, 0, 0);
@@ -396,15 +396,154 @@ case 4: // Cube R 2M
 
 break;
 
-case 5:  // Cube R 2L
+case 5:  // MOD R..//
+
+delay(1);
+claw_target_global = -390;
+delay(425); // was 200 // was 300 // was 400 WORKDING2
+drive_encoder(1, 660, 1000, 127, 60, 0.1, 0, 0); // was 900 // was 800 //w as 720 // 660 // was 550
+claw_target_global = -20;
+delay(300); //was 500 !!!
+arm_target_global = 180;
+turn_pid2(-1, 0, 127, 3.5, 0, 30, 0, 800); // was 800/-25 // was 900 WORKING1 // 800 (WORKING !!!)
+arm_target_global = 500;
+claw_release2(350, -350, 5000);// 350
+
+drive_stop(-1, 0, 127, 0.1, 1000); //was 10 // 12.5 // 14
+//drive_encoder(-1, 1200, 1000, 127, 60, 1, 0, 0);// was 1200
+
+delay(5600);// was 1400 // was 1000
+
+/*
+arm_target_global = -10;
+claw_target_global = -460;
+delay(600); // was 1000 // was 700
+turn_pid2(-1, 22, 127, 3.5, 0, 30, 0, 1100);
+claw_target_global = -460;
+drive_encoder(1, 800, 1000, 127, 60, 0.1, 0, 0);
+claw_target_global = -60;
+delay(800); // was 1000
+/* // two grabs
+drive_encoder(-1, 400, 1000, 127, 60, 0.1, 0, 0);
+claw_target_global = -460;
+delay(850); // was 700
+drive_encoder(1, 350, 1000, 127, 60, 0.1, 0, 0);
+claw_target_global = -70;
+delay(800); // was 700
+
+arm_target_global = 500;
+claw_release2(320, -330, 5000); // was 350
+drive_stop(-1, 0, 127, 0.1, 1500);
+
+
+delay(550);// was 1400 // was 1000
+*/
+
+arm_target_global = -10;
+claw_target_global = -420;
+delay(800); // was 1000
+turn_pid2(-1, 64, 127, 3.5, 0, 30, 0, 800);
+claw_target_global = -390;
+drive_encoder(1, 2200, 2100, 127, 60, 0.0, 0, 0);
+claw_target_global = -60;
+delay(1000);
+drive_encoder(-1, 350, 1000, 127, 60, 0.1, 0, 0);
+turn_pid2(-1, 0, 127, 3.5, 0, 30, 0, 800);
+//turn_pid2(-1, 0, 127, 3.5, 0, 30, 0, 800);
+// was 1000
+/* // two grabs
+drive_encoder(-1, 400, 1000, 127, 60, 0.1, 0, 0);
+claw_target_global = -460;
+delay(850); // was 700
+drive_encoder(1, 350, 1000, 127, 60, 0.1, 0, 0);
+claw_target_global = -70;
+delay(800); // was 700
+*/
+arm_target_global = 500;
+claw_release2(320, -330, 5000); // was 350
+drive_stop(-1, 0, 127, 0.1, 2000);
+
+
+
+
+
 
 break;
 
 case 6: // cube R 2R
+
+delay(1);
+claw_target_global = -390;
+delay(375); // was 200 // was 300 // was 400 WORKDING2
+drive_encoder(1, 660, 1000, 127, 60, 0.1, 0, 0); // was 900 // was 800 //w as 720 // 660 // was 550
+claw_target_global = -20;
+delay(300); //was 500 !!!
+arm_target_global = 180;
+turn_pid2(-1, 0, 127, 3.5, 0, 30, 0, 750); // was 800/-25 // was 900 WORKING1 // 800 (WORKING !!!)
+arm_target_global = 500;
+claw_release2(350, -350, 5000);// 350
+
+drive_stop(-1, 0, 127, 0.1, 1300); //was 10 // 12.5 // 14
+//drive_encoder(-1, 1200, 1000, 127, 60, 1, 0, 0);// was 1200
+
+delay(4700);// was 1400 // was 1000
+
+/*
+arm_target_global = -10;
+claw_target_global = -460;
+delay(600); // was 1000 // was 700
+turn_pid2(-1, -25, 127, 3.5, 0, 30, 0, 600);
+claw_target_global = -460;
+drive_encoder(1, 880, 1000, 127, 60, 0.1, 0, 0);
+claw_target_global = -60;
+delay(800); // was 1000
+/* // two grabs
+drive_encoder(-1, 400, 1000, 127, 60, 0.1, 0, 0);
+claw_target_global = -460;
+delay(850); // was 700
+drive_encoder(1, 350, 1000, 127, 60, 0.1, 0, 0);
+claw_target_global = -70;
+delay(800); // was 700
+
+arm_target_global = 500;
+claw_release2(320, -330, 5000); // was 350
+drive_stop(-1, 0, 127, 0.1, 1500);
+
+
+delay(550);// was 1400 // was 1000
+
+*/
+arm_target_global = -10;
+claw_target_global = -390;
+delay(800); // was 1000
+turn_pid2(-1, -64, 127, 3.5, 0, 30, 0, 800);
+claw_target_global = -390;
+drive_encoder(1, 2200, 2000, 127, 60, 0, 0, 0);
+claw_target_global = -60;
+delay(1000);
+drive_encoder(-1, 350, 1000, 127, 60, 0.1, 0, 0);
+turn_pid2(-1, 0, 127, 3.5, 0, 30, 0, 800);
+//turn_pid2(-1, 0, 127, 3.5, 0, 30, 0, 800);
+// was 1000
+/* // two grabs
+drive_encoder(-1, 400, 1000, 127, 60, 0.1, 0, 0);
+claw_target_global = -460;
+delay(850); // was 700
+drive_encoder(1, 350, 1000, 127, 60, 0.1, 0, 0);
+claw_target_global = -70;
+delay(800); // was 700
+*/
+arm_target_global = 500;
+claw_release2(320, -330, 5000); // was 350
+drive_stop(-1, 0, 127, 0.1, 2000);
+
+
+
+
 break;
 
 case 7: // Back L
-
+/*
   delay(5);
   claw_target_global = -240;
   drive_encoder(-1, 450, 1000, 127, 60, 0.1, 0, 0);
@@ -429,6 +568,74 @@ case 7: // Back L
     //drive_encoder(-1, 1500, 3000, 127, 60, 10, 0, 0.3);// was 1200
     //arm_target_global = 500;
     delay(2000);// was 1400
+
+*/
+
+delay(1);
+claw_target_global = -390;
+delay(375); // was 200 // was 300 // was 400 WORKDING2
+drive_encoder(1, 660, 1000, 127, 60, 0.1, 0, 0); // was 900 // was 800 //w as 720 // 660 // was 550
+claw_target_global = -20;
+delay(300); //was 500 !!!
+arm_target_global = 180;
+turn_pid2(-1, 0, 127, 3.5, 0, 30, 0, 750); // was 800/-25 // was 900 WORKING1 // 800 (WORKING !!!)
+arm_target_global = 500;
+claw_release2(350, -350, 5000);// 350
+
+drive_stop(-1, 0, 127, 0.1, 1300); //was 10 // 12.5 // 14
+//drive_encoder(-1, 1200, 1000, 127, 60, 1, 0, 0);// was 1200
+
+delay(4700);// was 1400 // was 1000
+/*
+arm_target_global = -10;
+claw_target_global = -460;
+delay(600); // was 1000 // was 700
+turn_pid2(-1, -25, 127, 3.5, 0, 30, 0, 600);
+claw_target_global = -460;
+drive_encoder(1, 880, 1000, 127, 60, 0.1, 0, 0);
+claw_target_global = -60;
+delay(800); // was 1000
+/* // two grabs
+drive_encoder(-1, 400, 1000, 127, 60, 0.1, 0, 0);
+claw_target_global = -460;
+delay(850); // was 700
+drive_encoder(1, 350, 1000, 127, 60, 0.1, 0, 0);
+claw_target_global = -70;
+delay(800); // was 700
+
+arm_target_global = 500;
+claw_release2(320, -330, 5000); // was 350
+drive_stop(-1, 0, 127, 0.1, 1500);
+
+
+delay(550);// was 1400 // was 1000
+*/
+arm_target_global = -10;
+claw_target_global = -390;
+delay(800); // was 1000
+turn_pid2(-1, 57, 127, 3.5, 0, 30, 0, 800);
+claw_target_global = -390;
+drive_encoder(1, 2200, 2000, 127, 60, 0, 0, 0);
+claw_target_global = -60;
+delay(1000);
+drive_encoder(-1, 350, 1000, 127, 60, 0.1, 0, 0);
+turn_pid2(-1, 0, 127, 3.5, 0, 30, 0, 800);
+//turn_pid2(-1, 0, 127, 3.5, 0, 30, 0, 800);
+// was 1000
+/* // two grabs
+drive_encoder(-1, 400, 1000, 127, 60, 0.1, 0, 0);
+claw_target_global = -460;
+delay(850); // was 700
+drive_encoder(1, 350, 1000, 127, 60, 0.1, 0, 0);
+claw_target_global = -70;
+delay(800); // was 700
+*/
+arm_target_global = 500;
+claw_release2(320, -330, 5000); // was 350
+drive_stop(-1, 0, 127, 0.1, 2000);
+
+
+
 
 
 
@@ -465,6 +672,20 @@ case 8: // Back R
 
 break;
 case 9: // do nothing
+
+delay(5);
+claw_target_global = -250;
+drive_encoder(-1, 450, 1000, 127, 60, 0.1, 0, 0);
+delay(500); // was 500
+drive_encoder(1, 1000, 1000, 127, 60, 0.1, 0, 0);
+claw_target_global = -60;
+delay(1000);
+arm_target_global = 230;
+drive_encoder(-1, 140, 1000, 127, 60, 0.1, 0, 0);
+turn_pid2(-1, 15, 127, 1.5, 0, 20.2, 0, 1000);
+    claw_release2(350, -350, 5000); // was 350
+      drive_stop(-1, 0, 127, 0.1, 1700);
+
 
 break;
 default:

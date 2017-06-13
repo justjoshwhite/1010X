@@ -110,19 +110,19 @@ void disablelcd(void *ignore){
             lcdSetText(uart1, 2, "#4 Cube R 2M");
           break;
           case 5:
-            lcdSetText(uart1, 2, "#5 Blank");
+            lcdSetText(uart1, 2, "#5 6007 R");
           break;
           case 6:
-            lcdSetText(uart1, 2, "#6 Blank");
+            lcdSetText(uart1, 2, "#6 6007 L");
           break;
           case 7:
-            lcdSetText(uart1, 2, "#7 Back L");
+            lcdSetText(uart1, 2, "#7 7700R L");
           break;
           case 8:
             lcdSetText(uart1, 2, "#8 Back R");
           break;
           case 9:
-            lcdSetText(uart1, 2, "#9 Nothing");
+            lcdSetText(uart1, 2, "#9 Near AntiDump");
           break;
           default:
           myauto = 1;
